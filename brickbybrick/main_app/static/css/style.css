@@ -17,3 +17,8 @@ body {
     max-width: 40vw;
     max-height: auto;
   }
+  
+  nav {
+    background-color: darkgray;
+
+  }
