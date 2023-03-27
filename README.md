@@ -45,6 +45,10 @@ createdb finchcollector
 ```
 django-admin startproject finchcollector
 ```
+or you can use
+```
+python3 -m django startproject finchcollector
+```
 
 **3. Change into the finchcollector directory and open the project in VScode**
 ```
