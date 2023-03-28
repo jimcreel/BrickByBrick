@@ -6,4 +6,5 @@ urlpatterns = [
   path('about/', views.about, name='about'),
   # route for sets index
   path('sets/', views.sets_index, name='index'),
+  path('sets/<int:set_id>/', views.sets_detail, name='detail'),
 ]
