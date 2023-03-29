@@ -18,3 +18,8 @@ class Set(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'set_id': self.id})
+    
+class Inventories(models.Model):
+    id = models.IntegerField(primary_key=True)
+    version = models.IntegerField()
+    set = models.ForeignKey(Set, on_delete=models.CASCADE)
