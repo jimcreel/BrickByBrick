@@ -9,17 +9,64 @@ class Set(models.Model):
     year = models.IntegerField()
     num_parts = models.IntegerField()
     theme_id = models.IntegerField()
-    num_minifigs = models.IntegerField()
     set_img_url = models.CharField(max_length=200)
-    set_url = models.CharField(max_length=200)
-    last_modified_dt = models.DateTimeField()
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'set_id': self.id})
+
+class User(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+
+class Collection(models.Model):
+    name = models.CharField(max_length=100)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    set = models.ManyToManyField(Set)
+    def __str__(self):
+        return self.name
     
-class Inventories(models.Model):
-    id = models.IntegerField(primary_key=True)
-    version = models.IntegerField()
-    set = models.ForeignKey(Set, on_delete=models.CASCADE)
+# class Part(models.Model):
+#     part_num = models.CharField(max_length=20, primary_key=True)
+#     name = models.CharField(max_length=100)
+#     part_cat_id = models.IntegerField()
+    
+# class Inventories(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     version = models.IntegerField()
+#     set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
+
+# class Inventory_MiniFig(models.Model):
+#     inventory_id = models.ForeignKey(Inventories, on_delete=models.CASCADE)
+#     fig_num = models.CharField(max_length=20)
+#     quantity = models.IntegerField()
+
+# class Inventory_Set(models.Model):
+#     inventory_id = models.ForeignKey(Inventories, on_delete=models.CASCADE)
+#     set_num = models.CharField(max_length=20)
+#     quantity = models.IntegerField()
+
+# class Theme(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     name = models.CharField(max_length=100)
+#     parent_id = models.IntegerField()
+
+# class Minifig(models.Model):
+#     fig_num = models.CharField(max_length=20, primary_key=True)
+#     name = models.CharField(max_length=100)
+#     num_parts = models.IntegerField()
+
+# class Inventory_Part(models.Model):
+#     inventory_id = models.ForeignKey(Inventories, on_delete=models.CASCADE)
+#     part_num = models.CharField(max_length=20)
+#     color_id = models.IntegerField()
+#     quantity = models.IntegerField()
+#     is_spare = models.BooleanField()
+
+
+
+
