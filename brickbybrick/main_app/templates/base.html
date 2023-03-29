@@ -14,15 +14,16 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Brick By Brick</a></li>
+          <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Brick By Brick</a></li>
           
 
         </ul>
         <ul class="right">
           
-            <li><a href="/about">About</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
             <!-- new markup below -->
-            <li><a href="/sets">View All My Lego Sets</a></li></li>
+            <li><a href="{% url 'index' %}">View All My Lego Sets</a></li></li>
         </ul>
       </div>
     </nav>

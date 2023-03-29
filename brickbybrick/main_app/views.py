@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.conf import settings
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from secrets import * 
 from .models import Set
@@ -37,3 +38,16 @@ def sets_index(request):
 def sets_detail(request, set_id):
     set = Set.objects.get(id=set_id)
     return render(request, 'sets/detail.html', {'set': set})
+
+class SetCreate(CreateView):
+    model = Set
+    fields = '__all__'
+    success_url = '/sets/{set_id}'
+
+class SetUpdate(UpdateView):
+    model = Set
+    fields = [  'set_img_url', 'set_url']
+
+class SetDelete(DeleteView):
+    model = Set
+    success_url = '/sets/'

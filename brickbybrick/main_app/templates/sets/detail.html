@@ -11,6 +11,10 @@
     <p>Minifigures: {{ set.num_minifigs}}</p>
     <img src = "{{ set.set_img_url }}" alt = "{{ set.name }}">
     <p>Year: {{ set.year }}</p>
+    <div class="card-action">
+      <a href="{% url 'sets_update' set.id %}">Edit</a>
+      <a href="{% url 'sets_delete' set.id %}">Delete</a>
+    </div>
   </div>
 </div>
 
