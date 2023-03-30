@@ -10,6 +10,7 @@ class Set(models.Model):
     theme_id = models.IntegerField()
     num_parts = models.IntegerField()
     img_url = models.CharField(max_length=200)
+    part = models.ManyToManyField('Part', through='SetPart')
     def __str__(self):
         return self.name
 
@@ -31,6 +32,29 @@ class Collection(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'collection_id': self.id})
+    
+class Part(models.Model):
+    part_num = models.CharField(max_length=20, primary_key=True)
+    part_name = models.CharField(max_length=250)
+    part_cat_id = models.IntegerField()
+    part_material = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.part_name
+    
+class SetPart(models.Model):
+    set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
+    part_num = models.ForeignKey(Part, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    color = models.CharField(max_length=100)
+    category = models.CharField(max_length=200)
+    design_id = models.IntegerField()
+    part_name = models.CharField(max_length=200)
+    image_url = models.CharField(max_length=300)
+    set_count = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.get_quantity_display()} of {self.part.part_name} in {self.set.name}"
 # class Part(models.Model):
 #     part_num = models.CharField(max_length=20, primary_key=True)
 #     name = models.CharField(max_length=100)
