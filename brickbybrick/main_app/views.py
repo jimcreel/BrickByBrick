@@ -14,8 +14,11 @@ print(REBRICKABLE_API_KEY)
 # Create your views here.
  
 def home(request):
-    first_ten = Set.objects.all()[:10]
-    return render(request, 'home.html', {'first_ten': first_ten})
+     rand_list = []
+     for i in range(0, 5):
+         rand_list.append(Set.objects.order_by('?').first())
+
+     return render(request, 'home.html', {'sets': rand_list})
 
 def about(request):
     return render(request, 'about.html')

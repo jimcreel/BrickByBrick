@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>Random Sets</h1>
-{% for set in first_ten %}
+{% for set in sets %}
   <div class="card">
     <a href= "{% url 'detail' set.set_num%}">
     <div class="card-content">
