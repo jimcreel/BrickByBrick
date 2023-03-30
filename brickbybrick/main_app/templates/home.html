@@ -2,9 +2,9 @@
 {% block content %}
 
 <h1>Random Sets</h1>
-{% for set in sets %}
+{% for set in first_ten %}
   <div class="card">
-    <a href= "{% url 'detail' set.id %}">
+    <a href= "{% url 'detail' set.set_num%}">
     <div class="card-content">
       <span class="card-title">{{ set.name }}</span>
       <img src = "{{ set.set_img_url }}" alt = "{{ set.name }}"></a> 

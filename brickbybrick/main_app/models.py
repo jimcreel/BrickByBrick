@@ -5,7 +5,7 @@ from django.urls import reverse
 
 class Set(models.Model):
     name = models.CharField(max_length=100)
-    set_num = models.CharField(max_length=100)
+    set_num = models.CharField(max_length=100, primary_key=True)
     year = models.IntegerField()
     num_parts = models.IntegerField()
     theme_id = models.IntegerField()
@@ -14,7 +14,7 @@ class Set(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('detail', kwargs={'set_id': self.id})
+        return reverse('detail', kwargs={'set_id': self.set_num})
 
 class User(models.Model):
     name = models.CharField(max_length=100)
@@ -29,7 +29,8 @@ class Collection(models.Model):
     def __str__(self):
         return self.name
     
-    
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'collection_id': self.id})
 # class Part(models.Model):
 #     part_num = models.CharField(max_length=20, primary_key=True)
 #     name = models.CharField(max_length=100)

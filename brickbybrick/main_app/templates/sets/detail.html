@@ -12,15 +12,15 @@
     <img src = "{{ set.set_img_url }}" alt = "{{ set.name }}">
     <p>Year: {{ set.year }}</p>
     <div class="card-action">
-      <a href="{% url 'sets_update' set.id %}">Edit</a>
-      <a href="{% url 'sets_delete' set.id %}">Delete</a>
+      <a href="{% url 'sets_update' set.set_num %}">Edit</a>
+      <a href="{% url 'sets_delete' set.set_num %}">Delete</a>
     <!-- New Markup Below -->
-    <form action="{% url 'collections_update' collection_id=collection.id set_id=set.id %}" method="POST">
+    <form action="{% url 'collections_update' collection_id=collection.id set_num=set.set_num %}" method="POST">
 
 
       {% csrf_token %}
       <!-- Render the inputs -->
-      <input type="hidden" name="set" value="{{ set.id }}">
+      <input type="hidden" name="set" value="{{ set.set_num }}">
       <input type="hidden" name="collection" value="{{ collection.id }}">
       <input type="submit" class="btn" value="Add Set To Collection">
     </form>

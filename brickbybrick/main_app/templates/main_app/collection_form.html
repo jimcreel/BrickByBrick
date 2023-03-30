@@ -3,7 +3,7 @@
 {% if object %}
 <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
 {% else %}
-<h1>Add Set</h1>
+<h1>Add Collection</h1>
 {% endif %}
 
   <!-- Leaving the action empty makes the form post to the same url used to display it -->
@@ -12,17 +12,7 @@
     {% csrf_token %}
     <table>
       <!-- Render the inputs inside of <tr>s & <td>s -->
-      <tr>
-        <td><label for="collection">Collection:</label></td>
-        <td>
-          <select id="collection" name="collection">
-            {% for collection in collections %}
-              <option value="{{ collection.id }}">{{ collection.name }}</option>
-            {% endfor %}
-          </select>
-        </td>
-      </tr>
-      {{ form.as_table }}
+          {{ form.as_table }}
     </table>
     <input type="submit" value="Submit!" class="btn">
   </form>

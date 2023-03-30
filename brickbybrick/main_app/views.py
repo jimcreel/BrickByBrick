@@ -14,12 +14,8 @@ print(REBRICKABLE_API_KEY)
 # Create your views here.
  
 def home(request):
-    count = Set.objects.all().count()
-    rand_list = []
-    for i in range(0, 5):
-        rand_list.append(Set.objects.order_by('?').first())
-    
-    return render(request, 'home.html', {'sets': rand_list})
+    first_ten = Set.objects.all()[:10]
+    return render(request, 'home.html', {'first_ten': first_ten})
 
 def about(request):
     return render(request, 'about.html')
@@ -44,23 +40,24 @@ def sets_index(request):
     #     'minis': minis
     # })
 
-def sets_detail(request, set_id):
-    set = Set.objects.get(id=set_id)
+def sets_detail(request, set_num):
+    set = Set.objects.get(set_num=set_num)
     collection = Collection.objects.first()
     return render(request, 'sets/detail.html', {'set': set, 'collection': collection})
 
 class SetCreate(CreateView):
     model = Set
     fields = '__all__'
-    success_url = '/sets/{set_id}'
+    success_url = '/sets/{set_num}'
 
 class SetUpdate(UpdateView):
     model = Set
-    fields = [  'set_img_url', 'set_url']
+    fields = [  'set_img_url']
+    success_url = '/sets/{set_num}'
 
 class SetDelete(DeleteView):
     model = Set
-    success_url = '/sets/'
+    success_url = '/'
 
 def collections_index(request):
     collections = Collection.objects.all()
@@ -68,14 +65,8 @@ def collections_index(request):
 
 def collections_detail(request, collection_id):
     collections = Collection.objects.get(id=collection_id)
-    print(collections.set.all())
     return render(request, 'collections/detail.html', {'collections': collections})
 
-def collections_add(request, set_id):
-    collections = Collection.objects.first()
-    set = Set.objects.get(id=set_id)
-    collections.set.add(set)
-    return render(request, 'collections/detail.html', {'collections': collections})
 
 class CollectionUpdate(UpdateView):
     model = Collection
@@ -92,8 +83,8 @@ class CollectionCreate(CreateView):
     success_url = '/collections/{collection_id}'
 
 class AddSetToCollection(View):
-    def post(self, request, collection_id, set_id):
+    def post(self, request, collection_id, set_num):
         collection = Collection.objects.get(id=collection_id)
-        set = Set.objects.get(id=set_id)
+        set = Set.objects.get(set_num = set_num)
         collection.set.add(set)
         return redirect('collections_detail', collection_id=collection_id)
