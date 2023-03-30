@@ -79,8 +79,8 @@ class CollectionDelete(DeleteView):
 
 class CollectionCreate(CreateView):
     model = Collection
-    fields = '__all__'
-    success_url = '/collections/{collection_id}'
+    fields = ['name']
+    success_url = '/collections/'
 
 class AddSetToCollection(View):
     def post(self, request, collection_id, set_num):
