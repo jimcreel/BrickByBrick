@@ -25,10 +25,10 @@ class User(models.Model):
 
 class Collection(models.Model):
     name = models.CharField(max_length=100)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     set = models.ManyToManyField(Set)
     def __str__(self):
         return self.name
+    
     
 # class Part(models.Model):
 #     part_num = models.CharField(max_length=20, primary_key=True)

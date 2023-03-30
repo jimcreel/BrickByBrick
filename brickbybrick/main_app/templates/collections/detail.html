@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Random Sets</h1>
-{% for set in sets %}
+<h1>Sets in {{ collections.name }} Collection  </h1>
+
+{% for set in collections.set.all %}
   <div class="card">
     <a href= "{% url 'detail' set.id %}">
     <div class="card-content">
