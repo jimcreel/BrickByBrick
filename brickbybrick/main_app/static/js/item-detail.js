@@ -11,4 +11,7 @@ let collectionSelect = document.getElementById('collection_select');
         const action = form.getAttribute("action");
         const newAction = action.replace("/0/", `/${collectionId}/`);
         form.setAttribute('action', newAction);
+        let button = document.getElementById('submit');
+        button.disabled = false;
+
     });

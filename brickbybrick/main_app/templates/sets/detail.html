@@ -21,7 +21,7 @@
       {% csrf_token %}      
       <!-- Render the inputs -->
       <input type="hidden" name="set" value="{{ set.set_num }}">
-      <label for="collection">Add to Collection:</label>
+      
       <div class="input-field col s12">
         <select id = "collection_select">
             <option value="" disabled selected>Choose your Collection</option>
@@ -29,9 +29,8 @@
             <option value="{{ collection.id }}">{{ collection.name }}</option>
           {% endfor %}
         </select>
-        <label>Materialize Select</label>
       </div>
-      <input type="submit" class="hidden btn" value="Add Set To Collection">
+      <input id = "submit"type="submit" class="hidden btn" value="Add Set To Collection" disabled>
     </form>
     </div>
   </div>
