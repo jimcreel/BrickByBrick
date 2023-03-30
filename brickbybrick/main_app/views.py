@@ -48,7 +48,7 @@ def sets_detail(request, set_num):
 class SetCreate(CreateView):
     model = Set
     fields = '__all__'
-    success_url = '/sets/{set_num}'
+    success_url = '/sets/'
 
 class SetUpdate(UpdateView):
     model = Set
