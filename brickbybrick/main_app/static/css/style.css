@@ -22,3 +22,8 @@ body {
     background-color: darkgray;
 
   }
+
+  
+  form {
+    display: flex;
+  }

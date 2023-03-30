@@ -17,17 +17,26 @@
       <a href="{% url 'sets_delete' set.set_num %}">Delete</a>
       
     <!-- New Markup Below -->
-    <form action="{% url 'collections_update' collection_id=collections.id set_num=set.set_num %}" method="POST">
+    <form id = 'form' action="{% url 'collections_update' collection_id=0 set_num=set.set_num %}" method="POST">
       {% csrf_token %}      
       <!-- Render the inputs -->
       <input type="hidden" name="set" value="{{ set.set_num }}">
-      <input type="hidden" name="collection" value="{{ collections.id }}">
-      
-      <input type="submit" class="btn" value="Add Set To Collection">
+      <label for="collection">Add to Collection:</label>
+      <div class="input-field col s12">
+        <select id = "collection_select">
+            <option value="" disabled selected>Choose your Collection</option>
+          {% for collection in collections %}
+            <option value="{{ collection.id }}">{{ collection.name }}</option>
+          {% endfor %}
+        </select>
+        <label>Materialize Select</label>
+      </div>
+      <input type="submit" class="hidden btn" value="Add Set To Collection">
     </form>
     </div>
   </div>
 </div>
+
 
 
 {% endblock %}
