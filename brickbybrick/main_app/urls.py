@@ -6,8 +6,8 @@ urlpatterns = [
   path('about/', views.about, name='about'),
   # route for sets index
   path('sets/', views.sets_index, name='index'),
-  path('sets/<str:set_num>/', views.sets_detail, name='detail'),
   path('sets/create/', views.SetCreate.as_view(), name='sets_create'),
+  path('sets/<str:set_num>/', views.sets_detail, name='detail'),
   path('sets/<str:pk>/update/', views.SetUpdate.as_view(), name='sets_update'),
   path('sets/<str:pk>/delete/', views.SetDelete.as_view(), name='sets_delete'),
   path('collections/', views.collections_index, name='collections_index'),

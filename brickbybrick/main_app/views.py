@@ -52,7 +52,7 @@ class SetCreate(CreateView):
 
 class SetUpdate(UpdateView):
     model = Set
-    fields = [  'set_img_url']
+    fields = [  'img_url']
     success_url = '/sets/{set_num}'
 
 class SetDelete(DeleteView):
