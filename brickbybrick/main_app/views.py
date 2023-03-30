@@ -46,7 +46,8 @@ def sets_index(request):
 def sets_detail(request, set_num):
     set = Set.objects.get(set_num=set_num)
     collection = Collection.objects.first()
-    return render(request, 'sets/detail.html', {'set': set, 'collection': collection})
+    print(collection)
+    return render(request, 'sets/detail.html', {'set': set, 'collections': collection})
 
 class SetCreate(CreateView):
     model = Set
@@ -90,4 +91,11 @@ class AddSetToCollection(View):
         collection = Collection.objects.get(id=collection_id)
         set = Set.objects.get(set_num = set_num)
         collection.set.add(set)
+        return redirect('collections_detail', collection_id=collection_id)
+
+class RemoveSetFromCollection(View):
+    def post(self, request, collection_id, set_num):
+        collection = Collection.objects.get(id=collection_id)
+        set = Set.objects.get(set_num = set_num)
+        collection.set.remove(set)
         return redirect('collections_detail', collection_id=collection_id)

@@ -14,5 +14,6 @@ urlpatterns = [
   path('collections/create/', views.CollectionCreate.as_view(), name='collections_create'),
   path('collections/<int:collection_id>/', views.collections_detail, name='collections_detail'),
   path('collections/<int:collection_id>/update/<str:set_num>/', views.AddSetToCollection.as_view(), name='collections_update'),
+  path('collections/<int:collection_id>/remove/<str:set_num>/', views.RemoveSetFromCollection.as_view(), name='collections_remove'),
   path('collections/<int:pk>/delete/', views.CollectionDelete.as_view(), name='collections_delete'),
 ]
