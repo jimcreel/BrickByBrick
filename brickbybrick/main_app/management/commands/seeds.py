@@ -28,7 +28,7 @@ def import_sets_from_csv(filepath):
                 print(f"Set already exists: {set_obj}")
 
 # Call the function to import sets from a CSV file
-# import_sets_from_csv('/Users/jimcreel/Downloads/sets.csv')
+import_sets_from_csv('/Users/jimcreel/Downloads/sets.csv')
 
 def import_parts_from_csv(filepath):
     with open(filepath, 'r') as csvfile:
@@ -50,31 +50,25 @@ def import_parts_from_csv(filepath):
                 print(f"Created new part: {part_obj}")
             else:
                 print(f"Part already exists: {part_obj}")
-# import_parts_from_csv('/Users/jimcreel/Downloads/parts.csv')
+import_parts_from_csv('/Users/jimcreel/Downloads/parts.csv')
 
-def import_set_part_list(filepath):
-    with open(filepath, 'r') as csvfile:
-        reader = csv.reader(csvfile)
-        
+def create_set_parts(filepath, set_num):
+    with open(filepath) as csvfile:
+        reader = csv.DictReader(csvfile)
         next(reader)
-        
         for row in reader:
-            
             set_part_obj, created = SetPart.objects.get_or_create(
-                set_num=row[0],
-                part_num=row[1],
+                set_num=Set.objects.get(set_num=set_num),
+                part_num=Part.objects.get(part_num=row['Part']),
                 defaults={
-                    "quantity": row[2],
-                    "color": row[3],
-                    "category": row[4],
-                    "design_id": row[5],
-                    "part_name": row[6],
-                    "image_url": row[7],
-                    "set_count": row[8]
+                    'color': row['Color'],
+                    'quantity': row['Quantity'],
+                    'is_spare': row['Is Spare'] == 'Y'
                 }
             )
             if created:
-                print(f"Created new set: {set_part_obj}")
+                print(f"Created new set_part: {set_part_obj}")
             else:
-                print(f"Set already exists: {set_part_obj}")
-# import_set_part_list('/Users/jimcreel/Downloads/Brickset-inventory-75192-1.csv')
+                print(f"Set_part already exists: {set_part_obj}")
+
+create_set_parts('/Users/jimcreel/Downloads/rebrickable_parts_75192-1-millennium-falcon.csv', '75192-1')

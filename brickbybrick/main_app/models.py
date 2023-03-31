@@ -39,16 +39,17 @@ class Part(models.Model):
 class SetPart(models.Model):
     set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
     part_num = models.ForeignKey(Part, on_delete=models.CASCADE)
+    color = models.IntegerField()
     quantity = models.IntegerField()
-    color = models.CharField(max_length=100)
-    category = models.CharField(max_length=200)
-    design_id = models.IntegerField()
-    part_name = models.CharField(max_length=200)
-    image_url = models.CharField(max_length=300)
-    set_count = models.IntegerField()
+    is_spare = models.BooleanField()
 
     def __str__(self):
-        return f"{self.get_quantity_display()} of {self.part.part_name} in {self.set.name}"
+        return f"{self.get_quantity_display()} of {self.part_num.part_name} in {self.set_num.name}"
+    def get_quantity_display(self):
+        if self.quantity == 1:
+            return f"{self.quantity} {self.part_num.part_name}"
+        else:
+            return f"{self.quantity} {self.part_num.part_name}s"
 # class Part(models.Model):
 #     part_num = models.CharField(max_length=20, primary_key=True)
 #     name = models.CharField(max_length=100)
