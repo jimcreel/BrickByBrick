@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Set(models.Model):
@@ -17,16 +17,10 @@ class Set(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'set_id': self.set_num})
 
-class User(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    def __str__(self):
-        return self.name
-
 class Collection(models.Model):
     name = models.CharField(max_length=100)
     set = models.ManyToManyField(Set)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
     
