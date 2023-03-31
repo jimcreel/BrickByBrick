@@ -3,6 +3,10 @@ from django.conf import settings
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.db.models.aggregates import Count
 from django.views import View
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from secrets import * 
 from .models import *
@@ -42,10 +46,10 @@ def sets_index(request):
     #     'sets': sets,
     #     'minis': minis
     # })
-
+@login_required
 def sets_detail(request, set_num):
     set = Set.objects.get(set_num=set_num)
-    collection = Collection.objects.all()
+    collection = Collection.objects.filter(user=request.user)
     print(collection)
     return render(request, 'sets/detail.html', {'set': set, 'collections': collection})
 
@@ -63,39 +67,62 @@ class SetDelete(DeleteView):
     model = Set
     success_url = '/'
 
+@login_required
 def collections_index(request):
-    collections = Collection.objects.all()
+    collections = Collection.objects.filter(user=request.user)
     return render(request, 'collections/index.html', {'collections': collections})
 
+@login_required
 def collections_detail(request, collection_id):
     collections = Collection.objects.get(id=collection_id)
     return render(request, 'collections/detail.html', {'collections': collections})
 
 
-class CollectionUpdate(UpdateView):
+class CollectionUpdate(LoginRequiredMixin, UpdateView):
     model = Collection
     fields = [  'name', 'id' ]
     success_url = '/collections/{collection_id}'
 
-class CollectionDelete(DeleteView):
+
+class CollectionDelete(LoginRequiredMixin, DeleteView):
     model = Collection
     success_url = '/collections/'
 
-class CollectionCreate(CreateView):
+
+class CollectionCreate(LoginRequiredMixin, CreateView):
     model = Collection
     fields = ['name']
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     success_url = '/collections/'
 
-class AddSetToCollection(View):
+
+class AddSetToCollection(LoginRequiredMixin, View):
     def post(self, request, collection_id, set_num):
         collection = Collection.objects.get(id=collection_id)
         set = Set.objects.get(set_num = set_num)
         collection.set.add(set)
         return redirect('collections_detail', collection_id=collection_id)
 
-class RemoveSetFromCollection(View):
+
+class RemoveSetFromCollection(LoginRequiredMixin, View):
     def post(self, request, collection_id, set_num):
         collection = Collection.objects.get(id=collection_id)
         set = Set.objects.get(set_num = set_num)
         collection.set.remove(set)
         return redirect('collections_detail', collection_id=collection_id)
+
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)

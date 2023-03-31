@@ -16,4 +16,5 @@ urlpatterns = [
   path('collections/<int:collection_id>/update/<str:set_num>/', views.AddSetToCollection.as_view(), name='collections_update'),
   path('collections/<int:collection_id>/remove/<str:set_num>/', views.RemoveSetFromCollection.as_view(), name='collections_remove'),
   path('collections/<int:pk>/delete/', views.CollectionDelete.as_view(), name='collections_delete'),
+  path('accounts/signup/', views.signup, name='signup'),
 ]
