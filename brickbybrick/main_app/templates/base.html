@@ -7,33 +7,48 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Brick By Brick</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 <body>
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <ul>
-          <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Brick By Brick</a></li>
-          
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Brick By Brick</a>
 
-        </ul>
+        
+        <!-- <ul class = "center">
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" required>
+              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </ul> -->
+
         <ul class="right">
             {% if user.is_authenticated %}
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
-            <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li></li>
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li class="active"><a href=""><i class="material-icons left">search</i></a></li>
+            <li class="active"><a href="{% url 'about' %}">About</a></li>
+            <li class="active"><a href="{% url 'sets_create' %}">Add a Set</a></li>
+            <li class="active"><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li></li>
+            <li class="active"><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'login' %}">Log In</a></li>
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li class="active"><a href=""><i class="material-icons left">search</i></a></li>
+            <li class="active"><a href="{% url 'about' %}">About</a></li>
+            <li class="active"><a href="{% url 'login' %}">Log In</a></li>
+            <li class="active"><a href="{% url 'signup' %}">Sign Up</a></li>
             {% endif %}
         </ul>
       </div>
     </nav>
   </header>
+
+
+
   <main class="container">
     {% block content %}
     {% endblock %}
