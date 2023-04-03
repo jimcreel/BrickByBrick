@@ -50,8 +50,9 @@ def sets_index(request):
 def sets_detail(request, set_num):
     set = Set.objects.get(set_num=set_num)
     collection = Collection.objects.filter(user=request.user)
+    parts = SetPart.objects.filter(set_num=set_num)
     print(collection)
-    return render(request, 'sets/detail.html', {'set': set, 'collections': collection})
+    return render(request, 'sets/detail.html', {'set': set, 'collections': collection, 'parts': parts})
 
 class SetCreate(CreateView):
     model = Set

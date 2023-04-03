@@ -11,6 +11,11 @@
     <p>Description: {{ set.description|linebreaks }}</p>
     <p>Minifigures: {{ set.num_minifigs}}</p>
     <img src = "{{ set.img_url }}" alt = "{{ set.name }}">
+    <ul>Part List
+      {% for part in parts %}
+        <li>{{ part.part_num }} - {{ part.name }} - {{ part.color }} - {{ part.quantity }}</li>
+      {% endfor %}
+    </ul>
     <p>Year: {{ set.year }}</p>
     <div class="card-action">
       <a href="{% url 'sets_update' set.set_num %}">Edit</a>
