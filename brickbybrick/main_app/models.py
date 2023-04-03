@@ -10,7 +10,6 @@ class Set(models.Model):
     theme_id = models.IntegerField()
     num_parts = models.IntegerField()
     img_url = models.CharField(max_length=200)
-    part = models.ManyToManyField('Part', through='SetPart')
     def __str__(self):
         return self.name
 
