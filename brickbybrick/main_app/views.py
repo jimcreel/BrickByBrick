@@ -19,7 +19,11 @@ print(REBRICKABLE_API_KEY)
  
 def home(request):
      rand_list = []
-     for i in range(0, 5):
+     # find how many sets have theme_id 18
+        # get a random number between 1 and that number
+        # get the set at that index
+     number_of_sets = Set.objects.filter(theme_id=18).count()
+     for i in range(0, number_of_sets):
          rand_list.append(Set.objects.order_by('?').first())
 
      return render(request, 'home.html', {'sets': rand_list})

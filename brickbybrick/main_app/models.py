@@ -33,13 +33,12 @@ class Set(models.Model):
         return reverse('detail', kwargs={'set_id': self.set_num})
 
 
+
+
 class Inventories(models.Model):
     id = models.IntegerField(primary_key=True)
     version = models.IntegerField()
-    set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
 
-    def __int__(self):
-        return self.id
         
 
 
@@ -54,7 +53,7 @@ class Inventory_Set(models.Model):
 
 class Minifig(models.Model):
     fig_num = models.CharField(max_length=20, primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=250)
     num_parts = models.IntegerField()
     img_url = models.CharField(max_length=200)
 
@@ -110,7 +109,7 @@ class Inventory_Part(models.Model):
 
 class Collection(models.Model):
     name = models.CharField(max_length=100)
-    set = models.ManyToManyField(Set)
+    set = models.ForeignKey(Set, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
