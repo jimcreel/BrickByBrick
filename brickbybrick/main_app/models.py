@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.db.models import Count
+from random import randint
+from django.db.models import Q
 # Create your models here.
 
 
@@ -26,6 +29,11 @@ class Set(models.Model):
     num_parts = models.IntegerField()
     img_url = models.CharField(max_length=200)
 
+    def random(self, theme_id):
+        count = self.aggregate(count=Count('id'), filter=Q(theme_id=theme_id))['count']
+        random_index = randint(0, count - 1)
+        return self.all()[random_index]
+    
     def __str__(self):
         return self.name
 

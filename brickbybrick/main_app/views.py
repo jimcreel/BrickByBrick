@@ -22,7 +22,12 @@ def home(request):
      # find how many sets have theme_id 18
         # get a random number between 1 and that number
         # get the set at that index
-     number_of_sets = Set.objects.filter(theme_id=18).count()
+     number_of_sw_sets = Set.objects.filter(theme_id=18).count()
+     number_of_hp_sets = Set.objects.filter(theme_id=246).count()
+     number_of_ninjago_sets = Set.objects.filter(theme_id=435).count()
+     number_of_sets = number_of_sw_sets + number_of_hp_sets + number_of_ninjago_sets
+     
+
      for i in range(0, number_of_sets):
          rand_list.append(Set.objects.order_by('?').first())
 
