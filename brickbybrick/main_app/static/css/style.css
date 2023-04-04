@@ -1,4 +1,6 @@
-
+nav form .input-field input[type=search]:focus {
+  height: auto;
+}
 
 body {
     display: flex;
