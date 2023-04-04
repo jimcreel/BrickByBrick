@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Sets in {{ collections.name }} Collection  </h1>
+<h1>Sets in {{ collection.name }} Collection  </h1>
 
-{% for set in collections.set.all %}
+{% for set in sets %}
   <div class="card">
     
     <div class="card-content">
@@ -11,11 +11,11 @@
       <a href= "{% url 'detail' set.set_num %}"><img src = "{{ set.img_url }}" alt = "{{ set.name }}"></a> 
       <!-- <p>Minifigures: {{set.minifigs | length }}</p> -->
       <div class="card-action">
-        <form action="{% url 'collections_remove' collection_id=collections.id set_num=set.set_num %}" method="POST">
+        <form action="{% url 'collections_remove' collection_id=collection.id set_num=set.set_num %}" method="POST">
           {% csrf_token %}      
           <!-- Render the inputs -->
           <input type="hidden" name="set" value="{{ set.set_num }}">
-          <input type="hidden" name="collection" value="{{ collections.id }}">
+          <input type="hidden" name="collection" value="{{ collection.id }}">
           
           <input type="submit" class="btn" value="Remove Set from Collection">
         </form>

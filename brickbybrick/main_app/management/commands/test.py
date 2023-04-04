@@ -1,16 +1,19 @@
 
 import csv
-
-filepath = '/Users/jimcreel/Downloads/themes.csv'
-
-with open(filepath, 'r') as csvfile:
-        reader = csv.reader(csvfile)
-
-        # Skip header ro
+import pandas as pd
 
 
-        for row in reader:
-            # Use get_or_create() to retrieve an existing Set object or create a new one
-            if row[2] == '':
-                row[2] = 0
-                print('wrote 0')
+def reorder_replace_add_serialized_id(csv_file):
+    # Read the CSV file into a DataFrame
+    df = pd.read_csv(csv_file)
+    # Reorder the columns
+    df = df.reindex(columns=['id', 'quantity', 'fig_num', 'inventory_id',])
+    
+    
+    # Add a serialized id
+    
+    
+    # Write the reordered, replaced, and serialized DataFrame back to the CSV file
+    df.to_csv(csv_file, index=False)
+
+reorder_replace_add_serialized_id('/Users/jimcreel/Downloads/inventory_minifigs.csv')

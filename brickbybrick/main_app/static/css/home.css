@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Glegoo&display=swap');
+
+body {
+    background-color: #E8E5DA;
+}
+
+#headerBoard {
+    font-family: 'Glegoo', serif;
+    text-align: center;
+}
