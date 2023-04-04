@@ -5,6 +5,21 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
+<body>
+	<div class="box">
+		<a href="{% url 'about'%}">About Us</a>
+	</div>
+	<div class="box">
+       {% comment %} Placeholder for now  {% endcomment %}
+		<a href="view-all-sets.html">View All Sets</a>
+	</div>
+	<div class="box" id="boxThree">
+     {% comment %} Placeholder for now  {% endcomment %}
+		<a href="lego-tutorials.html">LEGO Tutorials</a>
+	</div>
+</body>
+
+
 <h1 id="headerBoard">Inspiration Board</h1>
 {% for set in sets %}
   <div class="card">
