@@ -11,7 +11,7 @@
 	</div>
 	<div class="box">
        {% comment %} Placeholder for now  {% endcomment %}
-		<a href="view-all-sets.html">View All Sets</a>
+		<a href="{% url 'collections_index' %}">View Your Lego Sets</a>
 	</div>
 	<div class="box" id="boxThree">
      {% comment %} Placeholder for now  {% endcomment %}
@@ -21,6 +21,7 @@
 
 
 <h1 id="headerBoard">Inspiration Board</h1>
+<div class="card-grid">
 {% for set in sets %}
   <div class="card">
     <a href= "{% url 'detail' set.set_num%}">
@@ -32,5 +33,6 @@
   </a>
   </div>
 {% endfor %}
+</div>
 
 {% endblock %}
