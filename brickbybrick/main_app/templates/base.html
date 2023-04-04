@@ -15,7 +15,7 @@
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <a href="{% url 'home' %}" class="brand-logo">&nbsp;&nbsp;Brick By Brick</a>
+        <a href="{% url 'home' %}" class="brand-logo">&nbsp;&nbsp; Brick By Brick</a>
 
         <a href="#" data-target="mobile-links" class="sidenav-trigger">
           <i class="material-icons">menu</i>
@@ -24,20 +24,29 @@
 
         <ul class="right hide-on-med-and-down">
             {% if user.is_authenticated %}
-            <!-- <li><a href=""><i class="material-icons left">search</i></a></li> -->
-            <form>
-              <div class="input-field">
-                <input id="search" type="search" required>
-                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                <i class="material-icons">close</i>
-              </div>
-            </form>
+            <li>
+              <form>
+                <div class="input-field">
+                  <input id="search" type="search" required>
+                  <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                  <i class="material-icons">close</i>
+                </div>
+              </form>
+            </li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
             <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
-            <li><a href=""><i class="material-icons left">search</i></a></li>
+            <li>
+                  <form>
+                    <div class="input-field">
+                      <input id="search" type="search" required>
+                      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                      <i class="material-icons">close</i>
+                    </div>
+                  </form>
+            </li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'login' %}">Log In</a></li>
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
@@ -51,13 +60,29 @@
 
   <ul class="sidenav" id="mobile-links">
     {% if user.is_authenticated %}
-    <li><a href=""><i class="material-icons left">search</i></a></li>
+    <li>
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" class="center" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </li>
     <li><a href="{% url 'about' %}">About</a></li>
     <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
     <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
     <li><a href="{% url 'logout' %}">Log Out</a></li>
     {% else %}
-    <li><a href=""><i class="material-icons left">search</i></a></li>
+    <li>
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" class="center" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </li>
     <li><a href="{% url 'about' %}">About</a></li>
     <li><a href="{% url 'login' %}">Log In</a></li>
     <li><a href="{% url 'signup' %}">Sign Up</a></li>
