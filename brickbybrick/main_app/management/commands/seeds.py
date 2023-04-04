@@ -147,18 +147,28 @@ def import_inventories_from_csv(filepath):
 #import_inventories_from_csv('/Users/jimcreel/Downloads/inventories-4.csv')
         
 def import_inventory_set_from_csv(filepath):
-    tmp_data = pd.read_csv(filepath, sep=',')
-    index_id = 2865
-    for row in tmp_data.values:
-        index_id += 1
-        if Inventories.objects.filter(id=row[0]).exists() and Set.objects.filter(set_num=row[1]).exists():            
-            inventory_sets = Inventory_Set.objects.create(
-                id = index_id,
-                inventory_id_id=Inventories.objects.get(id=row[0]),
-                set_num_id=Set.objects.get(set_num=row[1]),
-                quantity=row[2]            
-            )
-    Inventory_Set.objects.bulk_create([inventory_sets], ignore_conflicts=True, batch_size=1000)
+    with open(filepath, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        
+        next(reader)
+        index = 2865
+        for row in reader:
+            index +=1
+            if Inventories.objects.filter(id=row[0]).exists() and Set.objects.filter(set_num=row[1]).exists():
+                part_obj, created = Inventory_Set.objects.get_or_create(
+                    id = index, 
+                    defaults={
+                        'inventory_id_id': Inventories.objects.get(id=row[0]),
+                        'set_num_id': Set.objects.get(set_num=row[1]),
+                        'quantity': row[2]
+                    }
+                )
+                if created:
+                    print(f"Created new part: {part_obj}")
+                else:
+                    print(f"Part already exists: {part_obj}")
+            else:
+                print(f"Inventory or Set does not exist: {row[0]} {row[1]}")
 #import_inventory_set_from_csv('/Users/jimcreel/Downloads/inventory_sets.csv')
 # def import_inventory_sets_to_inventories(filepath):
 #     with open(filepath, 'r') as csvfile:

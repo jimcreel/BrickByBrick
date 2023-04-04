@@ -49,9 +49,17 @@ def sets_index(request):
     # })
 @login_required
 def sets_detail(request, set_num):
-    inventory = Inventories.objects.get(set_num_id=set_num)
+    #get all inventories from set
+    #get all parts from inventories
+    #get all colors from parts
+    #get all images from colors
+    #get all minifigs from set
+    #get all images from minifigs
     set = Set.objects.get(set_num=set_num)
-    print(inventory)
+    inventories = Inventories.objects.filter(set_num=set_num)
+    collections = Collection.objects.filter(user=request.user)
+    print(collections)
+    return render(request, 'sets/detail.html', {'set': set, 'inventories': inventories, 'collections': collections})
 
 class SetCreate(CreateView):
     model = Set
@@ -60,7 +68,7 @@ class SetCreate(CreateView):
 
 class SetUpdate(UpdateView):
     model = Set
-    fields = [  'img_url']
+    fields = [ 'img_url']
     success_url = '/sets/{set_num}'
 
 class SetDelete(DeleteView):
