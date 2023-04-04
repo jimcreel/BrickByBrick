@@ -143,5 +143,18 @@ def import_inventories_from_csv(filepath):
         )
 
     Inventories.objects.bulk_create([inventories], ignore_conflicts=True, batch_size=1000)
-import_inventories_from_csv('/Users/jimcreel/Downloads/inventories.csv')
+#import_inventories_from_csv('/Users/jimcreel/Downloads/inventories.csv')
         
+def import_inventory_set_from_csv(filepath):
+    tmp_data = pd.read_csv(filepath, sep=',')
+    index_id = 0
+    for row in tmp_data.values:
+        index_id += 1
+        inventory_sets = Inventory_Set.objects.create(
+            id = index_id,
+            inventory_id_id=Inventories.objects.get(id=row[0]),
+            set_num_id=Set.objects.get(set_num=row[1]),
+            quantity=row[2]            
+        )
+    Inventory_Set.objects.bulk_create([inventory_sets], ignore_conflicts=True, batch_size=1000)
+import_inventory_set_from_csv('/Users/jimcreel/Downloads/inventory_sets.csv')

@@ -29,13 +29,13 @@ class Set(models.Model):
     num_parts = models.IntegerField()
     img_url = models.CharField(max_length=200)
 
-    def random(self, theme_id):
-        count = self.aggregate(count=Count('id'), filter=Q(theme_id=theme_id))['count']
+    def get_random(self, theme_id):
+        count = self.aggregate(count=Count('id'), filter=Q(theme_id=self.theme_id))['count']
         random_index = randint(0, count - 1)
         return self.all()[random_index]
     
     def __str__(self):
-        return self.name
+        return self.set_num
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'set_id': self.set_num})
@@ -47,6 +47,9 @@ class Inventories(models.Model):
     id = models.IntegerField(primary_key=True)
     version = models.IntegerField()
 
+    def __int__(self):
+        return self.id
+
         
 
 
@@ -54,7 +57,7 @@ class Inventory_Set(models.Model):
     inventory_id = models.ForeignKey(Inventories, on_delete=models.CASCADE)
     set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-
+    id = models.IntegerField(primary_key=True)
     def __str__(self):
         return f"{self.set_num} {self.quantity}"
 

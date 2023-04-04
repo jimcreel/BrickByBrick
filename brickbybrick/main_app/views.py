@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from secrets import * 
+from secrets import *
 from .models import *
 from .forms import *
 
@@ -16,22 +16,14 @@ from .forms import *
 REBRICKABLE_API_KEY = settings.REBRICKABLE_API_KEY
 print(REBRICKABLE_API_KEY)
 # Create your views here.
- 
+
+
 def home(request):
-     rand_list = []
-     # find how many sets have theme_id 18
-        # get a random number between 1 and that number
-        # get the set at that index
-     number_of_sw_sets = Set.objects.filter(theme_id=18).count()
-     number_of_hp_sets = Set.objects.filter(theme_id=246).count()
-     number_of_ninjago_sets = Set.objects.filter(theme_id=435).count()
-     number_of_sets = number_of_sw_sets + number_of_hp_sets + number_of_ninjago_sets
-     
-
-     for i in range(0, number_of_sets):
-         rand_list.append(Set.objects.order_by('?').first())
-
-     return render(request, 'home.html', {'sets': rand_list})
+    rand_list = []
+    theme_id = 18
+    for i in range(0, 5):
+        rand_list.append(Set.objects.filter(theme_id=theme_id).order_by('?').first())
+    return render(request, 'home.html', {'sets': rand_list})
 
 def about(request):
     return render(request, 'about.html')
