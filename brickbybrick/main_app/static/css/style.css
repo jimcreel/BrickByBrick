@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Glegoo&display=swap');
+
+* {
+  font-family: 'Glegoo', serif;
+}
 nav form .input-field input[type=search]:focus {
   height: auto;
 }
@@ -27,6 +32,12 @@ body {
     background-color: darkgray;
   }
 
+  nav img {
+    margin-top: 6px;
+    margin-left: 10px;
+    max-height: 50px;
+    max-width: auto;
+  }
   
   form {
     display: flex;
