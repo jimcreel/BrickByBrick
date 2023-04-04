@@ -38,6 +38,7 @@ class Set(models.Model):
     img_url = models.CharField(max_length=200)
     collection = models.ManyToManyField(Collection)
 
+
     def get_random(self, theme_id):
         count = self.aggregate(count=Count('id'), filter=Q(theme_id=self.theme_id))['count']
         random_index = randint(0, count - 1)
@@ -55,7 +56,7 @@ class Set(models.Model):
 class Inventories(models.Model):
     id = models.IntegerField(primary_key=True)
     version = models.IntegerField()
-    set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
+    set_num = models.ManyToManyField(Set, through = 'Inventory_Set')
     def __int__(self):
         return self.id
 

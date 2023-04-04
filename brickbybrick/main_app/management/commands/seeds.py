@@ -144,19 +144,20 @@ def import_inventories_from_csv(filepath):
         )
 
     Inventories.objects.bulk_create([inventories], ignore_conflicts=True, batch_size=1000)
-import_inventories_from_csv('/Users/jimcreel/Downloads/inventories-4.csv')
+#import_inventories_from_csv('/Users/jimcreel/Downloads/inventories-4.csv')
         
 def import_inventory_set_from_csv(filepath):
     tmp_data = pd.read_csv(filepath, sep=',')
-    index_id = 0
+    index_id = 2865
     for row in tmp_data.values:
         index_id += 1
-        inventory_sets = Inventory_Set.objects.create(
-            id = index_id,
-            inventory_id_id=Inventories.objects.get(id=row[0]),
-            set_num_id=Set.objects.get(set_num=row[1]),
-            quantity=row[2]            
-        )
+        if Inventories.objects.filter(id=row[0]).exists() and Set.objects.filter(set_num=row[1]).exists():            
+            inventory_sets = Inventory_Set.objects.create(
+                id = index_id,
+                inventory_id_id=Inventories.objects.get(id=row[0]),
+                set_num_id=Set.objects.get(set_num=row[1]),
+                quantity=row[2]            
+            )
     Inventory_Set.objects.bulk_create([inventory_sets], ignore_conflicts=True, batch_size=1000)
 #import_inventory_set_from_csv('/Users/jimcreel/Downloads/inventory_sets.csv')
 # def import_inventory_sets_to_inventories(filepath):
@@ -182,3 +183,21 @@ def import_inventory_set_from_csv(filepath):
 #                 Inventories.objects.filter(id=row[0]).update(set_num_id=Set.objects.get(set_num=row[2]), version = row[1])
 
 # import_inventory_sets_to_inventories('/Users/jimcreel/Downloads/inventories-4.csv')
+#use pandas to import 
+def inventory_parts_from_csv(filepath):
+    tmp_data = pd.read_csv(filepath, sep=',')
+    inventory_parts = [
+        Inventory_Part(
+            id=row[0],
+            inventory_id_id=row[1],
+            part_num_id=row[2],
+            color_id_id=row[3],
+            quantity=row[4],
+            is_spare=row[5],
+            img_url=row[6]
+        )
+        for row in tmp_data.values
+    ]
+    Inventory_Part.objects.bulk_create(inventory_parts, ignore_conflicts=True, batch_size=1000)
+
+inventory_parts_from_csv('/Users/jimcreel/Downloads/inventory_parts-4.csv')

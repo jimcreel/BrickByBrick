@@ -20,7 +20,7 @@ print(REBRICKABLE_API_KEY)
 
 def home(request):
     rand_list = []
-    theme_id = 18
+    theme_id = 158
     for i in range(0, 5):
         rand_list.append(Set.objects.filter(theme_id=theme_id).order_by('?').first())
     return render(request, 'home.html', {'sets': rand_list})
@@ -49,11 +49,9 @@ def sets_index(request):
     # })
 @login_required
 def sets_detail(request, set_num):
+    inventory = Inventories.objects.get(set_num_id=set_num)
     set = Set.objects.get(set_num=set_num)
-    collection = Collection.objects.filter(user=request.user)
-    parts = SetPart.objects.filter(set_num=set_num)
-    print(collection)
-    return render(request, 'sets/detail.html', {'set': set, 'collections': collection, 'parts': parts})
+    print(inventory)
 
 class SetCreate(CreateView):
     model = Set
