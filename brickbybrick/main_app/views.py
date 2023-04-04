@@ -58,7 +58,7 @@ def sets_detail(request, set_num):
     set = Set.objects.get(set_num=set_num)
     inventories = Inventories.objects.filter(set_num=set_num)
     collections = Collection.objects.filter(user=request.user)
-    print(collections)
+    print(inventories)
     return render(request, 'sets/detail.html', {'set': set, 'inventories': inventories, 'collections': collections})
 
 class SetCreate(CreateView):
