@@ -1,9 +1,20 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.db.models import Count
+from random import randint
+from django.db.models import Q
 # Create your models here.
 
+class Collection(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'collection_id': self.id})
 
 
 class Theme(models.Model):
@@ -25,21 +36,30 @@ class Set(models.Model):
     theme_id = models.ForeignKey(Theme, on_delete=models.CASCADE)
     num_parts = models.IntegerField()
     img_url = models.CharField(max_length=200)
+    collection = models.ManyToManyField(Collection)
 
+
+    def get_random(self, theme_id):
+        count = self.aggregate(count=Count('id'), filter=Q(theme_id=self.theme_id))['count']
+        random_index = randint(0, count - 1)
+        return self.all()[random_index]
+    
     def __str__(self):
-        return self.name
+        return self.set_num
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'set_id': self.set_num})
 
 
+
+
 class Inventories(models.Model):
     id = models.IntegerField(primary_key=True)
     version = models.IntegerField()
-    set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
-
+    set_num = models.ManyToManyField(Set, through = 'Inventory_Set')
     def __int__(self):
         return self.id
+
         
 
 
@@ -47,14 +67,14 @@ class Inventory_Set(models.Model):
     inventory_id = models.ForeignKey(Inventories, on_delete=models.CASCADE)
     set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-
+    id = models.IntegerField(primary_key=True)
     def __str__(self):
         return f"{self.set_num} {self.quantity}"
 
 
 class Minifig(models.Model):
     fig_num = models.CharField(max_length=20, primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=250)
     num_parts = models.IntegerField()
     img_url = models.CharField(max_length=200)
 
@@ -108,16 +128,8 @@ class Inventory_Part(models.Model):
 
     
 
-class Collection(models.Model):
-    name = models.CharField(max_length=100)
-    set = models.ManyToManyField(Set)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('detail', kwargs={'collection_id': self.id})
+    
 class SetPart(models.Model):
     set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
     part_num = models.ForeignKey(Part, on_delete=models.CASCADE)

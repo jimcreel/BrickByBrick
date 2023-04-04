@@ -18,7 +18,7 @@ def import_sets_from_csv(filepath):
         for row in tmp_data.values
     ]
     Set.objects.bulk_create(sets)
-import_sets_from_csv('/Users/jimcreel/Downloads/sets-4.csv')
+#import_sets_from_csv('/Users/jimcreel/Downloads/sets-4.csv')
 
 def import_parts_from_csv(filepath):
     with open(filepath, 'r') as csvfile:
@@ -106,3 +106,108 @@ def create_colors_from_csv(filepath):
             else:
                 print(f"Color already exists: {color_obj}")
 #create_colors_from_csv('/Users/jimcreel/Downloads/colors.csv')
+
+def import_minifigs_from_csv(filepath):
+    tmp_data = pd.read_csv(filepath, sep=',')
+    minifigs = [
+        Minifig(
+            fig_num=row[0],
+            name=row[1],
+            num_parts=row[2],
+            img_url=row[3]
+        )   
+        for row in tmp_data.values
+    ]
+    Minifig.objects.bulk_create(minifigs)
+#import_minifigs_from_csv('/Users/jimcreel/Downloads/minifigs.csv')
+
+def create_inventory_minifig(filepath):
+    tmp_data = pd.read_csv(filepath, sep=',')
+    inventory_minifigs = [
+        Inventory_MiniFig(
+            inventory_id=Inventories.objects.get(id=row[0]),
+            minifig_id=Minifig.objects.get(fig_num=row[1]),
+            quantity=row[2]
+        )
+        for row in tmp_data.values
+    ]
+    Inventory_MiniFig.objects.bulk_create(inventory_minifigs)
+#create_inventory_minifig('/Users/jimcreel/Downloads/inventory_minifigs.csv')
+
+def import_inventories_from_csv(filepath):
+    tmp_data = pd.read_csv(filepath, sep=',')
+    for row in tmp_data.values:
+        inventories = Inventories.objects.create(
+            id=row[0],
+            version=row[1],
+            set_num_id = row[2],
+        )
+
+    Inventories.objects.bulk_create([inventories], ignore_conflicts=True, batch_size=1000)
+#import_inventories_from_csv('/Users/jimcreel/Downloads/inventories-4.csv')
+        
+def import_inventory_set_from_csv(filepath):
+    with open(filepath, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        
+        next(reader)
+        index = 2865
+        for row in reader:
+            index +=1
+            if Inventories.objects.filter(id=row[0]).exists() and Set.objects.filter(set_num=row[1]).exists():
+                part_obj, created = Inventory_Set.objects.get_or_create(
+                    id = index, 
+                    defaults={
+                        'inventory_id_id': Inventories.objects.get(id=row[0]),
+                        'set_num_id': Set.objects.get(set_num=row[1]),
+                        'quantity': row[2]
+                    }
+                )
+                if created:
+                    print(f"Created new part: {part_obj}")
+                else:
+                    print(f"Part already exists: {part_obj}")
+            else:
+                print(f"Inventory or Set does not exist: {row[0]} {row[1]}")
+#import_inventory_set_from_csv('/Users/jimcreel/Downloads/inventory_sets.csv')
+# def import_inventory_sets_to_inventories(filepath):
+#     with open(filepath, 'r') as csvfile:
+#         reader = csv.reader(csvfile)
+        
+#         next(reader)
+        
+#         for row in reader:
+#             if not Inventories.objects.filter(id=row[0]).exists():
+#                 part_obj, created = Inventories.objects.get_or_create(
+#                     set_num_id = Set.objects.get(set_num=row[2]),
+#                     defaults={
+#                         'id': row[0],
+#                         'version': 1
+#                     }
+#                 )
+#                 if created:
+#                     print(f"Created new part: {part_obj}")
+#                 else:
+#                     print(f"Part already exists: {part_obj}")
+#             else:
+#                 Inventories.objects.filter(id=row[0]).update(set_num_id=Set.objects.get(set_num=row[2]), version = row[1])
+
+# import_inventory_sets_to_inventories('/Users/jimcreel/Downloads/inventories-4.csv')
+#use pandas to import 
+def inventory_parts_from_csv(filepath):
+    tmp_data = pd.read_csv(filepath, sep=',')
+    inventory_parts = [
+        Inventory_Part(
+            id=row[0],
+            inventory_id_id=row[1],
+            part_num_id=row[2],
+            color_id_id=row[3],
+            quantity=row[4],
+            is_spare=row[5],
+            img_url=row[6]
+        )
+        for row in tmp_data.values
+    ]
+    Inventory_Part.objects.bulk_create(inventory_parts, ignore_conflicts=True, batch_size=1000)
+
+inventory_parts_from_csv('/Users/jimcreel/Downloads/inventory_parts-4.csv')

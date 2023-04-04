@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from secrets import * 
+from secrets import *
 from .models import *
 from .forms import *
 
@@ -16,13 +16,14 @@ from .forms import *
 REBRICKABLE_API_KEY = settings.REBRICKABLE_API_KEY
 print(REBRICKABLE_API_KEY)
 # Create your views here.
- 
-def home(request):
-     rand_list = []
-     for i in range(0, 5):
-         rand_list.append(Set.objects.order_by('?').first())
 
-     return render(request, 'home.html', {'sets': rand_list})
+
+def home(request):
+    rand_list = []
+    theme_id = 158
+    for i in range(0, 5):
+        rand_list.append(Set.objects.filter(theme_id=theme_id).order_by('?').first())
+    return render(request, 'home.html', {'sets': rand_list})
 
 def about(request):
     return render(request, 'about.html')
@@ -48,11 +49,17 @@ def sets_index(request):
     # })
 @login_required
 def sets_detail(request, set_num):
+    #get all inventories from set
+    #get all parts from inventories
+    #get all colors from parts
+    #get all images from colors
+    #get all minifigs from set
+    #get all images from minifigs
     set = Set.objects.get(set_num=set_num)
-    collection = Collection.objects.filter(user=request.user)
-    parts = SetPart.objects.filter(set_num=set_num)
-    print(collection)
-    return render(request, 'sets/detail.html', {'set': set, 'collections': collection, 'parts': parts})
+    inventories = Inventories.objects.filter(set_num=set_num)
+    collections = Collection.objects.filter(user=request.user)
+    print(inventories)
+    return render(request, 'sets/detail.html', {'set': set, 'inventories': inventories, 'collections': collections})
 
 class SetCreate(CreateView):
     model = Set
@@ -61,7 +68,7 @@ class SetCreate(CreateView):
 
 class SetUpdate(UpdateView):
     model = Set
-    fields = [  'img_url']
+    fields = [ 'img_url']
     success_url = '/sets/{set_num}'
 
 class SetDelete(DeleteView):
@@ -75,8 +82,10 @@ def collections_index(request):
 
 @login_required
 def collections_detail(request, collection_id):
-    collections = Collection.objects.get(id=collection_id)
-    return render(request, 'collections/detail.html', {'collections': collections})
+    current_collection = Collection.objects.get(id=collection_id)
+    sets = Set.objects.filter(collection = collection_id)
+    print(sets)
+    return render(request, 'collections/detail.html', {'sets': sets, 'collection': current_collection})
 
 
 class CollectionUpdate(LoginRequiredMixin, UpdateView):
@@ -103,7 +112,7 @@ class AddSetToCollection(LoginRequiredMixin, View):
     def post(self, request, collection_id, set_num):
         collection = Collection.objects.get(id=collection_id)
         set = Set.objects.get(set_num = set_num)
-        collection.set.add(set)
+        set.collection.add(collection)
         return redirect('collections_detail', collection_id=collection_id)
 
 
