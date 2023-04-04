@@ -140,10 +140,11 @@ def import_inventories_from_csv(filepath):
         inventories = Inventories.objects.create(
             id=row[0],
             version=row[1],
+            set_num_id = row[2],
         )
 
     Inventories.objects.bulk_create([inventories], ignore_conflicts=True, batch_size=1000)
-#import_inventories_from_csv('/Users/jimcreel/Downloads/inventories.csv')
+import_inventories_from_csv('/Users/jimcreel/Downloads/inventories-4.csv')
         
 def import_inventory_set_from_csv(filepath):
     tmp_data = pd.read_csv(filepath, sep=',')
@@ -157,4 +158,27 @@ def import_inventory_set_from_csv(filepath):
             quantity=row[2]            
         )
     Inventory_Set.objects.bulk_create([inventory_sets], ignore_conflicts=True, batch_size=1000)
-import_inventory_set_from_csv('/Users/jimcreel/Downloads/inventory_sets.csv')
+#import_inventory_set_from_csv('/Users/jimcreel/Downloads/inventory_sets.csv')
+# def import_inventory_sets_to_inventories(filepath):
+#     with open(filepath, 'r') as csvfile:
+#         reader = csv.reader(csvfile)
+        
+#         next(reader)
+        
+#         for row in reader:
+#             if not Inventories.objects.filter(id=row[0]).exists():
+#                 part_obj, created = Inventories.objects.get_or_create(
+#                     set_num_id = Set.objects.get(set_num=row[2]),
+#                     defaults={
+#                         'id': row[0],
+#                         'version': 1
+#                     }
+#                 )
+#                 if created:
+#                     print(f"Created new part: {part_obj}")
+#                 else:
+#                     print(f"Part already exists: {part_obj}")
+#             else:
+#                 Inventories.objects.filter(id=row[0]).update(set_num_id=Set.objects.get(set_num=row[2]), version = row[1])
+
+# import_inventory_sets_to_inventories('/Users/jimcreel/Downloads/inventories-4.csv')

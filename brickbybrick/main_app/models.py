@@ -6,7 +6,15 @@ from random import randint
 from django.db.models import Q
 # Create your models here.
 
+class Collection(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'collection_id': self.id})
 
 
 class Theme(models.Model):
@@ -28,6 +36,7 @@ class Set(models.Model):
     theme_id = models.ForeignKey(Theme, on_delete=models.CASCADE)
     num_parts = models.IntegerField()
     img_url = models.CharField(max_length=200)
+    collection = models.ManyToManyField(Collection)
 
     def get_random(self, theme_id):
         count = self.aggregate(count=Count('id'), filter=Q(theme_id=self.theme_id))['count']
@@ -46,7 +55,7 @@ class Set(models.Model):
 class Inventories(models.Model):
     id = models.IntegerField(primary_key=True)
     version = models.IntegerField()
-
+    set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
     def __int__(self):
         return self.id
 
@@ -118,16 +127,8 @@ class Inventory_Part(models.Model):
 
     
 
-class Collection(models.Model):
-    name = models.CharField(max_length=100)
-    set = models.ForeignKey(Set, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('detail', kwargs={'collection_id': self.id})
+    
 class SetPart(models.Model):
     set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
     part_num = models.ForeignKey(Part, on_delete=models.CASCADE)

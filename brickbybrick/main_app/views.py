@@ -76,8 +76,10 @@ def collections_index(request):
 
 @login_required
 def collections_detail(request, collection_id):
-    collections = Collection.objects.get(id=collection_id)
-    return render(request, 'collections/detail.html', {'collections': collections})
+    current_collection = Collection.objects.get(id=collection_id)
+    sets = Set.objects.filter(collection = collection_id)
+    print(sets)
+    return render(request, 'collections/detail.html', {'sets': sets, 'collection': current_collection})
 
 
 class CollectionUpdate(LoginRequiredMixin, UpdateView):
@@ -104,7 +106,7 @@ class AddSetToCollection(LoginRequiredMixin, View):
     def post(self, request, collection_id, set_num):
         collection = Collection.objects.get(id=collection_id)
         set = Set.objects.get(set_num = set_num)
-        collection.set.add(set)
+        set.collection.add(collection)
         return redirect('collections_detail', collection_id=collection_id)
 
 
