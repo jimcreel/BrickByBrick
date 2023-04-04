@@ -7,41 +7,80 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Brick By Brick</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 <body>
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <ul>
-          <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Brick By Brick</a></li>
-          
+        <a href="{% url 'home' %}" class="brand-logo">&nbsp;&nbsp;Brick By Brick</a>
 
-        </ul>
-        <ul class="right">
+        <a href="#" data-target="mobile-links" class="sidenav-trigger">
+          <i class="material-icons">menu</i>
+        </a>
+        
+
+        <ul class="right hide-on-med-and-down">
             {% if user.is_authenticated %}
+            <!-- <li><a href=""><i class="material-icons left">search</i></a></li> -->
+            <form>
+              <div class="input-field">
+                <input id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
-            <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li></li>
+            <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
+            <li><a href=""><i class="material-icons left">search</i></a></li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'login' %}">Log In</a></li>
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
             {% endif %}
         </ul>
+
+
       </div>
     </nav>
   </header>
+
+  <ul class="sidenav" id="mobile-links">
+    {% if user.is_authenticated %}
+    <li><a href=""><i class="material-icons left">search</i></a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
+    <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
+    <li><a href="{% url 'logout' %}">Log Out</a></li>
+    {% else %}
+    <li><a href=""><i class="material-icons left">search</i></a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'login' %}">Log In</a></li>
+    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+    {% endif %}
+  </ul>
+
   <main class="container">
     {% block content %}
     {% endblock %}
   </main>
   <footer class="page-footer">
   </footer>
-  <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="{% static 'js/item-detail.js' %}"></script>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="{% static 'js/item-detail.js' %}"></script>
+    
+  <script>
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
+    });
+  </script>
 </body>
 </html>
