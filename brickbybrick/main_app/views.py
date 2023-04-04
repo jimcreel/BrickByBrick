@@ -56,10 +56,13 @@ def sets_detail(request, set_num):
     #get all minifigs from set
     #get all images from minifigs
     set = Set.objects.get(set_num=set_num)
-    inventories = Inventories.objects.filter(set_num=set_num)
+    inventories = Inventory_Set.objects.filter(set_num_id=set_num)
+    inv_list = []
+    for inventory in inventories:
+        print(inventory.inventory_id)
     collections = Collection.objects.filter(user=request.user)
     print(inventories)
-    return render(request, 'sets/detail.html', {'set': set, 'inventories': inventories, 'collections': collections})
+    return render(request, 'sets/detail.html', {'set': set, 'inventories': inv_list, 'collections': collections})
 
 class SetCreate(CreateView):
     model = Set
