@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Random Sets</h1>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<h1 id="headerBoard">Inspiration Board</h1>
 {% for set in sets %}
   <div class="card">
     <a href= "{% url 'detail' set.set_num%}">

@@ -1,6 +1,9 @@
+
+/*Added background to all pages here */
 body {
     display: flex;
     min-height: 100vh;
+    max-height: 200vh;
     flex-direction: column;
   }
   
@@ -12,15 +15,14 @@ body {
     padding-top: 0;
     text-align: right;
   }
-  
+
   .card img {
     max-width: 40vw;
-    max-height: auto;
+    max-height: 40vh;
   }
   
   nav {
     background-color: darkgray;
-
   }
 
   
