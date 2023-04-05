@@ -12,8 +12,8 @@
     <p>Minifigures: {{ set.num_minifigs}}</p>
     <img src = "{{ set.img_url }}" alt = "{{ set.name }}">
     <ul>Part List
-      {% for part in inventories.parts %}
-        <li>{{ part.part_num }} - {{ part.name }} - {{ part.color }} - {{ part.quantity }}</li>
+      {% for part in inventories %}
+        <li>Part Num:  {{part.0}} - Qty: {{part.1}}  <img src = {{part.2}} width="25" height ="25" ></li>
       {% endfor %}
     </ul>
     <p>Year: {{ set.year }}</p>

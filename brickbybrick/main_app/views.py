@@ -49,20 +49,22 @@ def sets_index(request):
     # })
 @login_required
 def sets_detail(request, set_num):
-    #get all inventories from set
-    #get all parts from inventories
-    #get all colors from parts
-    #get all images from colors
-    #get all minifigs from set
-    #get all images from minifigs
     set = Set.objects.get(set_num=set_num)
-    inventories = Inventory_Set.objects.filter(set_num_id=set_num)
-    inv_list = []
-    for inventory in inventories:
-        print(inventory.inventory_id)
-    collections = Collection.objects.filter(user=request.user)
-    print(inventories)
-    return render(request, 'sets/detail.html', {'set': set, 'inventories': inv_list, 'collections': collections})
+    # grab the inventory associated with the set and pre-fetch the part
+
+    inventories = Inventories.objects.filter(set_num_id=set_num).select_related('set_num')
+    # grab the parts associated with the inventory and pre-fetch the part
+    
+    inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
+    part_list = Part.objects.filter(pk__in=inv_list.values_list('part_num_id', flat=True)).distinct()
+    top_level_inv = Inventories.objects.filter(set_num_id=set_num).first()
+    top_level_part_list = Inventory_Part.objects.filter(inventory_id=top_level_inv.id, part_num__isnull=False).select_related('part_num') if top_level_inv else []
+    inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
+    
+    collections = request.user.collection_set.all()
+    print(inventory_flat_list)
+    return render(request, 'sets/detail.html', {'set': set, 'inventories': inventory_flat_list, 'collections': collections})
+
 
 class SetCreate(CreateView):
     model = Set
