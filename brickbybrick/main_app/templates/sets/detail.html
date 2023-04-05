@@ -10,12 +10,27 @@
     <p>Number of Pieces: {{ set.num_parts}} </p>
     <p>Description: {{ set.description|linebreaks }}</p>
     <p>Minifigures: {{ set.num_minifigs}}</p>
-    <img src = "{{ set.img_url }}" alt = "{{ set.name }}">
-    <ul>Part List
-      {% for part in inventories %}
-        <li>Part Num:  {{part.0}} - Qty: {{part.1}}  <img src = {{part.2}} width="25" height ="25" ></li>
-      {% endfor %}
-    </ul>
+    <img class = 'cardImg' src = "{{ set.img_url }}" alt = "{{ set.name }}">
+    {% for part_num, quantity, img_url in inventories %}
+        <div>
+            <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
+            <p>{{ part_num }} - {{ quantity }}</p>
+        </div>
+    {% endfor %}
+
+    {% if inventories.has_other_pages %}
+        <nav>
+            {% if inventories.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ inventories.previous_page_number }}">previous</a>
+            {% endif %}
+
+            {% if inventories.has_next %}
+                <a href="?page={{ inventories.next_page_number }}">next</a>
+                <a href="?page={{ inventories.paginator.num_pages }}">&raquo; last</a>
+            {% endif %}
+        </nav>
+    {% endif %}
     <p>Year: {{ set.year }}</p>
     <div class="card-action">
       <a href="{% url 'sets_update' set.set_num %}">Edit</a>

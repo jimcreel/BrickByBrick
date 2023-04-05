@@ -7,6 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 
 from secrets import *
 from .models import *
@@ -63,7 +64,10 @@ def sets_detail(request, set_num):
     
     collections = request.user.collection_set.all()
     print(inventory_flat_list)
-    return render(request, 'sets/detail.html', {'set': set, 'inventories': inventory_flat_list, 'collections': collections})
+    paginator = Paginator(inventory_flat_list, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'sets/detail.html', {'set': set, 'inventories': page_obj, 'collections': collections, 'range': 6})
 
 
 class SetCreate(CreateView):
