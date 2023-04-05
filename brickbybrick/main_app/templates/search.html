@@ -5,20 +5,31 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
-
+<div class="card-grid">
     {% if searchWord %}
         <h1>You Searched for "{{ searchWord }}"</h1>
         <br>
         <h2>Results:</h2>
         <br>
         {% for sets in searchSets %}
-            {{ sets.name }}
+        <div class="card">
+            <div class="card-content">
+                <a href= "{% url 'detail' sets.set_num%}">
+                    <span class="card-title">{{ sets.name }}</span>
+                    <img src = "{{ sets.img_url }}" alt = "{{ sets.name }}">
+                </a>
+            </div>
+            <br>
+            <br>
             <br>
         {% endfor %}
     {% else %}
         <h1>You Searched Nothin!</h1>
 
     {% endif %}
+</div>
+
+
 
 {% endblock %}
 
