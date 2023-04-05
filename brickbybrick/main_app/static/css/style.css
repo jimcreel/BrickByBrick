@@ -29,19 +29,16 @@ body {
     text-align: right;
   }
 
-dev
   nav {
     background-color: rgba(211,211,211,0.35);
   }
 
 
   nav img {
-    margin-top: 6px;
-    margin-left: 10px;
-    max-height: 50px;
-    max-width: auto;
+    height: 80px;
+    width: auto;
+    margin-left: 20px;
   }
-
   form {
     display: flex;
   }
