@@ -7,6 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 
 from secrets import *
 from .models import *
@@ -66,14 +67,17 @@ def sets_detail(request, set_num):
     # grab the parts associated with the inventory and pre-fetch the part
     
     inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
-    part_list = Part.objects.filter(pk__in=inv_list.values_list('part_num_id', flat=True)).distinct()
-    top_level_inv = Inventories.objects.filter(set_num_id=set_num).first()
-    top_level_part_list = Inventory_Part.objects.filter(inventory_id=top_level_inv.id, part_num__isnull=False).select_related('part_num') if top_level_inv else []
+    
+   
+    
     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
     
     collections = request.user.collection_set.all()
     print(inventory_flat_list)
-    return render(request, 'sets/detail.html', {'set': set, 'inventories': inventory_flat_list, 'collections': collections})
+    paginator = Paginator(inventory_flat_list, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'sets/detail.html', {'set': set, 'inventories': page_obj, 'collections': collections, 'range': 6})
 
 
 class SetCreate(CreateView):

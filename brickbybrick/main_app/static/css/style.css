@@ -23,10 +23,7 @@ body {
     text-align: right;
   }
 
-  .card img {
-    max-width: 30vw;
-    max-height: auto;
-  }
+ 
   
   nav {
     background-color: darkgray;
@@ -46,4 +43,14 @@ body {
   btn a {
     text-decoration: none;
     color: white;
+  }
+  
+  .partImg {
+    max-width: 25px;
+    max-height: auto;
+  }
+
+  .cardImg {
+    max-width: 30vw;
+    max-height: auto;
   }
