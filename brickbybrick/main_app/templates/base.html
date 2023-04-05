@@ -8,10 +8,17 @@
   <title>Brick By Brick</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/side-bar.css' %}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
+
+
+
 <body>
+
+<div class="body-text">
+<!-- Start of Navbar ----------------------------------------------------------------->
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
@@ -23,7 +30,7 @@
         </a>
       
         <ul class="right hide-on-med-and-down">
-
+<!-- Navbar if logged in----------------------------------------------------------------->
             {% if user.is_authenticated %}
             <li>
               <form method="POST" action="{% url 'search' %}" name="searchWord">
@@ -42,7 +49,7 @@
             <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
 
-
+<!-- Navbar if not logged in----------------------------------------------------------------->
             {% else %}
             <li>
                   <form method="POST" action="{% url 'search' %}">
@@ -66,8 +73,9 @@
     </nav>
   </header>
 
+<!-- Mobile Friendly Navbar ----------------------------------------------------------------->
   <ul class="sidenav" id="mobile-links">
-
+<!-- Mobile Friendly Navbar if logged in----------------------------------------------------------------->
     {% if user.is_authenticated %}
     <li>
       <form method="POST" action="{% url 'search' %}" name="searchWord">
@@ -86,7 +94,7 @@
     <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
     <li><a href="{% url 'logout' %}">Log Out</a></li>
 
-
+<!-- Mobile Friendly Navbar if not logged in----------------------------------------------------------------->
     {% else %}
     <li>
       <form method="POST" action="{% url 'search' %}" name="searchWord">
@@ -106,6 +114,20 @@
 
     {% endif %}
   </ul>
+
+
+<!--Side bar----------------------------------------------------------------->
+<ul class="hide-on-med-and-down">
+  <div class="sidebar">
+    <li>Menu Item 1</li>
+    <li>Menu Item 2</li>
+    <li>Menu Item 3</li>
+  </div>
+</ul>    
+
+</div>
+
+
 
   <main class="container">
     {% block content %}

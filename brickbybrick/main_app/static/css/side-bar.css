@@ -1,0 +1,20 @@
+.sidebar {
+    height: 100vh;
+    width: 150px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 100px;
+    background-color: lightblue;
+    }
+    
+    .sidebar li {
+    padding: 8px;
+    font-size: 24px;
+    display: block;
+    }
+    
+    .body-text {
+    margin-right: 150px;
+    font-size: 18px;
+    }
