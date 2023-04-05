@@ -47,10 +47,10 @@
             </li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
-            <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
+            <!-- <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li> -->
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             <li>
-              <a class="waves-effect waves-light btn" onclick="openNav()">Open Collections <i class="material-icons right">arrow_drop_down_circle</i></a>
+              <a class="waves-effect waves-light btn" onclick="openNav()" ondblclick="closeNav()">Open Collections <i class="material-icons right">arrow_drop_down_circle</i></a>
             </li>
 
 <!-- Navbar if not logged in----------------------------------------------------------------->
@@ -129,7 +129,7 @@
     </div>
     <!-- <li>Parts List</li> -->
     <li>
-      Collection List
+      <a href = "{% url 'collections_index' %}">Collection List</a>
       {% for collection in collections %}
         <div class="card">
           <a href= "{% url 'collections_detail' collection.id %}">
