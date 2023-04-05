@@ -1,11 +1,25 @@
-{% extends 'base.html' %}
+{% comment %} {% extends 'base.html' %} {% endcomment %}
 {% block content %}
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+	{% comment %} added it here because when trying to add it in the css, it wouldnt work  {% endcomment %}
+	body {
+		background-image: url("{% static 'images/prison-break.png' %}");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+</style>
 
 <body>
+<h1>	
+	<img src="{% static 'images/BrickByBrickLogo.png' %}" alt="Lego Logo" id="legoLogo">
+</h1>
+<span class="center-align">
 	<div class="box">
 		<a href="{% url 'about'%}">About Us</a>
 	</div>
@@ -17,22 +31,10 @@
      {% comment %} Placeholder for now  {% endcomment %}
 		<a href="lego-tutorials.html">LEGO Tutorials</a>
 	</div>
+</span>
+
+
 </body>
 
-
-<h1 id="headerBoard">Inspiration Board</h1>
-<div class="card-grid">
-{% for set in sets %}
-  <div class="card">
-    <a href= "{% url 'detail' set.set_num%}">
-    <div class="card-content">
-      <span class="card-title">{{ set.name }}</span>
-      <img src = "{{ set.img_url }}" alt = "{{ set.name }}"></a> 
-      <!-- <p>Minifigures: {{set.minifigs | length }}</p> -->
-    </div>
-  </a>
-  </div>
-{% endfor %}
-</div>
 
 {% endblock %}

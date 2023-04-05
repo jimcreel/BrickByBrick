@@ -13,7 +13,13 @@ body {
     max-height: 200vh;
     flex-direction: column;
   }
+
+#navLogoId {
+  margin-top: -8px !important;
+  margin-left: -35px !important;
   
+}
+
   main {
     flex: 1 0 auto;
   }
@@ -23,11 +29,11 @@ body {
     text-align: right;
   }
 
- 
-  
+dev
   nav {
-    background-color: darkgray;
+    background-color: rgba(211,211,211,0.35);
   }
+
 
   nav img {
     margin-top: 6px;
@@ -35,7 +41,7 @@ body {
     max-height: 50px;
     max-width: auto;
   }
-  
+
   form {
     display: flex;
   }
