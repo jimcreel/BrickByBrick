@@ -24,19 +24,9 @@ def home(request):
     theme_id = 158
     for i in range(0, 5):
         rand_list.append(Set.objects.filter(theme_id=theme_id).order_by('?').first())
-    if request.user.is_authenticated:
-        collections = Collection.objects.filter(user = request.user)
-        return render(request, 'home.html', {'sets': rand_list,
-                                         'collections': collections})
     return render(request, 'home.html', {'sets': rand_list})
 
 def about(request):
-    if request.user.is_authenticated:
-        collections = Collection.objects.filter(user = request.user)
-        return render(request, 'about.html', 
-            {'user': request.user,
-             'collections': collections})
-
     return render(request, 'about.html')
 
 def sets_index(request):
@@ -62,10 +52,16 @@ def sets_index(request):
 def sets_detail(request, set_num):
     set = Set.objects.get(set_num=set_num)
     # grab the inventory associated with the set and pre-fetch the part
+
     inventories = Inventories.objects.filter(set_num_id=set_num).select_related('set_num')
     # grab the parts associated with the inventory and pre-fetch the part
+    
     inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
+    part_list = Part.objects.filter(pk__in=inv_list.values_list('part_num_id', flat=True)).distinct()
+    top_level_inv = Inventories.objects.filter(set_num_id=set_num).first()
+    top_level_part_list = Inventory_Part.objects.filter(inventory_id=top_level_inv.id, part_num__isnull=False).select_related('part_num') if top_level_inv else []
     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
+    
     collections = request.user.collection_set.all()
     print(inventory_flat_list)
     paginator = Paginator(inventory_flat_list, 6)
@@ -133,7 +129,7 @@ class RemoveSetFromCollection(LoginRequiredMixin, View):
     def post(self, request, collection_id, set_num):
         collection = Collection.objects.get(id=collection_id)
         set = Set.objects.get(set_num = set_num)
-        collection.set.remove(set)
+        set.collection.remove(collection)
         return redirect('collections_detail', collection_id=collection_id)
 
 def signup(request):
