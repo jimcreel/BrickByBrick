@@ -62,16 +62,10 @@ def sets_index(request):
 def sets_detail(request, set_num):
     set = Set.objects.get(set_num=set_num)
     # grab the inventory associated with the set and pre-fetch the part
-
     inventories = Inventories.objects.filter(set_num_id=set_num).select_related('set_num')
     # grab the parts associated with the inventory and pre-fetch the part
-    
     inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
-    
-   
-    
     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
-    
     collections = request.user.collection_set.all()
     print(inventory_flat_list)
     paginator = Paginator(inventory_flat_list, 6)
