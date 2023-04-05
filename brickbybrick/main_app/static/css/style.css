@@ -28,9 +28,9 @@ body {
     max-width: 30vw;
     max-height: auto;
   }
-  
+
   nav {
-    background-color: darkgray;
+    background-color: rgba(211,211,211,0.35);
   }
 
   form {
