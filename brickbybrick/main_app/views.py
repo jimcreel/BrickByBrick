@@ -136,3 +136,20 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+def search(request):
+    if request.method == "POST":
+        searchWord = request.POST.get('searchWord')
+        searchSets = Set.objects.filter(name__icontains=searchWord)
+
+        return render(request, 'search.html', 
+            { 'searchWord': searchWord,
+             'searchSets': searchSets })
+    else:
+
+        return render(request, 'search.html')
+    # search_term = request.GET.get('search')
+    # url = f'https://rebrickable.com/api/v3/lego/sets/?key={REBRICKABLE_API_KEY}&search={search_term}'
+    # r = requests.get(url)
+    # sets = r.json()
+    # return render(request, 'sets/index.html', {'sets': sets})

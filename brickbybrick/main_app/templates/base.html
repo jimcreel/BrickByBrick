@@ -18,19 +18,21 @@
 
         <a href="{% url 'home' %}" class="brand-logo"><img src="{% static 'images/logo-pic.png' %}" ></a>
 
-
         <a href="#" data-target="mobile-links" class="sidenav-trigger">
           <i class="material-icons">menu</i>
         </a>
-        
-
+      
         <ul class="right hide-on-med-and-down">
+
             {% if user.is_authenticated %}
             <li>
-              <form>
+              <form method="POST" action="{% url 'search' %}" name="searchWord">
+                {% csrf_token %}
                 <div class="input-field">
-                  <input id="search" type="search" required>
-                  <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                  <input id="search" type="search" name="searchWord" required>
+                  <label class="label-icon" for="search">
+                    <i class="material-icons">search</i>
+                  </label>
                   <i class="material-icons">close</i>
                 </div>
               </form>
@@ -39,12 +41,17 @@
             <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
             <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
+
+
             {% else %}
             <li>
-                  <form>
+                  <form method="POST" action="{% url 'search' %}">
+                    {% csrf_token %}
                     <div class="input-field">
-                      <input id="search" type="search" required>
-                      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                      <input id="search" type="search" name="searchWord" required>
+                      <label class="label-icon" for="search">
+                        <i class="material-icons">search</i>
+                      </label>
                       <i class="material-icons">close</i>
                     </div>
                   </form>
@@ -52,21 +59,24 @@
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'login' %}">Log In</a></li>
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
+
             {% endif %}
         </ul>
-
-
       </div>
     </nav>
   </header>
 
   <ul class="sidenav" id="mobile-links">
+
     {% if user.is_authenticated %}
     <li>
-      <form>
+      <form method="POST" action="{% url 'search' %}" name="searchWord">
+        {% csrf_token %}
         <div class="input-field">
-          <input id="search" type="search" class="center" required>
-          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <input id="search" type="search" class="center" name="searchWord" required>
+          <label class="label-icon" for="search">
+            <i class="material-icons">search</i>
+          </label>
           <i class="material-icons">close</i>
         </div>
       </form>
@@ -75,12 +85,17 @@
     <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
     <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
     <li><a href="{% url 'logout' %}">Log Out</a></li>
+
+
     {% else %}
     <li>
-      <form>
+      <form method="POST" action="{% url 'search' %}" name="searchWord">
+        {% csrf_token %}
         <div class="input-field">
-          <input id="search" type="search" class="center" required>
-          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <input id="search" type="search" class="center" name="searchWord" required>
+          <label class="label-icon" for="search">
+            <i class="material-icons">search</i>
+          </label>
           <i class="material-icons">close</i>
         </div>
       </form>
@@ -88,6 +103,7 @@
     <li><a href="{% url 'about' %}">About</a></li>
     <li><a href="{% url 'login' %}">Log In</a></li>
     <li><a href="{% url 'signup' %}">Sign Up</a></li>
+
     {% endif %}
   </ul>
 
