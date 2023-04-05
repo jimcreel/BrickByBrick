@@ -138,8 +138,14 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def search(request):
-    
-    return render(request, 'search.html')
+    if request.method == "POST":
+        searchWord = request.POST.get('searchWord')
+
+        return render(request, 'search.html', 
+            { 'searchWord': searchWord })
+    else:
+
+        return render(request, 'search.html')
     # search_term = request.GET.get('search')
     # url = f'https://rebrickable.com/api/v3/lego/sets/?key={REBRICKABLE_API_KEY}&search={search_term}'
     # r = requests.get(url)

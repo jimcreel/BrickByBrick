@@ -5,6 +5,19 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
-<h1>You Searched For...</h1>
+
+    {% if searchWord %}
+        <h1>You Searched for {{ searchWord }}</h1>
+
+    {% else %}
+        <h1>You Searched Nothin!</h1>
+
+    {% endif %}
 
 {% endblock %}
+
+<!-- Refrences:
+https://www.youtube.com/watch?v=AGtae4L5BbI&t=725s 
+
+
+-->

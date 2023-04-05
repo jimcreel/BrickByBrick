@@ -26,10 +26,10 @@
 
             {% if user.is_authenticated %}
             <li>
-              <form method="POST" action="{% url 'search' %}">
+              <form method="POST" action="{% url 'search' %}" name="searchWord">
                 {% csrf_token %}
                 <div class="input-field">
-                  <input id="search" type="search" required>
+                  <input id="search" type="search" name="searchWord" required>
                   <label class="label-icon" for="search">
                     <i class="material-icons">search</i>
                   </label>
@@ -48,7 +48,7 @@
                   <form method="POST" action="{% url 'search' %}">
                     {% csrf_token %}
                     <div class="input-field">
-                      <input id="search" type="search" required>
+                      <input id="search" type="search" name="searchWord" required>
                       <label class="label-icon" for="search">
                         <i class="material-icons">search</i>
                       </label>
@@ -70,10 +70,10 @@
 
     {% if user.is_authenticated %}
     <li>
-      <form method="POST" action="{% url 'search' %}">
+      <form method="POST" action="{% url 'search' %}" name="searchWord">
         {% csrf_token %}
         <div class="input-field">
-          <input id="search" type="search" class="center" required>
+          <input id="search" type="search" class="center" name="searchWord" required>
           <label class="label-icon" for="search">
             <i class="material-icons">search</i>
           </label>
@@ -89,10 +89,10 @@
 
     {% else %}
     <li>
-      <form method="POST" action="{% url 'search' %}">
+      <form method="POST" action="{% url 'search' %}" name="searchWord">
         {% csrf_token %}
         <div class="input-field">
-          <input id="search" type="search" class="center" required>
+          <input id="search" type="search" class="center" name="searchWord" required>
           <label class="label-icon" for="search">
             <i class="material-icons">search</i>
           </label>
