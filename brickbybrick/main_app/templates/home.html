@@ -2,15 +2,21 @@
 {% block content %}
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+	{% comment %} added it here because when trying to add it in the css, it wouldnt work  {% endcomment %}
+	body {
+		background-image: url("{% static 'images/prison-break.png' %}");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+</style>
 
 <body>
+<span class="center-align">
 	<div class="box">
 		<a href="{% url 'about'%}">About Us</a>
 	</div>
@@ -22,9 +28,12 @@
      {% comment %} Placeholder for now  {% endcomment %}
 		<a href="lego-tutorials.html">LEGO Tutorials</a>
 	</div>
+</span>
+
+	<h1>	
+	<img src="{% static 'images/BrickByBrickLogo.png' %}" alt="Lego Logo" id="legoLogo">
+</h1>
 </body>
-
-
 
 
 {% endblock %}
