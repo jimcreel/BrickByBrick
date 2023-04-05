@@ -50,7 +50,7 @@
             <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             <li>
-              <a class="waves-effect waves-light btn" onclick="openNav()">Open Collections</a>
+              <a class="waves-effect waves-light btn" onclick="openNav()">Open Collections <i class="material-icons right">arrow_drop_down_circle</i></a>
             </li>
 
 <!-- Navbar if not logged in----------------------------------------------------------------->
@@ -124,12 +124,24 @@
 <div id="main">
 <ul class="hide-on-med-and-down">
   <div id="sidebar" class="sidebar">
-    <div class="closebtn" onclick="closeNav()">×</div>
-    <li>Menu Item 1</li>
-    <li>Menu Item 2</li>
-    <li>Menu Item 3</li>
+    <div class="closebtn" onclick="closeNav()">
+      <i class="material-icons">close</i>  
+    </div>
+    <!-- <li>Parts List</li> -->
+    <li>
+      Collection List
+      {% for collection in collections %}
+        <div class="card">
+          <a href= "{% url 'collections_detail' collection.id %}">
+          <div class="card-content">
+            <span class="card-title">{{ collection.name }}</span>
+          </div>
+          </a>
+        </div>
+      {% endfor %}
+    </li>
   </div>
-  <button class="openbtn" onclick="openNav()">Open Sidebar</button> 
+  <!-- <button class="openbtn" onclick="openNav()">Open Sidebar</button>  -->
 </div>
 </ul>    
 
