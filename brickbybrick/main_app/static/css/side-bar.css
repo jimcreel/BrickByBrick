@@ -1,20 +1,46 @@
 .sidebar {
     height: 100vh;
-    width: 150px;
-    position: absolute;
+    width: 0;
+    position: fixed;
     top: 0;
     right: 0;
-    padding-top: 100px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 110px;
     background-color: lightblue;
-    }
+}
     
-    .sidebar li {
-    padding: 8px;
+.sidebar li {
+    padding: 8px 8px 8px 30px;
     font-size: 24px;
     display: block;
-    }
+    transition: 0.5s;
+    cursor: pointer;
+}
     
-    .body-text {
+.body-text {
     margin-right: 150px;
     font-size: 18px;
-    }
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    padding-top: 110px;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+}
+    
+.openbtn {
+    font-size: 24px;
+    cursor: pointer;
+    background-color: lightblue;
+}
+
+#main {
+    transition: margin-left .5s;
+}
+
+
+/* refrences 
+https://blog.hubspot.com/website/css-sidebar#:~:text=If%20you're%20DIY%2Ding,want%20a%20pure%20CSS%20implementation. */

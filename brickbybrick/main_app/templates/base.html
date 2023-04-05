@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/side-bar.css' %}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="{% static 'js/side-bar.js' %}"></script>
 
 </head>
 
@@ -117,18 +118,24 @@
 
 
 <!--Side bar----------------------------------------------------------------->
+<div id="main">
 <ul class="hide-on-med-and-down">
-  <div class="sidebar">
-    <li>Menu Item 1</li>
-    <li>Menu Item 2</li>
-    <li>Menu Item 3</li>
+  <div id="sidebar" class="sidebar">
+    <div class="closebtn" onclick="closeNav()">×</div>
+      <li>Menu Item 1</li>
+      <li>Menu Item 2</li>
+      <li>Menu Item 3</li>
+  </div>
+
+
+    <button class="openbtn" onclick="openNav()">Open Sidebar</button> 
   </div>
 </ul>    
 
 </div>
 
 
-
+<!--Footer (not in use rn)----------------------------------------------------------------->
   <main class="container">
     {% block content %}
     {% endblock %}
