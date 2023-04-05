@@ -49,6 +49,9 @@
             <li><a href="{% url 'sets_create' %}">Add a Set</a></li>
             <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li>
+              <a class="waves-effect waves-light btn" onclick="openNav()">Open Collections</a>
+            </li>
 
 <!-- Navbar if not logged in----------------------------------------------------------------->
             {% else %}
@@ -122,14 +125,12 @@
 <ul class="hide-on-med-and-down">
   <div id="sidebar" class="sidebar">
     <div class="closebtn" onclick="closeNav()">×</div>
-      <li>Menu Item 1</li>
-      <li>Menu Item 2</li>
-      <li>Menu Item 3</li>
+    <li>Menu Item 1</li>
+    <li>Menu Item 2</li>
+    <li>Menu Item 3</li>
   </div>
-
-
-    <button class="openbtn" onclick="openNav()">Open Sidebar</button> 
-  </div>
+  <button class="openbtn" onclick="openNav()">Open Sidebar</button> 
+</div>
 </ul>    
 
 </div>
