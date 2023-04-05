@@ -57,9 +57,9 @@ def sets_detail(request, set_num):
     # grab the parts associated with the inventory and pre-fetch the part
     
     inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
-    part_list = Part.objects.filter(pk__in=inv_list.values_list('part_num_id', flat=True)).distinct()
-    top_level_inv = Inventories.objects.filter(set_num_id=set_num).first()
-    top_level_part_list = Inventory_Part.objects.filter(inventory_id=top_level_inv.id, part_num__isnull=False).select_related('part_num') if top_level_inv else []
+    
+   
+    
     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
     
     collections = request.user.collection_set.all()
