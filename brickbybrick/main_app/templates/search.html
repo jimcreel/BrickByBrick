@@ -7,8 +7,14 @@
 
 
     {% if searchWord %}
-        <h1>You Searched for {{ searchWord }}</h1>
-
+        <h1>You Searched for "{{ searchWord }}"</h1>
+        <br>
+        <h2>Results:</h2>
+        <br>
+        {% for sets in searchSets %}
+            {{ sets.name }}
+            <br>
+        {% endfor %}
     {% else %}
         <h1>You Searched Nothin!</h1>
 

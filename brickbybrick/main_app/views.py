@@ -140,9 +140,11 @@ def signup(request):
 def search(request):
     if request.method == "POST":
         searchWord = request.POST.get('searchWord')
+        searchSets = Set.objects.filter(name__icontains=searchWord)
 
         return render(request, 'search.html', 
-            { 'searchWord': searchWord })
+            { 'searchWord': searchWord,
+             'searchSets': searchSets })
     else:
 
         return render(request, 'search.html')
