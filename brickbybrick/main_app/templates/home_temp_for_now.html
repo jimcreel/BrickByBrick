@@ -1,14 +1,9 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% extends 'base.html' %}
 {% block content %}
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
-
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <body>
 	<div class="box">
@@ -25,6 +20,19 @@
 </body>
 
 
-
+<h1 id="headerBoard">Inspiration Board</h1>
+<div class="card-grid">
+{% for set in sets %}
+  <div class="card">
+    <a href= "{% url 'detail' set.set_num%}">
+    <div class="card-content">
+      <span class="card-title">{{ set.name }}</span>
+      <img src = "{{ set.img_url }}" alt = "{{ set.name }}"></a> 
+      <!-- <p>Minifigures: {{set.minifigs | length }}</p> -->
+    </div>
+  </a>
+  </div>
+{% endfor %}
+</div>
 
 {% endblock %}
