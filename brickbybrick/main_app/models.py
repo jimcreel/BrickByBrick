@@ -9,7 +9,6 @@ from django.db.models import Q
 class Collection(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
     def __str__(self):
         return self.name
 
@@ -56,7 +55,7 @@ class Set(models.Model):
 class Inventories(models.Model):
     id = models.IntegerField(primary_key=True)
     version = models.IntegerField()
-    set_num = models.ManyToManyField(Set, through = 'Inventory_Set')
+    set_num = models.ForeignKey(Set, on_delete=models.CASCADE)
     def __int__(self):
         return self.id
 

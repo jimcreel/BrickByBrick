@@ -196,18 +196,20 @@ def import_inventory_set_from_csv(filepath):
 #use pandas to import 
 def inventory_parts_from_csv(filepath):
     tmp_data = pd.read_csv(filepath, sep=',')
+    #change the values of the is_spare column to boolean
+    tmp_data['is_spare'] = tmp_data['is_spare'].map({'FALSE': False, 'TRUE': True})
     inventory_parts = [
         Inventory_Part(
             id=row[0],
-            inventory_id_id=row[1],
-            part_num_id=row[2],
-            color_id_id=row[3],
-            quantity=row[4],
-            is_spare=row[5],
-            img_url=row[6]
+            quantity=row[1],
+            is_spare=row[2],
+            img_url=row[3],
+            color_id_id=Color.objects.get(id=row[4]),
+            inventory_id_id = Inventories.objects.get(id=row[5]),
+            part_num_id = Part.objects.get(part_num=row[6])   
         )
         for row in tmp_data.values
     ]
-    Inventory_Part.objects.bulk_create(inventory_parts, ignore_conflicts=True, batch_size=1000)
+    Inventory_Part.objects.bulk_create(inventory_parts, batch_size=500)
 
-inventory_parts_from_csv('/Users/jimcreel/Downloads/inventory_parts-4.csv')
+inventory_parts_from_csv('/Users/jimcreel/Downloads/inventory_parts.csv')
