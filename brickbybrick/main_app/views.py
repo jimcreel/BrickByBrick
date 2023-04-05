@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.db.models.aggregates import Count
+from django.db.models.aggregates import Count, Sum
 from django.views import View
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -96,6 +96,24 @@ def collections_detail(request, collection_id):
     print(sets)
     return render(request, 'collections/detail.html', {'sets': sets, 'collection': current_collection})
 
+
+def collection_parts(request, collection_id):
+    collection = Collection.objects.get(id=collection_id)
+    sets = Set.objects.filter(collection=collection_id).prefetch_related('inventory_set_set__part_num_id')
+    #get the inventory associated with the set and pre-fetch the part
+    inventories = Inventories.objects.filter(set_num_id__in=sets).select_related('set_num')
+    # grab the parts associated with the inventory and pre-fetch the part
+    
+    inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
+    part_list = Part.objects.filter(pk__in=inv_list.values_list('part_num_id', flat=True)).distinct()
+    top_level_inv = Inventories.objects.filter(set_num_id__in=sets).first()
+    top_level_part_list = Inventory_Part.objects.filter(inventory_id=top_level_inv.id, part_num__isnull=False).select_related('part_num') if top_level_inv else []
+    inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
+    print(inventory_flat_list)
+    paginator = Paginator(inventory_flat_list, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'collections/parts.html', {'inventories': page_obj, 'collection': collection, 'range': 6})
 
 class CollectionUpdate(LoginRequiredMixin, UpdateView):
     model = Collection
