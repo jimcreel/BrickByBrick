@@ -3,6 +3,7 @@
 {% block content %}
 
     <h1>Parts in {{ collection.name }} Collection</h1>
+    <h2> Total Parts: {{ total_parts }}</h2>
 
 {% for part_num, quantity, img_url, part_num__part_name in inventories %}
         <div>
