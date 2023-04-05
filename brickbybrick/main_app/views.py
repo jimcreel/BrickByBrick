@@ -7,6 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 
 from secrets import *
 from .models import *
@@ -23,9 +24,19 @@ def home(request):
     theme_id = 158
     for i in range(0, 5):
         rand_list.append(Set.objects.filter(theme_id=theme_id).order_by('?').first())
+    if request.user.is_authenticated:
+        collections = Collection.objects.filter(user = request.user)
+        return render(request, 'home.html', {'sets': rand_list,
+                                         'collections': collections})
     return render(request, 'home.html', {'sets': rand_list})
 
 def about(request):
+    if request.user.is_authenticated:
+        collections = Collection.objects.filter(user = request.user)
+        return render(request, 'about.html', 
+            {'user': request.user,
+             'collections': collections})
+
     return render(request, 'about.html')
 
 def sets_index(request):
@@ -49,17 +60,19 @@ def sets_index(request):
     # })
 @login_required
 def sets_detail(request, set_num):
-    #get all inventories from set
-    #get all parts from inventories
-    #get all colors from parts
-    #get all images from colors
-    #get all minifigs from set
-    #get all images from minifigs
     set = Set.objects.get(set_num=set_num)
-    inventories = Inventories.objects.filter(set_num=set_num)
-    collections = Collection.objects.filter(user=request.user)
-    print(inventories)
-    return render(request, 'sets/detail.html', {'set': set, 'inventories': inventories, 'collections': collections})
+    # grab the inventory associated with the set and pre-fetch the part
+    inventories = Inventories.objects.filter(set_num_id=set_num).select_related('set_num')
+    # grab the parts associated with the inventory and pre-fetch the part
+    inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
+    inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
+    collections = request.user.collection_set.all()
+    print(inventory_flat_list)
+    paginator = Paginator(inventory_flat_list, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'sets/detail.html', {'set': set, 'inventories': page_obj, 'collections': collections, 'range': 6})
+
 
 class SetCreate(CreateView):
     model = Set
@@ -136,3 +149,25 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+def search(request):
+    if request.method == "POST":
+        searchWord = request.POST.get('searchWord')
+        searchSets = Set.objects.filter(Q(name__icontains=searchWord)|Q(set_num__icontains=searchWord))
+        if not searchSets:
+            search_mini_figs = Minifig.objects.filter(name__icontains=searchWord)
+        if searchSets:
+            return render(request, 'search.html', 
+            { 'searchWord': searchWord,
+             'searchSets': searchSets })
+        elif search_mini_figs:
+            return render(request, 'search.html', 
+            { 'searchWord': searchWord,
+             'search_mini_figs': search_mini_figs })
+        else:
+            return render(request, 'search.html')
+    # search_term = request.GET.get('search')
+    # url = f'https://rebrickable.com/api/v3/lego/sets/?key={REBRICKABLE_API_KEY}&search={search_term}'
+    # r = requests.get(url)
+    # sets = r.json()
+    # return render(request, 'sets/index.html', {'sets': sets})

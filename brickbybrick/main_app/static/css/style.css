@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Glegoo&display=swap');
+
+* {
+  font-family: 'Glegoo', serif;
+}
 nav form .input-field input[type=search]:focus {
   height: auto;
 }
@@ -24,13 +29,17 @@ body {
     text-align: right;
   }
 
-  .card img {
-    max-width: 30vw;
-    max-height: auto;
-  }
-
+dev
   nav {
     background-color: rgba(211,211,211,0.35);
+  }
+
+
+  nav img {
+    margin-top: 6px;
+    margin-left: 10px;
+    max-height: 50px;
+    max-width: auto;
   }
 
   form {
@@ -40,4 +49,14 @@ body {
   btn a {
     text-decoration: none;
     color: white;
+  }
+  
+  .partImg {
+    max-width: 25px;
+    max-height: auto;
+  }
+
+  .cardImg {
+    max-width: 30vw;
+    max-height: auto;
   }
