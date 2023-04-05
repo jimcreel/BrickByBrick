@@ -140,14 +140,19 @@ def signup(request):
 def search(request):
     if request.method == "POST":
         searchWord = request.POST.get('searchWord')
-        searchSets = Set.objects.filter(name__icontains=searchWord)
-
-        return render(request, 'search.html', 
+        searchSets = Set.objects.filter(Q(name__icontains=searchWord)|Q(set_num__icontains=searchWord))
+        if not searchSets:
+            search_mini_figs = Minifig.objects.filter(name__icontains=searchWord)
+        if searchSets:
+            return render(request, 'search.html', 
             { 'searchWord': searchWord,
              'searchSets': searchSets })
-    else:
-
-        return render(request, 'search.html')
+        elif search_mini_figs:
+            return render(request, 'search.html', 
+            { 'searchWord': searchWord,
+             'search_mini_figs': search_mini_figs })
+        else:
+            return render(request, 'search.html')
     # search_term = request.GET.get('search')
     # url = f'https://rebrickable.com/api/v3/lego/sets/?key={REBRICKABLE_API_KEY}&search={search_term}'
     # r = requests.get(url)
