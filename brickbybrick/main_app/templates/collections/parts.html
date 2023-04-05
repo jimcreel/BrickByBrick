@@ -4,10 +4,10 @@
 
     <h1>Parts in {{ collection.name }} Collection</h1>
 
-{% for part_num, quantity, img_url in inventories %}
+{% for part_num, quantity, img_url, part_num__part_name in inventories %}
         <div>
             <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
-            <p>{{ part_num }} - {{ quantity }}</p>
+            <p>{{ part_num }} - {{ quantity }} - {{ part_num__part_name }}</p>
         </div>
     {% endfor %}
 

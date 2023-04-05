@@ -108,7 +108,7 @@ def collection_parts(request, collection_id):
     part_list = Part.objects.filter(pk__in=inv_list.values_list('part_num_id', flat=True)).distinct()
     top_level_inv = Inventories.objects.filter(set_num_id__in=sets).first()
     top_level_part_list = Inventory_Part.objects.filter(inventory_id=top_level_inv.id, part_num__isnull=False).select_related('part_num') if top_level_inv else []
-    inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
+    inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
     print(inventory_flat_list)
     paginator = Paginator(inventory_flat_list, 6)
     page_number = request.GET.get('page')
