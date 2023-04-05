@@ -15,6 +15,9 @@ body {
   margin: 120px auto -100;
   text-align: center;
   justify-content: center;
+  animation-name: logoName;
+  animation-duration: 1.8s;
+  animation-timing-function: ease-out;
 }
 
 
@@ -108,4 +111,47 @@ img {
   max-width: 100%;
   height: auto;
   margin: 0 auto;
+}
+
+
+
+
+/* @keyframes logoName {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  70% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+} */
+
+@keyframes logoName {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-3%);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-5%);
+  }
+  85% {
+    transform: translateY(-3%);
+  }
+  100% {
+    transform: translateY(0);
+ }
 }
