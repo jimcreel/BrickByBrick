@@ -4,6 +4,7 @@ from django.urls import path
 urlpatterns = [
   path('', views.home, name='home'),
   path('about/', views.about, name='about'),
+  path('search/', views.search, name='search'),
   # route for sets index
   path('sets/', views.sets_index, name='index'),
   path('sets/create/', views.SetCreate.as_view(), name='sets_create'),
