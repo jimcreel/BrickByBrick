@@ -1,0 +1,19 @@
+.part-tray { 
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    height: 40vh;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.part {
+    width: 100px;
+    height: 55px;
+}
+
+.page-nav {
+    background-color: darkgray;
+    display: flex;
+    justify-content: space-around;
+}

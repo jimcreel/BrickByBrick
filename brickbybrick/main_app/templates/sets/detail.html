@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
 
 <h1>Set Details</h1>
 
@@ -12,15 +13,18 @@
     <p>Minifigures: {{minifigs|length}}</p>
     
     <img class = 'cardImg' src = "{{ set.img_url }}" alt = "{{ set.name }}">
-    {% for part_num, quantity, img_url in inventories %}
-        <div>
+    <div class="part-tray">
+
+        {% for part_num, quantity, img_url in inventories %}
+        <div class="part">
             <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
             <p>{{ part_num }} - {{ quantity }}</p>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 
     {% if inventories.has_other_pages %}
-        <nav>
+        <nav class = 'page-nav'>
             {% if inventories.has_previous %}
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ inventories.previous_page_number }}">previous</a>
@@ -34,8 +38,8 @@
     {% endif %}
     <p>Year: {{ set.year }}</p>
     <div class="card-action">
-      <a href="{% url 'sets_update' set.set_num %}">Edit</a>
-      <a href="{% url 'sets_delete' set.set_num %}">Delete</a>
+      <!-- <a href="{% url 'sets_update' set.set_num %}">Edit</a>
+      <a href="{% url 'sets_delete' set.set_num %}">Delete</a> -->
       
     <!-- New Markup Below -->
     <form id = 'form' action="{% url 'collections_update' collection_id=0 set_num=set.set_num %}" method="POST">

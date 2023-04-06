@@ -1,19 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
 
     <h1>Parts in {{ collection.name }} Collection</h1>
     <h2> Total Parts: {{ total_parts.quantity__sum }}</h2>
+    <div class="part-tray">
 
-{% for part_num, quantity, img_url, part_num__part_name in inventories %}
-        <div>
+        {% for part_num, quantity, img_url, part_num__part_name in inventories %}
+        <div class="part">
             <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
-            <p>{{ part_num }} - {{ quantity }} - {{ part_num__part_name }}</p>
+            <p>{{ part_num }} - {{ quantity }}</p>
         </div>
-    {% endfor %}
-
+        {% endfor %}
+    </div>
     {% if inventories.has_other_pages %}
-        <nav>
+        <nav class = 'page-nav'>
             {% if inventories.has_previous %}
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ inventories.previous_page_number }}">previous</a>
@@ -26,3 +29,6 @@
         </nav>
     {% endif %}
 {% endblock %}
+
+
+
