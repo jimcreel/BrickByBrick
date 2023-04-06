@@ -14,14 +14,6 @@
         background-attachment: fixed;
     }
 
-    /* This is a seudo element, the content points to a empty string,
-    which creates the pseudo element.
-    width & height is at 100% bc we want to cover 100% of the page.
-    background-color is the color of the overlay. which also is the opacity.
-    The z-index is set to -1, so it will be behind the content.
-    SO the words wont be transparent.
-    */
-
       .searchWallpaper::before {
         content: "";
         position: fixed;
@@ -60,8 +52,6 @@
 {% endif %}
 
                 </div>
-            <!-- </div> -->
-
 
 </body>
 
