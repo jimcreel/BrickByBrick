@@ -3,6 +3,8 @@
 
 <h1>Sets in {{ collection.name }} Collection  </h1>
 
+<a href="{% url 'collection_parts' collection.id %}">View Parts</a>
+
 {% for set in sets %}
   <div class="card">
     
