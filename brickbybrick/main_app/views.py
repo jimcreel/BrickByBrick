@@ -18,6 +18,12 @@ REBRICKABLE_API_KEY = settings.REBRICKABLE_API_KEY
 print(REBRICKABLE_API_KEY)
 # Create your views here.
 
+def build_context(request, context):
+    context = {}
+    if request.user.is_authenticated:
+        collections = Collection.objects.filter(user = request.user)
+        context['collections'] = collections
+    return context
 
 def home(request):
     rand_list = []
@@ -25,21 +31,17 @@ def home(request):
     for i in range(0, 5):
         rand_list.append(Set.objects.filter(theme_id=theme_id).order_by('?').first())
     
-    if request.user.is_authenticated:
-        collections = Collection.objects.filter(user = request.user)
-        return render(request, 'home.html', {'sets': rand_list,
-                                        'collections': collections})
-    
-    return render(request, 'home.html', {'sets': rand_list})
+    context = {'sets': rand_list}
+    context = build_context(request, context)
+
+    return render(request, 'home.html', context)
 
 def about(request):
-    if request.user.is_authenticated:
-        collections = Collection.objects.filter(user = request.user)
-        return render(request, 'about.html', 
-            {'user': request.user,
-                'collections': collections})
     
-    return render(request, 'about.html')
+    context = {}
+    context = build_context(request, context)
+
+    return render(request, 'about.html', context)
 
 def sets_index(request):
     # sets = []
@@ -86,6 +88,7 @@ class SetCreate(CreateView):
     model = Set
     fields = '__all__'
     success_url = '/sets/'
+    
 
 class SetUpdate(UpdateView):
     model = Set
@@ -158,24 +161,132 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+
 def search(request):
+    context = {}
+    context = build_context(request, context)
+
     if request.method == "POST":
         searchWord = request.POST.get('searchWord')
         searchSets = Set.objects.filter(Q(name__icontains=searchWord)|Q(set_num__icontains=searchWord))
         if not searchSets:
             search_mini_figs = Minifig.objects.filter(name__icontains=searchWord)
         if searchSets:
-            return render(request, 'search.html', 
-            { 'searchWord': searchWord,
-             'searchSets': searchSets })
+            context.update({ 'searchWord': searchWord, 'searchSets': searchSets })
+            return render(request, 'search.html', context)
         elif search_mini_figs:
-            return render(request, 'search.html', 
-            { 'searchWord': searchWord,
-             'search_mini_figs': search_mini_figs })
+            context.update({ 'searchWord': searchWord, 'search_mini_figs': search_mini_figs })
+            return render(request, 'search.html', context)
         else:
-            return render(request, 'search.html')
-    # search_term = request.GET.get('search')
-    # url = f'https://rebrickable.com/api/v3/lego/sets/?key={REBRICKABLE_API_KEY}&search={search_term}'
-    # r = requests.get(url)
-    # sets = r.json()
-    # return render(request, 'sets/index.html', {'sets': sets})
+            return render(request, 'search.html', context)
+
+
+
+
+
+
+
+# Chat GTP
+#     if request.method == "POST":
+#         searchWord = request.POST.get('searchWord')
+#         searchSets = Set.objects.filter(Q(name__icontains=searchWord) | Q(set_num__icontains=searchWord))
+
+#         if not searchSets:
+#             search_mini_figs = Minifig.objects.filter(name__icontains=searchWord)
+#             context = {}
+#             context = build_context(request, context)
+#             return render(request, 'search.html', 
+#                         {'searchWord': searchWord,
+#                         'search_mini_figs': search_mini_figs}, 
+#                         context=context)
+#         else:
+#             context = {}
+#             context = build_context(request, context)
+#             return render(request, 'search.html', 
+#                         {'searchWord': searchWord,
+#                         'searchSets': searchSets}, 
+#                         context=context)
+#     else:
+#         context = {}
+#         context = build_context(request, context)
+#         return render(request, 'search.html', context=context)
+
+
+
+    # if request.method == "POST":
+    #     searchWord = request.POST.get('searchWord')
+    #     searchSets = Set.objects.filter(Q(name__icontains=searchWord)|Q(set_num__icontains=searchWord))
+    #     search_mini_figs = Minifig.objects.filter(name__icontains=searchWord)
+    #     context = {}
+    #     context = build_context(request, context)
+
+    #     print(context)
+
+    #     search = {
+    #         'searchWord': searchWord,
+    #         'searchSets': searchSets,
+    #         'search_mini_figs': search_mini_figs,
+    #     }
+                   
+    #     return render(request, 'search.html', search, context)
+    
+
+        # context = build_context(request, context)
+        # if not searchSets:
+        #     search_mini_figs = Minifig.objects.filter(name__icontains=searchWord)
+        # if searchSets:
+        #     return render(request, 'search.html',
+        #     { 'searchWord': searchWord,
+        #      'searchSets': searchSets,
+        #      'search_mini_figs': search_mini_figs,
+        #      'context': context})
+        # elif search_mini_figs:
+        #     return render(request, 'search.html', context,
+        #     { 'searchWord': searchWord,
+        #      'search_mini_figs': search_mini_figs })
+        # else:
+        #     return render(request, 'search.html')
+
+
+
+
+
+# JIM MODIFY
+    # if request.method == "POST":
+    #     searchWord = request.POST.get('searchWord')
+    #     searchSets = Set.objects.filter(Q(name__icontains=searchWord)|Q(set_num__icontains=searchWord))
+    #     if not searchSets:
+    #         search_mini_figs = Minifig.objects.filter(name__icontains=searchWord)
+    #     if searchSets:
+    #         context = { 'searchWord': searchWord,'searchSets': searchSets }
+    #         context = build_context(request, context)
+
+    #         return render(request, 'search.html', context)
+    #     elif search_mini_figs:
+    #         context = { 'searchWord': searchWord,'search_mini_figs': search_mini_figs }
+    #         context = build_context(request, context)
+
+    #         return render(request, 'search.html', context)
+    #     else:
+    #         context = { 'searchWord': searchWord }
+    #         context = build_context(request, context)
+
+    #         return render(request, 'search.html', context)
+
+
+# OG ORIGINAL 
+    #     if request.method == "POST":
+    #         searchWord = request.POST.get('searchWord')
+    #         searchSets = Set.objects.filter(Q(name__icontains=searchWord)|Q(set_num__icontains=searchWord))
+    #         if not searchSets:
+    #             search_mini_figs = Minifig.objects.filter(name__icontains=searchWord)
+    #         if searchSets:
+    #             return render(request, 'search.html', 
+    #             { 'searchWord': searchWord,
+    #              'searchSets': searchSets })
+    #         elif search_mini_figs:
+    #             return render(request, 'search.html', 
+    #             { 'searchWord': searchWord,
+    #              'search_mini_figs': search_mini_figs })
+    #         else:
+    #             return render(request, 'search.html')
