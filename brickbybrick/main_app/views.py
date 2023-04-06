@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.db.models import F
 
 from secrets import *
 from .models import *
@@ -69,9 +70,7 @@ def sets_detail(request, set_num):
     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
     
     collections = request.user.collection_set.all()
-    print(inventory_flat_list)
-    print(set)
-    print(collections)
+
     paginator = Paginator(inventory_flat_list, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -105,10 +104,10 @@ def collections_index(request):
 def collections_detail(request, collection_id):
     current_collection = Collection.objects.get(id=collection_id)
     sets = Set.objects.filter(collection = collection_id)
-
+    parts = Collection_Part.objects.filter(collection_id_id = collection_id)
     context = {}
     context = build_context(request, context)
-
+    context['parts'] = parts
     context['sets'] = sets
     context['collection'] = current_collection
 
@@ -120,21 +119,22 @@ def collections_detail(request, collection_id):
 
 def collection_parts(request, collection_id):
     collection = Collection.objects.get(id=collection_id)
-    sets = Set.objects.filter(collection=collection_id).prefetch_related('inventory_set_set__part_num_id')
-    #get the inventory associated with the set and pre-fetch the part
-    inventories = Inventories.objects.filter(set_num_id__in=sets).select_related('set_num')
-    # grab the parts associated with the inventory and pre-fetch the part
+    # sets = Set.objects.filter(collection=collection_id).prefetch_related('inventory_set_set__part_num_id')
+    # #get the inventory associated with the set and pre-fetch the part
+    # inventories = Inventories.objects.filter(set_num_id__in=sets).select_related('set_num')
+    # # grab the parts associated with the inventory and pre-fetch the part
     
-    inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
-    part_list = Part.objects.filter(pk__in=inv_list.values_list('part_num_id', flat=True)).distinct()
-    top_level_inv = Inventories.objects.filter(set_num_id__in=sets).first()
-    top_level_part_list = Inventory_Part.objects.filter(inventory_id=top_level_inv.id, part_num__isnull=False).select_related('part_num') if top_level_inv else []
-    inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
-    total_parts = inv_list.count()
+    # inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
+    # inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
+    # total_parts = inv_list.count()
+    inventory_flat_list = Collection_Part.objects.filter(collection_id_id=collection_id).values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
+    total_parts = Collection_Part.objects.filter(collection_id_id=collection_id).aggregate(Sum('quantity'))
     paginator = Paginator(inventory_flat_list, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'collections/parts.html', {'inventories': page_obj, 'collection': collection, 'range': 6, 'total_parts': total_parts})
+    context = {'inventories': page_obj, 'collection': collection, 'range': 6, 'total_parts': total_parts}
+    context = build_context(request, context)
+    return render(request, 'collections/parts.html', context)
 
 class CollectionUpdate(LoginRequiredMixin, UpdateView):
     model = Collection
@@ -165,6 +165,50 @@ class AddSetToCollection(LoginRequiredMixin, View):
         set.collection.add(collection)
         collection.last_img = set.img_url
         collection.save()
+        existing_parts = Collection_Part.objects.filter(
+        collection_id=collection_id,
+        part_num__in=Inventory_Part.objects.filter(inventory_id__set_num_id=set_num).values_list('part_num', flat=True)
+        )
+
+        existing_part_dict = {}
+        for part in existing_parts:
+            part_key = (part.part_num_id, part.is_spare, part.color_id_id)
+            existing_part_dict[part_key] = part
+
+        new_parts = []
+        for inventory_part in Inventory_Part.objects.filter(inventory_id__set_num_id=set_num):
+            part_key = (inventory_part.part_num_id, inventory_part.is_spare, inventory_part.color_id_id)
+            if part_key in existing_part_dict:
+                existing_part_obj = existing_part_dict[part_key]
+                existing_part_obj.quantity += inventory_part.quantity
+                existing_part_obj.save()
+                del existing_part_dict[part_key]
+            else:
+                img_url = inventory_part.img_url if inventory_part.img_url else ' '
+                collection_part = Collection_Part(
+                    collection_id_id=collection_id,
+                    part_num_id=inventory_part.part_num_id,
+                    is_spare=inventory_part.is_spare,
+                    color_id_id=inventory_part.color_id_id,
+                    img_url=img_url,
+                    quantity=inventory_part.quantity,
+                )
+                new_parts.append(collection_part)
+
+        # Bulk create the new Collection_Part objects
+        if new_parts:
+            Collection_Part.objects.bulk_create(new_parts)
+
+        # Delete the old Collection_Part objects that were not updated
+        if existing_part_dict:
+            Collection_Part.objects.filter(
+                collection_id=collection_id,
+                part_num__in=[part[0] for part in existing_part_dict.keys()],
+                is_spare__in=[part[1] for part in existing_part_dict.keys()],
+                color_id__in=[part[2] for part in existing_part_dict.keys()],
+            ).delete()
+
+
         return redirect('collections_detail', collection_id=collection_id)
 
 
@@ -175,6 +219,15 @@ class RemoveSetFromCollection(LoginRequiredMixin, View):
         collection = Collection.objects.get(id=collection_id)
         set = Set.objects.get(set_num = set_num)
         set.collection.remove(collection)
+        parts = Inventory_Part.objects.filter(inventory_id__set_num_id=set_num)
+        for part in parts:
+            collection_part = Collection_Part.objects.filter(collection_id=collection_id, part_num_id=part.part_num_id)
+            if collection_part:
+                collection_part = collection_part[0]
+                collection_part.quantity -= part.quantity
+                if collection_part.quantity == 0:
+                    collection_part.delete()
+                collection_part.save()
         return redirect('collections_detail', collection_id=collection_id)
 
 def signup(request):

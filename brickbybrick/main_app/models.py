@@ -127,7 +127,13 @@ class Inventory_Part(models.Model):
     img_url = models.CharField(max_length=200)
 
     
-
+class Collection_Part(models.Model):
+    collection_id = models.ForeignKey(Collection, on_delete=models.CASCADE)
+    part_num = models.ForeignKey(Part, on_delete=models.CASCADE)
+    color_id = models.ForeignKey(Color, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    is_spare = models.BooleanField()
+    img_url = models.CharField(max_length=200, default = "https://i.imgur.com/2ZQ4U0i.png")
 
     
 class SetPart(models.Model):
