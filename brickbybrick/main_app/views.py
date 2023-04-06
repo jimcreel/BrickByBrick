@@ -43,7 +43,7 @@ def about(request):
 
     return render(request, 'about.html', context)
 
-#def sets_index(request):
+def sets_index(request):
     # sets = []
     # minis = []
     # for item in my_sets:
