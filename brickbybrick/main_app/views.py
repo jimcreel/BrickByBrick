@@ -157,12 +157,24 @@ class CollectionCreate(LoginRequiredMixin, CreateView):
     success_url = '/collections/'
 
 
+# class AddSetToCollection(LoginRequiredMixin, View):
+#     def post(self, request, collection_id, set_num):
+#         collection = Collection.objects.get(id=collection_id)
+#         set = Set.objects.get(set_num = set_num)
+#         set.collection.add(collection)
+#         collection.update(last_img=set.img_url)
+#         return redirect('collections_detail', collection_id=collection_id)
+    
 class AddSetToCollection(LoginRequiredMixin, View):
     def post(self, request, collection_id, set_num):
         collection = Collection.objects.get(id=collection_id)
-        set = Set.objects.get(set_num = set_num)
+        set = Set.objects.get(set_num=set_num)
         set.collection.add(collection)
+        collection.last_img = set.img_url
+        collection.save()
         return redirect('collections_detail', collection_id=collection_id)
+
+
 
 
 class RemoveSetFromCollection(LoginRequiredMixin, View):

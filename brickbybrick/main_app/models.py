@@ -9,6 +9,7 @@ from django.db.models import Q
 class Collection(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    last_img = models.CharField(max_length=250, default="https://i.imgur.com/2ZQ4U0i.png")
     def __str__(self):
         return self.name
 
