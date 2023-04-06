@@ -50,7 +50,7 @@ def sets_index(request, theme_name):
     paginator = Paginator(set_list, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {'sets': page_obj}
+    context = {'sets': page_obj, 'theme_name': theme_name}
     context = build_context(request, context)
     print(context)
     return render(request, 'sets/index.html', context)

@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
+
+{% if theme_name == 'Harry Potter' %}
+<style>
+  body{
+        background-image: url("{% static 'images/harry-potter.jpeg' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+  }
+</style>
+{% endif % }
 <h1>Set List</h1>
 {% for set in sets %}
   <div class="card">
