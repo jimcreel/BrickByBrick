@@ -77,10 +77,11 @@ def sets_detail(request, set_num):
     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
     
     collections = request.user.collection_set.all()
-    print(inventory_flat_list)
+    # print(inventory_flat_list)
     paginator = Paginator(inventory_flat_list, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    
     return render(request, 'sets/detail.html', {'set': set, 'inventories': page_obj, 'collections': collections, 'range': 6})
 
 
@@ -108,8 +109,26 @@ def collections_index(request):
 def collections_detail(request, collection_id):
     current_collection = Collection.objects.get(id=collection_id)
     sets = Set.objects.filter(collection = collection_id)
-    print(sets)
-    return render(request, 'collections/detail.html', {'sets': sets, 'collection': current_collection})
+
+    context = {}
+    context = build_context(request, context)
+
+    context['sets'] = sets
+    context['collection'] = current_collection
+
+    return render(request, 'collections/detail.html', context)
+
+
+# OLD JIM CODE
+# def collections_detail(request, collection_id):
+#     current_collection = Collection.objects.get(id=collection_id)
+#     sets = Set.objects.filter(collection = collection_id)
+#     # print(sets)
+#     context = {}
+#     context = build_context(request, context)
+
+
+#     return render(request, 'collections/detail.html', {'sets': sets, 'collection': current_collection})
 
 
 class CollectionUpdate(LoginRequiredMixin, UpdateView):
