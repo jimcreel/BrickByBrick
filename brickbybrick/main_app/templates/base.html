@@ -28,8 +28,6 @@
   <li><a href="{% url 'sets_index' theme_name='City' %}">Browse City Sets</a></li>
   <li><a href="{% url 'sets_index' theme_name='UCS' %}">Browse Ultimate Collector Series Sets</a></li>
 </ul>
-
-
 <!-- Start of Navbar ----------------------------------------------------------------->
   <header class="navbar-fixed">
     <nav>
@@ -56,18 +54,14 @@
                 </div>
               </form>
             </li>
-            <!-- <li><a href="{% url 'sets_index' theme_name='Harry Potter' %}">Browse Harry Potter Sets</a></li>
-            <li><a href="{% url 'sets_index' theme_name='Star Wars' %}">Browse Star Wars Sets</a></li>
-            <li><a href="{% url 'sets_index' theme_name='City' %}">Browse City Sets</a></li>
-            <li><a href="{% url 'sets_index' theme_name='UCS' %}">Browse Ultimate Collector Series Sets</a></li> -->
-
-
             <li><a href="{% url 'about' %}">About</a></li>
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">View Set Themes<i class="material-icons right">arrow_drop_down</i></a></li>
-            <!-- <li><a href="{% url 'sets_create' %}">Add a Set</a></li> -->
-            <!-- <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li> -->
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
-            
+            <li>
+              <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                View Set Themes
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
+            </li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>   
             <li>
               <a class="waves-effect waves-light btn" onclick="openNav()" ondblclick="closeNav()">Open Collections <i class="material-icons right">arrow_drop_down_circle</i></a>
             </li>
@@ -113,8 +107,13 @@
       </form>
     </li>
     <li><a href="{% url 'about' %}">About</a></li>
-    <!-- <li><a href="{% url 'sets_create' %}">Add a Set</a></li> -->
     <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li>
+    <li>
+      <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+        View Set Themes
+        <i class="material-icons right">arrow_drop_down</i>
+      </a>
+    </li>
     <li><a href="{% url 'logout' %}">Log Out</a></li>
 
 <!-- Mobile Friendly Navbar if not logged in----------------------------------------------------------------->
@@ -167,7 +166,6 @@
       {% endfor %}
     </li>
   </div>
-  <!-- <button class="openbtn" onclick="openNav()">Open Sidebar</button>  -->
 </div>
 </ul>    
 
