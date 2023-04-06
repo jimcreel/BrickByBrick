@@ -45,10 +45,17 @@
                 </div>
               </form>
             </li>
+            <li><a href="{% url 'sets_index' theme_name='Harry Potter' %}">Browse Harry Potter Sets</a></li>
+            <li><a href="{% url 'sets_index' theme_name='Star Wars' %}">Browse Star Wars Sets</a></li>
+            <li><a href="{% url 'sets_index' theme_name='City' %}">Browse City Sets</a></li>
+            <li><a href="{% url 'sets_index' theme_name='UCS' %}">Browse Ultimate Collector Series Sets</a></li>
+
+
             <li><a href="{% url 'about' %}">About</a></li>
             <!-- <li><a href="{% url 'sets_create' %}">Add a Set</a></li> -->
             <!-- <li><a href="{% url 'collections_index' %}">View All My Lego Sets</a></li> -->
             <li><a href="{% url 'logout' %}">Log Out</a></li>
+            
             <li>
               <a class="waves-effect waves-light btn" onclick="openNav()" ondblclick="closeNav()">Open Collections <i class="material-icons right">arrow_drop_down_circle</i></a>
             </li>
