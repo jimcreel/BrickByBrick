@@ -19,7 +19,6 @@ print(REBRICKABLE_API_KEY)
 # Create your views here.
 
 def build_context(request, context):
-    context = {}
     if request.user.is_authenticated:
         collections = Collection.objects.filter(user = request.user)
         context['collections'] = collections
@@ -43,25 +42,18 @@ def about(request):
 
     return render(request, 'about.html', context)
 
-def sets_index(request):
-    # sets = []
-    # minis = []
-    # for item in my_sets:
-    #     url = f'https://rebrickable.com/api/v3/lego/sets/{item}/?key=1ed8ac4859da5604bdb3fa343f93c829'
-    #     mini_url = f'https://rebrickable.com/api/v3/lego/sets/{item}/minifigs/?key=1ed8ac4859da5604bdb3fa343f93c829'
-    #     req = requests.get(mini_url)
-    #     r = requests.get(url)
-    #     set = r.json()
-    #     minifigs = req.json()
-    #     set['minifigs'] = minifigs['results']
-    #     sets.append(set)
-    sets = Set.objects.all()
-    return render(request, 'sets/index.html', {'sets': sets})
-        
-    # return render(request, 'sets/index.html', {
-    #     'sets': sets,
-    #     'minis': minis
-    # })
+def sets_index(request, theme_name):
+    
+    theme_list = Theme.objects.filter(name=theme_name).values_list('id', flat=True)
+    set_list = Set.objects.filter(theme_id__in=theme_list).order_by('?', 'year').values_list('set_num', 'name', 'img_url', 'year')
+    paginator = Paginator(set_list, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {'sets': page_obj}
+    context = build_context(request, context)
+    print(context)
+    return render(request, 'sets/index.html', context)
+
 @login_required
 def sets_detail(request, set_num):
     set = Set.objects.get(set_num=set_num)
