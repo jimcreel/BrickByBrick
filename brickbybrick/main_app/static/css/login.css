@@ -43,6 +43,8 @@ button {
     cursor: pointer;
     font-weight: bold;
     margin-top: 25px;
+    justify-content: center;
+    display: block;
 }
 
 button:hover {
