@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Glegoo&display=swap');
+
+
+
+#loginHeader {
+    text-align: center;
+    letter-spacing: 3px;
+    font-family: 'Glegoo', serif;
+    margin-top: 200px;
+    margin-bottom: 40px;
+    font-weight: bolder;
+    
+}
+
+p {
+    margin: 15px;
+    padding: 15px;
+}
+
+form {
+    text-align: left;
+    justify-content: center;
+
+}
+
+label {
+    font-weight: bold;
+}
+
+button {
+    position: relative;
+    padding: 10px 20px;
+    max-height: 4.5rem;
+    outline: none;
+    border: .5px solid #aaa6a6;
+    background: #aba0a0;
+    color: #ae00ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: .7;
+    font-size: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+button:hover {
+    box-shadow: 0 0 10px #ae00ff, 0 0 25px #001eff, 0 0 50px #ae00ff;
+}
+
+
+label {
+    font-weight: bolder;
+    color: black;
+    font-size: 17px;
+}
