@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Glegoo&display=swap');
+
+/* .container {
+    grid-template-columns: 100px 50px 100px;
+    grid-template-rows: 80px auto 80px; 
+    column-gap: 10px;
+    row-gap: 15px;
+  } */
+
+
+  /* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.card {
+    width: calc(33.33% - 20px);
+    box-sizing: border-box;
+    padding: 5px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.card:nth-child(3n+1) {
+    margin-right: 10px;
+}
+
+.card:last-child {
+    margin-right: 0;
+}
+
+/* .container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 50px;
+    margin-bottom: 50px;
+} */
+
+.card-content {
+    padding: 20px;
+    text-align: center;
+
+}
+
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
