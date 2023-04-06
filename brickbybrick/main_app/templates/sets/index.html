@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
 
 
 {% if theme_name == 'Harry Potter' %}
@@ -12,8 +13,22 @@
         background-attachment: fixed;
   }
 </style>
-{% endif % }
+{% endif %}
+
+{% if theme_name == 'Star Wars' %}
+<style>
+  body{
+        background-image: url("{% static 'images/star-wars-lego.jpeg' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+  }
+  </style>
+{% endif %}
+
+
 <h1>Set List</h1>
+<div class = 'card-grid'>
 {% for set in sets %}
   <div class="card">
     <a href= "{% url 'detail' set.0 %}">
@@ -25,6 +40,7 @@
   </a>
   </div>
 {% endfor %}
+</div>
 {% if sets.has_other_pages %}
         <nav>
             {% if sets.has_previous %}
@@ -37,6 +53,6 @@
                 <a href="?page={{ sets.paginator.num_pages }}">&raquo; last</a>
             {% endif %}
         </nav>
-    {% endif %}
+{% endif %}
 
 {% endblock %}

@@ -15,6 +15,7 @@
  grid-auto-rows: auto;
  grid-gap: 20px;
 
+
 }
 
 .card-content {
@@ -34,9 +35,12 @@
     margin-bottom: 20px;
     width: 22rem;
     max-width: 22rem;
-    background-color: rgba(255, 255, 255, .35)
+    background-color: rgba(255, 255, 255, .35);
 }
-
+.btn-tray {
+    display: flex;
+    justify-content: center;
+}
 .card:hover {
     background-color: rgba(255, 255, 255, 0.8);
     
