@@ -66,14 +66,12 @@ def sets_detail(request, set_num):
     inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
     mini_list = Inventory_MiniFig.objects.filter(inventory_id__in=inventories).select_related('fig_num')
     mini_flat_list = mini_list.values_list('fig_num', 'quantity', 'fig_num__name', 'fig_num__img_url')
-    print(mini_list)
-    part_list = Part.objects.filter(pk__in=inv_list.values_list('part_num_id', flat=True)).distinct()
-    top_level_inv = Inventories.objects.filter(set_num_id=set_num).first()
-    top_level_part_list = Inventory_Part.objects.filter(inventory_id=top_level_inv.id, part_num__isnull=False).select_related('part_num') if top_level_inv else []
     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
     
     collections = request.user.collection_set.all()
-
+    print(inventory_flat_list)
+    print(set)
+    print(collections)
     paginator = Paginator(inventory_flat_list, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
