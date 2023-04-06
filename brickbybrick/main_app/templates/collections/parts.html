@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Parts in {{ collection.name }} Collection</h1>
+    <h2> Total Parts: {{ total_parts }}</h2>
+
+{% for part_num, quantity, img_url, part_num__part_name in inventories %}
+        <div>
+            <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
+            <p>{{ part_num }} - {{ quantity }} - {{ part_num__part_name }}</p>
+        </div>
+    {% endfor %}
+
+    {% if inventories.has_other_pages %}
+        <nav>
+            {% if inventories.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ inventories.previous_page_number }}">previous</a>
+            {% endif %}
+
+            {% if inventories.has_next %}
+                <a href="?page={{ inventories.next_page_number }}">next</a>
+                <a href="?page={{ inventories.paginator.num_pages }}">&raquo; last</a>
+            {% endif %}
+        </nav>
+    {% endif %}
+{% endblock %}

@@ -8,7 +8,7 @@
     <a href= "{% url 'collections_detail' collection.id %}">
     <div class="card-content">
       <span class="card-title">{{ collection.name }}</span>
-      
+      <btn class="btn"><a href="{% url 'collections_delete' collection.id %}">Delete</a></btn>
       <!-- <p>Minifigures: {{set.minifigs | length }}</p> -->
     </div>
   </a>
