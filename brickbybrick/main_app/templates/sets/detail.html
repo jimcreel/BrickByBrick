@@ -9,7 +9,8 @@
     <span class="card-title">Set Number {{ set.set_num}} - {{ set.name }}</span>
     <p>Number of Pieces: {{ set.num_parts}} </p>
     <p>Description: {{ set.description|linebreaks }}</p>
-    <p>Minifigures: {{ set.num_minifigs}}</p>
+    <p>Minifigures: {{minifigs|length}}</p>
+    
     <img class = 'cardImg' src = "{{ set.img_url }}" alt = "{{ set.name }}">
     {% for part_num, quantity, img_url in inventories %}
         <div>
