@@ -89,6 +89,12 @@ class SetCreate(CreateView):
     model = Set
     fields = '__all__'
     success_url = '/sets/'
+
+    # Need Jims help with this
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context = build_context(self.request, context)
+    #     return context
     
 
 class SetUpdate(UpdateView):
