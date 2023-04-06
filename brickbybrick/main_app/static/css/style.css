@@ -57,3 +57,8 @@ body {
     max-width: 30vw;
     max-height: auto;
   }
+
+  .side-img {
+    max-width: 100px;
+    max-height: auto;
+  }

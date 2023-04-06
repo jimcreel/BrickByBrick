@@ -18,18 +18,32 @@ REBRICKABLE_API_KEY = settings.REBRICKABLE_API_KEY
 print(REBRICKABLE_API_KEY)
 # Create your views here.
 
+def build_context(request, context):
+    context = {}
+    if request.user.is_authenticated:
+        collections = Collection.objects.filter(user = request.user)
+        context['collections'] = collections
+    return context
 
 def home(request):
     rand_list = []
     theme_id = 158
     for i in range(0, 5):
         rand_list.append(Set.objects.filter(theme_id=theme_id).order_by('?').first())
-    return render(request, 'home.html', {'sets': rand_list})
+    
+    context = {'sets': rand_list}
+    context = build_context(request, context)
+
+    return render(request, 'home.html', context)
 
 def about(request):
-    return render(request, 'about.html')
+    
+    context = {}
+    context = build_context(request, context)
 
-def sets_index(request):
+    return render(request, 'about.html', context)
+
+#def sets_index(request):
     # sets = []
     # minis = []
     # for item in my_sets:
@@ -67,16 +81,21 @@ def sets_detail(request, set_num):
     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
     
     collections = request.user.collection_set.all()
+
     paginator = Paginator(inventory_flat_list, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'sets/detail.html', {'set': set, 'minifigs': mini_flat_list, 'inventories': page_obj, 'collections': collections, 'range': 6})
 
 
+
 class SetCreate(CreateView):
     model = Set
     fields = '__all__'
     success_url = '/sets/'
+
+
+    
 
 class SetUpdate(UpdateView):
     model = Set
@@ -96,8 +115,17 @@ def collections_index(request):
 def collections_detail(request, collection_id):
     current_collection = Collection.objects.get(id=collection_id)
     sets = Set.objects.filter(collection = collection_id)
-    print(sets)
-    return render(request, 'collections/detail.html', {'sets': sets, 'collection': current_collection})
+
+    context = {}
+    context = build_context(request, context)
+
+    context['sets'] = sets
+    context['collection'] = current_collection
+
+    return render(request, 'collections/detail.html', context)
+
+
+
 
 
 def collection_parts(request, collection_id):
@@ -138,12 +166,18 @@ class CollectionCreate(LoginRequiredMixin, CreateView):
     success_url = '/collections/'
 
 
+
+    
 class AddSetToCollection(LoginRequiredMixin, View):
     def post(self, request, collection_id, set_num):
         collection = Collection.objects.get(id=collection_id)
-        set = Set.objects.get(set_num = set_num)
+        set = Set.objects.get(set_num=set_num)
         set.collection.add(collection)
+        collection.last_img = set.img_url
+        collection.save()
         return redirect('collections_detail', collection_id=collection_id)
+
+
 
 
 class RemoveSetFromCollection(LoginRequiredMixin, View):
@@ -167,24 +201,28 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+
 def search(request):
+    context = {}
+    context = build_context(request, context)
+
     if request.method == "POST":
         searchWord = request.POST.get('searchWord')
         searchSets = Set.objects.filter(Q(name__icontains=searchWord)|Q(set_num__icontains=searchWord))
         if not searchSets:
             search_mini_figs = Minifig.objects.filter(name__icontains=searchWord)
         if searchSets:
-            return render(request, 'search.html', 
-            { 'searchWord': searchWord,
-             'searchSets': searchSets })
+            context.update({ 'searchWord': searchWord, 'searchSets': searchSets })
+            return render(request, 'search.html', context)
         elif search_mini_figs:
-            return render(request, 'search.html', 
-            { 'searchWord': searchWord,
-             'search_mini_figs': search_mini_figs })
+            context.update({ 'searchWord': searchWord, 'search_mini_figs': search_mini_figs })
+            return render(request, 'search.html', context)
         else:
-            return render(request, 'search.html')
-    # search_term = request.GET.get('search')
-    # url = f'https://rebrickable.com/api/v3/lego/sets/?key={REBRICKABLE_API_KEY}&search={search_term}'
-    # r = requests.get(url)
-    # sets = r.json()
-    # return render(request, 'sets/index.html', {'sets': sets})
+            return render(request, 'search.html', context)
+
+
+
+
+
+
+
