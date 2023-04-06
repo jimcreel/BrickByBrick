@@ -8,6 +8,13 @@ body {
 }
 
 
+/*
+
+if you want the image of your background to stay fixed, use this:
+background-attachment: fixed;
+
+ */
+
 #legoLogo {
   width: 65vw;
   height: 45vh;
