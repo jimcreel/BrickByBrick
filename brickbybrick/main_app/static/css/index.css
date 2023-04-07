@@ -9,6 +9,10 @@
     padding: 20px;
 }
 
+h1 {
+    letter-spacing: 2px;
+}
+
 .card-grid {
  display: grid;
  grid-template-columns: repeat(3, 1fr);
