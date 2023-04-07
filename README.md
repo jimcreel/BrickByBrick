@@ -2,17 +2,13 @@
 
 ## By: Gary Zhuo, Jim Creel, and Nicolas Angel
 
-<p align="center"><img src="./BrickByBrickLogo.png" /></p>
+<p align="center"><img src="./README-Pictures/BrickByBrickLogo.png" /></p>
 
 ### Link to Brick by Brick
 
 ---
 
-
-
 Click Here!
-
-
 
 ### Project Description
 
@@ -30,7 +26,6 @@ Brick by Brick Values
   * Brick by Brick was made to be user friendly compared to other competitors websites. Our main mission was to save the users time searching for sets and individual parts they come with.
 * Community:
   * Built by Lego fans, Brick by Brick is dedicated to foster a sense of community by allowing users to browse the many options on new sets they can build and share them with the world!
-
 
 ### Getting Started
 
@@ -62,24 +57,17 @@ Feel free to browse the links below!
 
 <p align="center"><img src="./README-Pictures/Brick-by-Brick-HomePage.png" /></p>
 
-
 * Next browse to the About Us page:
 
-
 <p align="center"><img src="./README-Pictures/Brick-by-Brick-AboutNTLGIN.png" /></p>
-
 
 * After Login, Feel free to browse preselected sets, add to personal collections!
 
 <p align="center"><img src="./README-Pictures/Brick-by-Brick-AboutLGIN.png" /></p>
 
-
 * Or feel free to search your own sets!
 
 <p align="center"><img src="./README-Pictures/Brick-by-Brick-Search.png" /></p>
-
-
-
 
 * DISCLAIMER: Brick by Brick is in constant production, the website might change and slighly differ from these images! The devs will update as soon as we can!
 
@@ -99,7 +87,6 @@ Technologies Used for Brick by Brick:
 * Heroku
 * PostgreSQL
 
-
 ### Next Steps
 
 ---
@@ -110,7 +97,6 @@ Technologies Used for Brick by Brick:
 ### Credits
 
 ---
-
 
 **Gary Zhou**
 
@@ -125,8 +111,6 @@ Technologies Used for Brick by Brick:
 	<a href="http://www.garyzhuo.com/"><img src="./README-Pictures/website.png" width="60" height="auto"/></a> 
 </p>
 
-
-
 **Jim Creel**
 
 * Roles:
@@ -139,8 +123,6 @@ Technologies Used for Brick by Brick:
 	<a href="https://www.linkedin.com/in/jim-creel/"><img src="./README-Pictures/linkedin.png" width="55" height="auto"/></a> 
 	<a href=""><img src="./README-Pictures/website.png" width="60" height="auto"/></a> 
 </p>
-
-
 
 **Nicolas Angel**
 
