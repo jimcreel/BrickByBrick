@@ -17,8 +17,9 @@
 
         {% for part_num, quantity, img_url in inventories %}
         <div class="part">
-            <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
-            <p>{{ part_num }} - {{ quantity }}</p>
+          <p>Part #:{{ part_num }}</p>  
+          <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
+           <p>Qty: {{ quantity }}</p>
         </div>
         {% endfor %}
     </div>

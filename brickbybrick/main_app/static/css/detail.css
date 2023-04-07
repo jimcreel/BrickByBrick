@@ -8,8 +8,10 @@
 }
 
 .part {
-    width: 100px;
+    width: 150px;
     height: 55px;
+    margin: 10px;
+    font-size: 12px;
 }
 
 .page-nav {
@@ -17,3 +19,4 @@
     display: flex;
     justify-content: space-around;
 }
+
