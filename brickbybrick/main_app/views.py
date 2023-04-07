@@ -57,7 +57,7 @@ def sets_index(request, theme_name):
 
 @login_required
 def sets_detail(request, set_num):
-    set = Set.objects.get(set_num=set_num)
+    sets = Set.objects.get(set_num=set_num)
     # grab the inventory associated with the set and pre-fetch the part and minifigure
 
 
@@ -69,12 +69,42 @@ def sets_detail(request, set_num):
     mini_flat_list = mini_list.values_list('fig_num', 'quantity', 'fig_num__name', 'fig_num__img_url')
     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
     
-    collections = request.user.collection_set.all()
+    collection = Collection.objects.filter(user=request.user)
+    #if the set is in a user's collection
+    if collection.filter(set=set_num).exists():
+        set_owned = True
+        percentage_match = 100
+    else:
+        set_owned = False
+        collection_parts = Collection_Part.objects.filter(collection_id__in=collection).values_list('part_num', 'quantity')
+        set_parts = inv_list.values_list('part_num', 'quantity')
+        collection_parts = Collection_Part.objects.filter(collection_id__in=collection).values_list('part_num', 'quantity')
+        set_parts = inv_list.values_list('part_num', 'quantity')
 
+        collection_part_dict = {part[0]: part[1] for part in collection_parts}
+        set_part_dict = {part[0]: part[1] for part in set_parts}
+
+        total_set_quantity = 0
+        matched_set_quantity = 0
+
+        for part_num, quantity in set_part_dict.items():
+            if part_num in collection_part_dict:
+                matched_set_quantity += min(quantity, collection_part_dict[part_num])
+            total_set_quantity += quantity
+
+        if total_set_quantity == 0:
+            percentage_match = 0
+        else:
+            percentage_match = round(((matched_set_quantity / total_set_quantity) * 100), 1)
+
+    
+
+    
+    
     paginator = Paginator(inventory_flat_list, 25)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'sets/detail.html', {'set': set, 'minifigs': mini_flat_list, 'inventories': page_obj, 'collections': collections, 'range': 6})
+    return render(request, 'sets/detail.html', {'sets': sets, 'minifigs': mini_flat_list, 'inventories': page_obj, 'collections': collection, 'range': 6, 'percentage': percentage_match, 'set_owned': set_owned})
 
 
 
@@ -98,7 +128,7 @@ class SetDelete(DeleteView):
 @login_required
 def collections_index(request):
     collections = Collection.objects.filter(user=request.user)
-    return render(request, 'collections/index.html', {'collections': collections})
+    return render(request, 'collections/index.html', {'collections': collections, 'parts': collection_parts})
 
 @login_required
 def collections_detail(request, collection_id):
@@ -118,21 +148,18 @@ def collections_detail(request, collection_id):
 
 
 def collection_parts(request, collection_id):
-    collection = Collection.objects.get(id=collection_id)
-    # sets = Set.objects.filter(collection=collection_id).prefetch_related('inventory_set_set__part_num_id')
-    # #get the inventory associated with the set and pre-fetch the part
-    # inventories = Inventories.objects.filter(set_num_id__in=sets).select_related('set_num')
-    # # grab the parts associated with the inventory and pre-fetch the part
-    
-    # inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
-    # inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
-    # total_parts = inv_list.count()
-    inventory_flat_list = Collection_Part.objects.filter(collection_id_id=collection_id).values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
-    total_parts = Collection_Part.objects.filter(collection_id_id=collection_id).aggregate(Sum('quantity'))
+    if collection_id == 0:
+        collection = Collection.objects.filter(user=request.user)
+        inventory_flat_list = Collection_Part.objects.filter(collection_id__in=collection).values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
+        total_parts = Collection_Part.objects.filter(collection_id__in=collection).aggregate(Sum('quantity'))
+    else:
+        collection = Collection.objects.get(id=collection_id)
+        inventory_flat_list = Collection_Part.objects.filter(collection_id_id=collection_id).values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
+        total_parts = Collection_Part.objects.filter(collection_id_id=collection_id).aggregate(Sum('quantity'))
     paginator = Paginator(inventory_flat_list, 25)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {'inventories': page_obj, 'collection': collection, 'range': 6, 'total_parts': total_parts}
+    context = {'inventories': page_obj, 'collection': collection, 'range': 6, 'total_parts': total_parts, 'collection_id': collection_id}
     context = build_context(request, context)
     return render(request, 'collections/parts.html', context)
 
@@ -225,7 +252,7 @@ class RemoveSetFromCollection(LoginRequiredMixin, View):
             if collection_part:
                 collection_part = collection_part[0]
                 collection_part.quantity -= part.quantity
-                if collection_part.quantity == 0:
+                if collection_part.quantity <= 0:
                     collection_part.delete()
                 collection_part.save()
         return redirect('collections_detail', collection_id=collection_id)
