@@ -27,6 +27,18 @@ Brick by Brick Values
 * Community:
   * Built by Lego fans, Brick by Brick is dedicated to foster a sense of community by allowing users to browse the many options on new sets they can build and share them with the world!
 
+
+### Getting Started
+
+---
+
+Brick by Brick used these resources to plan out the website and how it was built.
+
+Feel free to browse the links below!
+
+* [Trello Board](https://trello.com/b/LbKtyQYe/brick-by-brick-unit-3-project)
+* [Pitch Deck](https://docs.google.com/presentation/d/13AaIUvx5hBIPDS11o4axd45i4k2cGlKIWQkJf3aqpf4/edit#slide=id.g2264f569ebc_0_1219)
+
 ### Installation Instructions
 
 ---
@@ -50,9 +62,20 @@ Technologies Used for Brick by Brick:
 
 * Django
 * Python 3
+* Javascript
+* HTML 5
+* CSS
+* Materialize CSS
 * GitHub
 * Heroku
-* 
+* PostgreSQL
+
+
+### Next Steps
+
+---
+
+
 
 ### Credits
 
