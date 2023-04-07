@@ -28,7 +28,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.environ['MODE'] == 'dev' else False
 
 ALLOWED_HOSTS = []
 
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'brickbybrick.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jimcreel/brickbybrick',
+        'NAME': os.environ['BIT_DOT_IO_DB'],
         'USER': os.environ['BIT_DOT_IO_USER'],
         'PASSWORD': os.environ['BIT_DOT_IO_PASSWORD'],
         'HOST': os.environ['BIT_DOT_IO_HOST'],
