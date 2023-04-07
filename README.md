@@ -4,6 +4,12 @@
 
 <p align="center"><img src="./BrickByBrickLogo.png" /></p>
 
+### Link to Brick by Brick
+
+---
+
+
+
 ### Project Description
 
 ---
@@ -21,21 +27,32 @@ Brick by Brick Values
 * Community:
   * Built by Lego fans, Brick by Brick is dedicated to foster a sense of community by allowing users to browse the many options on new sets they can build and share them with the world!
 
-
 ### Installation Instructions
 
 ---
 
-* Fork and Clone this Repo
-* 
-
+* Fork and Clone this Repo.
+* Use :
+  ```
+  git clone <paste clone link here>
+  ```
+* Once files are installed, download any dependencies needed!
 
 ### How to browse "Brick by Brick"
 
 ---
 
+### Technology Used
 
+---
 
+Technologies Used for Brick by Brick:
+
+* Django
+* Python 3
+* GitHub
+* Heroku
+* 
 
 ### Credits
 
