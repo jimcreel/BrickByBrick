@@ -70,3 +70,9 @@ body {
     display: flex;
     justify-content: space-around;
 }
+
+.twitter {
+  position: absolute;
+  top: 150px;
+  left: 10px;
+}

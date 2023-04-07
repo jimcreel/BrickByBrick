@@ -4,7 +4,9 @@
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
 <h1>Collection List</h1>
+
 <btn class="btn"><a href="{% url 'collections_create' %}">Add a Collection</a></btn>
+<btn class = "btn"><a href="{% url 'collection_parts' 0 %}">View Parts In All Collections</a></btn>
 <div class = 'card-grid'>
 {% for collection in collections %}
   <div class="card">
