@@ -4,7 +4,7 @@ h1 {
     letter-spacing: 3px;
     font-family: 'Glegoo', serif;
     margin-top: 50px;
-    margin-bottom: 40px;
+    margin-bottom: -20px;
     font-weight: bolder;
 }
 
@@ -16,10 +16,29 @@ p {
 form {
     text-align: left;
     justify-content: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 30vw;
+    margin: 0 auto;
+    margin-bottom: 100px;
 
 }
 
 label {
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: 24px;
     color: black;
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
 }
+
+li {
+    text-align: center;
+}
+
+#id_username {
+    font-size: 20px;
+    font-weight: 500;
+}
+
