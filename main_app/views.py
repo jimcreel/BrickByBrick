@@ -15,8 +15,7 @@ from .models import *
 from .forms import *
 
 
-REBRICKABLE_API_KEY = settings.REBRICKABLE_API_KEY
-print(REBRICKABLE_API_KEY)
+
 # Create your views here.
 
 def build_context(request, context):
