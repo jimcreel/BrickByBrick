@@ -53,12 +53,20 @@ body {
     max-height: auto;
   }
 
-  .cardImg {
-    max-width: 30vw;
+  
+
+  .side-img {
+    width: 90%;
     max-height: auto;
   }
 
-  .side-img {
-    max-width: 100px;
-    max-height: auto;
+  .cardImg {
+    max-height: 12rem;
+    max-width: 12rem;
   }
+
+  .page-nav {
+    background-color: darkgray;
+    display: flex;
+    justify-content: space-around;
+}
