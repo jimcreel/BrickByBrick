@@ -10,6 +10,10 @@
 
 
 
+Click Here!
+
+
+
 ### Project Description
 
 ---
@@ -105,3 +109,48 @@ Technologies Used for Brick by Brick:
 ### Credits
 
 ---
+
+
+Gary Zhou
+
+* Roles:
+  * Scrum Master
+  * Designer
+* Links:
+
+<p align="left">
+	<a href="https://github.com/garyzhuo"><img src="./README-Pictures/GitHub-logo.png" width="100" height="auto"/></a> 
+	<a href="https://www.linkedin.com/in/garyzhuo/"><img src="./README-Pictures/linkedin.png" width="55" height="auto"/></a> 
+	<a href="http://www.garyzhuo.com/"><img src="./README-Pictures/website.png" width="60" height="auto"/></a> 
+</p>
+
+
+
+Jim Creel
+
+* Roles:
+  * GitHub Manager
+  * Database Manager
+* Links:
+
+<p align="left">
+	<a href="https://github.com/jimcreel"><img src="./README-Pictures/GitHub-logo.png" width="100" height="auto"/></a> 
+	<a href="https://www.linkedin.com/in/jim-creel/"><img src="./README-Pictures/linkedin.png" width="55" height="auto"/></a> 
+	<a href=""><img src="./README-Pictures/website.png" width="60" height="auto"/></a> 
+</p>
+
+
+
+Nicolas Angel
+
+* Roles:
+
+  * Database Manager
+  * Documenter
+* Links:
+
+  <p align="left">
+  	<a href="https://github.com/nangel42"><img src="./README-Pictures/GitHub-logo.png" width="100" height="auto"/></a> 
+  	<a href="https://www.linkedin.com/in/nicolasangel/"><img src="./README-Pictures/linkedin.png" width="55" height="auto"/></a> 
+  	<a href="https://nangel42.github.io/Nicolas-Angel-Portfolio/"><img src="./README-Pictures/website.png" width="60" height="auto"/></a> 
+  </p>
