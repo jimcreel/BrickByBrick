@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from secrets import *
 from dotenv import load_dotenv, find_dotenv
-import os
+import os, django_on_heroku
 
 load_dotenv(find_dotenv())
 
@@ -24,11 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-SECRET_KEY = 'SECRET_KEY'
-REBRICKABLE_API_KEY = 'REBRICKABLE_API_KEY'
+SECRET_KEY = os.environ['SECRET_KEY']
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.environ['MODE'] == 'dev' else False
 
 ALLOWED_HOSTS = []
 
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'brickbybrick.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jimcreel/brickbybrick',
+        'NAME': os.environ['BIT_DOT_IO_DB'],
         'USER': os.environ['BIT_DOT_IO_USER'],
         'PASSWORD': os.environ['BIT_DOT_IO_PASSWORD'],
         'HOST': os.environ['BIT_DOT_IO_HOST'],
@@ -135,3 +135,4 @@ LOGOUT_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+django_on_heroku.settings(locals())
