@@ -75,4 +75,10 @@ body {
   position: absolute;
   top: 150px;
   left: 10px;
+  opacity: 0.1;
+  transition: all 1s ease;
+}
+
+.twitter:hover {
+  opacity: 1;
 }
