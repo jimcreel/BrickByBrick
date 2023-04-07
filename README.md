@@ -106,9 +106,9 @@ Technologies Used for Brick by Brick:
 * Links:
 
 <p align="left">
-	<a target="_blank" rel="noopener noreferrer" href="https://github.com/garyzhuo"><img src="./README-Pictures/GitHub-logo.png" width="100" height="auto"/></a> 
+	<a target="_blank" rel="noopener noreferrer" href="https://github.com/garyzhuo"><img src="./README-Pictures/GitHub-logo-white.png" width="100" height="auto"/></a> 
 	<a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/garyzhuo/"><img src="./README-Pictures/linkedin.png" width="55" height="auto"/></a> 
-	<a target="_blank" rel="noopener noreferrer" href="http://www.garyzhuo.com/"><img src="./README-Pictures/website.png" width="60" height="auto"/></a> 
+	<a target="_blank" rel="noopener noreferrer" href="http://www.garyzhuo.com/"><img src="./README-Pictures/website-white.png" width="60" height="auto"/></a> 
 </p>
 
 **Jim Creel**
@@ -119,7 +119,7 @@ Technologies Used for Brick by Brick:
 * Links:
 
 <p align="left">
-	<a target="_blank" rel="noopener noreferrer" href="https://github.com/jimcreel"><img src="./README-Pictures/GitHub-logo.png" width="100" height="auto"/></a> 
+	<a target="_blank" rel="noopener noreferrer" href="https://github.com/jimcreel"><img src="./README-Pictures/GitHub-logo-white.png" width="100" height="auto"/></a> 
 	<a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jim-creel/"><img src="./README-Pictures/linkedin.png" width="55" height="auto"/></a> 
 	<a href=""><img src="./README-Pictures/website.png" width="60" height="auto"/></a> 
 </p>
@@ -133,7 +133,7 @@ Technologies Used for Brick by Brick:
 * Links:
 
   <p align="left">
-  	<a target="_blank" rel="noopener noreferrer" href="https://github.com/nangel42"><img src="./README-Pictures/GitHub-logo.png" width="100" height="auto"/></a> 
+  	<a target="_blank" rel="noopener noreferrer" href="https://github.com/nangel42"><img src="./README-Pictures/GitHub-logo-white.png" width="100" height="auto"/></a> 
   	<a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/nicolasangel/"><img src="./README-Pictures/linkedin.png" width="55" height="auto"/></a> 
   	<a target="_blank" rel="noopener noreferrer" href="https://nangel42.github.io/Nicolas-Angel-Portfolio/"><img src="./README-Pictures/website.png" width="60" height="auto"/></a> 
   </p>
