@@ -3,8 +3,7 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/detail.css' %}">
-
-    <h1>Parts in {{ collection.name }} Collection</h1>
+    <h1>Parts in {% if collection_id == 0 %} All Collections {% else %} {{ collection.name }} Collection {% endif %}</h1>
     <h2> Total Parts: {{ total_parts.quantity__sum }}</h2>
     <div class="part-tray">
 

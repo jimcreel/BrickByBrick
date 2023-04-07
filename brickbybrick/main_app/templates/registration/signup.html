@@ -1,6 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+<style>
+	/* added it here because when trying to add it in the css, it wouldnt work  
+	*/
+	body {
+		background-image: url("{% static 'images/sign_up.jpeg' %}");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+    body::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.25); /* adjust the alpha value as needed */
+        z-index: -1;
+    }
+</style>
+
+
 <h1>Sign Up</h1>
 
 <p class="red-text">{{ error_message }}</p>
