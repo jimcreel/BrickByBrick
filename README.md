@@ -14,7 +14,7 @@ Click Here!
 
 ---
 
-    Many existing Lego websites lack user-centered design and appeal to resellers, leading to a less engaging user experience and a site promoting the price gouging of Lego sets. Brick by Brick is focused on giving an eye appealing and user-friendly approach to browsing Lego sets. Powered by BrickLinks API, Brick by Brick is able to cross compare sets that you own to sets you would like to build by every individual part!
+Many existing Lego websites lack user-centered design and appeal to resellers, leading to a less engaging user experience and a site promoting the price gouging of Lego sets. Brick by Brick is focused on giving an eye appealing and user-friendly approach to browsing Lego sets. Powered by BrickLinks API, Brick by Brick is able to cross compare sets that you own to sets you would like to build by every individual part!
 
 Brick by Brick Values
 
