@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/search.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 
 
 {% if theme_name == 'Harry Potter' %}
@@ -42,7 +42,7 @@
 {% endfor %}
 </div>
 {% if sets.has_other_pages %}
-        <nav>
+        <nav class = "page-nav">
             {% if sets.has_previous %}
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ sets.previous_page_number }}">previous</a>

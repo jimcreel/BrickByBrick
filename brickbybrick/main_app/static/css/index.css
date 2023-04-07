@@ -24,8 +24,9 @@
     align-items: center;
     padding: 20px;
     justify-content: center;
-    width: 22rem;
+    width: 90%;
     max-width: 22rem;
+    margin: 0 auto;
 }
 
 .card {
@@ -36,6 +37,7 @@
     width: 22rem;
     max-width: 22rem;
     background-color: rgba(255, 255, 255, .35);
+    max-height: 22rem;
 }
 .btn-tray {
     display: flex;
@@ -60,10 +62,18 @@
     margin-bottom: 20px;
     color: black;
 }
+.side-nav {
+    width: 90%;
+}
 
-img {
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-    margin-bottom: 20px;
-} 
+@media (max-width: 1250px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1000px) {
+    .card-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
