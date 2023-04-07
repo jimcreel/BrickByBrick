@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Glegoo&display=swap');
+
+* {
+  font-family: 'Glegoo', serif;
+}
+nav form .input-field input[type=search]:focus {
+  height: auto;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    max-height: 200vh;
+    flex-direction: column;
+  }
+
+#navLogoId {
+  margin-top: -8px !important;
+  margin-left: -35px !important;
+  
+}
+
+  main {
+    flex: 1 0 auto;
+  }
+  
+  footer.page-footer {
+    padding-top: 0;
+    text-align: right;
+  }
+
+  nav {
+    background-color: rgba(211,211,211,0.35);
+  }
+
+
+  nav img {
+    height: 90px;
+    width: auto;
+    margin-left: 20px;
+  }
+  form {
+    display: flex;
+  }
+
+  btn a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .partImg {
+    max-width: 25px;
+    max-height: auto;
+  }
+
+  
+
+  .side-img {
+    width: 90%;
+    max-height: auto;
+  }
+
+  .cardImg {
+    max-height: 12rem;
+    max-width: 12rem;
+  }
+
+  .page-nav {
+    background-color: darkgray;
+    display: flex;
+    justify-content: space-around;
+}
+
+.twitter {
+  position: absolute;
+  top: 150px;
+  left: 10px;
+  opacity: 0.1;
+  transition: all 1s ease;
+}
+
+.twitter:hover {
+  opacity: 1;
+}
