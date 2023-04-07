@@ -50,7 +50,7 @@ def sets_index(request, theme_name):
     paginator = Paginator(set_list, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {'sets': page_obj}
+    context = {'sets': page_obj, 'theme_name': theme_name}
     context = build_context(request, context)
     print(context)
     return render(request, 'sets/index.html', context)
@@ -71,7 +71,7 @@ def sets_detail(request, set_num):
     
     collections = request.user.collection_set.all()
 
-    paginator = Paginator(inventory_flat_list, 6)
+    paginator = Paginator(inventory_flat_list, 25)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'sets/detail.html', {'set': set, 'minifigs': mini_flat_list, 'inventories': page_obj, 'collections': collections, 'range': 6})
@@ -129,7 +129,7 @@ def collection_parts(request, collection_id):
     # total_parts = inv_list.count()
     inventory_flat_list = Collection_Part.objects.filter(collection_id_id=collection_id).values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
     total_parts = Collection_Part.objects.filter(collection_id_id=collection_id).aggregate(Sum('quantity'))
-    paginator = Paginator(inventory_flat_list, 6)
+    paginator = Paginator(inventory_flat_list, 25)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {'inventories': page_obj, 'collection': collection, 'range': 6, 'total_parts': total_parts}
