@@ -104,14 +104,15 @@ Technologies Used for Brick by Brick:
 
 ---
 
-
+* Brick by Brick has some bright ideas for our future...
+  * Implementing a 3-D model API for each set in our database
 
 ### Credits
 
 ---
 
 
-Gary Zhou
+**Gary Zhou**
 
 * Roles:
   * Scrum Master
@@ -126,7 +127,7 @@ Gary Zhou
 
 
 
-Jim Creel
+**Jim Creel**
 
 * Roles:
   * GitHub Manager
@@ -141,7 +142,7 @@ Jim Creel
 
 
 
-Nicolas Angel
+**Nicolas Angel**
 
 * Roles:
 
