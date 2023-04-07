@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 
 <h1>Collection List</h1>
 <btn class="btn"><a href="{% url 'collections_create' %}">Add a Collection</a></btn>
+<div class = 'card-grid'>
 {% for collection in collections %}
   <div class="card">
     <a href= "{% url 'collections_detail' collection.id %}">
@@ -12,7 +15,11 @@
       <!-- <p>Minifigures: {{set.minifigs | length }}</p> -->
     </div>
   </a>
+    <div class = 'btn-tray'>
+      <btn class="btn"><a href="{% url 'collections_delete' collection.id %}">Delete</a></btn>
+    </div>
   </div>
 {% endfor %}
+</div>
 
 {% endblock %}

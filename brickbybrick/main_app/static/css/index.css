@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Glegoo&display=swap');
+
+  /* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ grid-auto-rows: auto;
+ grid-gap: 20px;
+
+
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    justify-content: center;
+    width: 90%;
+    max-width: 22rem;
+    margin: 0 auto;
+}
+
+.card {
+    width: calc(33.33% - 20px);
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 20px;
+    width: 22rem;
+    max-width: 22rem;
+    background-color: rgba(255, 255, 255, .35);
+    max-height: 22rem;
+}
+.btn-tray {
+    display: flex;
+    justify-content: center;
+}
+.card:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    
+}
+
+.card:nth-child(3n+1) {
+    margin-right: 10px;
+}
+
+.card:last-child {
+    margin-right: 0;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: black;
+}
+.side-nav {
+    width: 90%;
+}
+
+@media (max-width: 1250px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1000px) {
+    .card-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
