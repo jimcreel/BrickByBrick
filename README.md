@@ -54,6 +54,31 @@ Feel free to browse the links below!
 
 ---
 
+* Below is Brick by Bricks Landing Page:
+
+<p align="center"><img src="./README-Pictures/Brick-by-Brick-HomePage.png" /></p>
+
+
+* Next browse to the About Us page:
+
+
+<p align="center"><img src="./README-Pictures/Brick-by-Brick-AboutNTLGIN.png" /></p>
+
+
+* After Login, Feel free to browse preselected sets, add to personal collections!
+
+<p align="center"><img src="./README-Pictures/Brick-by-Brick-AboutLGIN.png" /></p>
+
+
+* Or feel free to search your own sets!
+
+<p align="center"><img src="./README-Pictures/Brick-by-Brick-Search.png" /></p>
+
+
+
+
+* DISCLAIMER: Brick by Brick is in constant production, the website might change and slighly differ from these images! The devs will update as soon as we can!
+
 ### Technology Used
 
 ---
