@@ -161,7 +161,7 @@
     <li>
       <a class = "CollList" href = "{% url 'collections_index' %}">Collection List</a>
       {% for collection in collections %}
-        <div class="card side-nav">
+        <div class="card side-nav" id = "SNVCard">
           <a href= "{% url 'collections_detail' collection.id %}">
           <div class="card-content">
             <span id = "CdTtl" class="card-title">{{ collection.name }}</span>
@@ -177,7 +177,7 @@
         </div>
       {% endfor %}
     </li>
-    <btn class="btn"><a href="{% url 'collections_create' %}">Add a Collection</a></btn>
+    <btn class="btn" id = "AddColl"><a id = "AddCollA" href="{% url 'collections_create' %}">Add a Collection</a></btn>
   </div>
 </div>
 </ul>    

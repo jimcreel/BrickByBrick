@@ -110,6 +110,10 @@ body {
   z-index: 4;
 }
 
+#sidebar:hover {
+  background-color: rgba(211,211,211,0.9);
+}
+
 #CdTtl {
   color: black;
   font-size: 1.5rem;
@@ -131,4 +135,24 @@ body {
   color: rgba(71, 181, 214, 0.849);
   font-weight: 600;
   text-decoration: underline;
+}
+
+#AddColl {
+  background-color: rgba(0, 0, 0, 0.822);
+}
+
+#AddColl:hover {
+  font-weight: 600;
+}
+
+#AddCollA {
+  color: rgb(255, 255, 255);
+}
+
+#SNVCard{
+  background-color: rgba(255, 255, 255, .35);
+}
+
+#SNVCard:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
