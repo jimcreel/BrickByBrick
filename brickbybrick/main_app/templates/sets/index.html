@@ -7,7 +7,7 @@
 {% if theme_name == 'Harry Potter' %}
 <style>
   body{
-        background-image: url("{% static 'images/harry-potter.jpeg' %}");
+        background-image: url("{% static 'images/new-harry.jpeg' %}");
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -18,7 +18,7 @@
 {% if theme_name == 'Star Wars' %}
 <style>
   body{
-        background-image: url("{% static 'images/star-wars-lego.jpeg' %}");
+        background-image: url("{% static 'images/new-starwars.jpeg' %}");
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -26,6 +26,27 @@
   </style>
 {% endif %}
 
+{% if theme_name == 'City' %}
+<style>
+  body{
+        background-image: url("{% static 'images/new-legocity.jpeg' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+  }
+  </style>
+{% endif %}
+
+{% if theme_name == 'UCS' %}
+<style>
+  body{
+        background-image: url("{% static 'images/new-batman.jpeg' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+  }
+  </style>
+{% endif %}
 
 <h1>Set List</h1>
 <div class = 'card-grid'>
