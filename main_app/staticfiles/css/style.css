@@ -82,3 +82,24 @@ body {
 .twitter:hover {
   opacity: 1;
 }
+
+#ddCss{
+  color:rgb(124, 123, 123);
+  font-weight: bold;
+  background-color: rgba(211,211,211,0.35);
+
+}
+
+#ddCss:hover {
+  color: rgb(117, 117, 117);
+  font-weight: bolder;
+  background-color: rgba(211,211,211,0.50);
+}
+
+#collBtn {
+  background-color: rgba(211,211,211,0.35);
+}
+
+#collBtn:hover {
+  background-color: rgba(184, 182, 182, 0.7);
+}
