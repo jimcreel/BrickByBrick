@@ -159,12 +159,12 @@
     </div>
     <!-- <li>Parts List</li> -->
     <li>
-      <a href = "{% url 'collections_index' %}">Collection List</a>
+      <a class = "CollList" href = "{% url 'collections_index' %}">Collection List</a>
       {% for collection in collections %}
         <div class="card side-nav">
           <a href= "{% url 'collections_detail' collection.id %}">
           <div class="card-content">
-            <span class="card-title">{{ collection.name }}</span>
+            <span id = "CdTtl" class="card-title">{{ collection.name }}</span>
 
             {% if collection.last_img %}
               <img src="{{ collection.last_img }}" alt="Lego Set Image" class="side-img">
