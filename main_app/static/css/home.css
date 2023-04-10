@@ -3,9 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 /*    font-family: 'Bangers', cursive;   */
 
-body {
-    background-image: url("{% static 'images/lego-rush.gif' %}");
-}
+
 
 
 /*
