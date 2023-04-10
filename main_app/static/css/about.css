@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Glegoo&display=swap');
 
-/* body {
-    background-color: #E8E5DA; 
-      background-image: url("{% static 'images/about-wallpaper.jpeg' %}");
-} */
+
 
 .aboutHeader {
     font-family: 'Glegoo', serif !important;
