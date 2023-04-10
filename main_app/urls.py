@@ -10,6 +10,7 @@ urlpatterns = [
   path('sets/<str:set_num>/', views.sets_detail, name='detail'),
   path('sets/<str:pk>/update/', views.SetUpdate.as_view(), name='sets_update'),
   path('sets/<str:pk>/delete/', views.SetDelete.as_view(), name='sets_delete'),
+  # path('sets/<str:set_num>/missing/', views.parts_missing, name='parts_missing'),
   path('sets/theme/<str:theme_name>/', views.sets_index, name='sets_index'),
   path('collections/', views.collections_index, name='collections_index'),
   path('collections/<int:collection_id>/parts/', views.collection_parts, name='collection_parts'),

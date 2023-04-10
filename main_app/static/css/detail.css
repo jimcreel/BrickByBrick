@@ -5,6 +5,7 @@
     height: 40vh;
     flex-wrap: wrap;
     padding: 5px;
+    overflow: auto;
 }
 
 .part {
@@ -15,4 +16,10 @@
 }
 
 
+.select-dropdown {
+    min-width: 200px;
+}
 
+form {
+    flex-direction: column;
+}

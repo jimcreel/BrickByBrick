@@ -58,8 +58,6 @@ def sets_index(request, theme_name):
 def sets_detail(request, set_num):
     sets = Set.objects.get(set_num=set_num)
     # grab the inventory associated with the set and pre-fetch the part and minifigure
-
-
     inventories = Inventories.objects.filter(set_num_id=set_num).select_related('set_num')
     # grab the parts associated with the inventory and pre-fetch the part
     
@@ -77,15 +75,13 @@ def sets_detail(request, set_num):
         set_owned = False
         collection_parts = Collection_Part.objects.filter(collection_id__in=collection).values_list('part_num', 'quantity')
         set_parts = inv_list.values_list('part_num', 'quantity')
-        collection_parts = Collection_Part.objects.filter(collection_id__in=collection).values_list('part_num', 'quantity')
-        set_parts = inv_list.values_list('part_num', 'quantity')
 
         collection_part_dict = {part[0]: part[1] for part in collection_parts}
         set_part_dict = {part[0]: part[1] for part in set_parts}
 
         total_set_quantity = 0
         matched_set_quantity = 0
-
+        
         for part_num, quantity in set_part_dict.items():
             if part_num in collection_part_dict:
                 matched_set_quantity += min(quantity, collection_part_dict[part_num])
@@ -96,15 +92,41 @@ def sets_detail(request, set_num):
         else:
             percentage_match = round(((matched_set_quantity / total_set_quantity) * 100), 1)
 
-    
-
-    
-    
     paginator = Paginator(inventory_flat_list, 25)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'sets/detail.html', {'sets': sets, 'minifigs': mini_flat_list, 'inventories': page_obj, 'collections': collection, 'range': 6, 'percentage': percentage_match, 'set_owned': set_owned})
 
+
+# @login_required
+# def parts_missing(request, set_num):
+#     sets = Set.objects.get(set_num=set_num)
+#     # grab the inventory associated with the set and pre-fetch the part and minifigure
+#     inventories = Inventories.objects.filter(set_num_id=set_num).select_related('set_num')
+#     # grab the parts associated with the inventory and pre-fetch the part
+    
+#     inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
+#     inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
+    
+#     collection = Collection.objects.filter(user=request.user)
+    
+#     collection_parts = Collection_Part.objects.filter(collection_id__in=collection).values_list('part_num', 'quantity')
+#     set_parts = inv_list.values_list('part_num', 'quantity')
+    
+#     collection_part_dict = {part[0]: part[1] for part in collection_parts}
+#     set_part_dict = {part[0]: part[1] for part in set_parts}
+#     #find the parts in set_parts that are not in collection_parts
+#     missing_parts = set_part_dict.items() - collection_part_dict.items()
+#     display_list = []
+#     for part, quantity in missing_parts:
+#         #get the part object from inv_list
+#         part_obj = set_parts.first(part_num=part)
+#         collection_part_obj = collection_parts.first(part_num=part)
+#         part_obj['quantity'] = part_obj['quantity'] - collection_part_obj['quantity']
+#     paginator = Paginator(missing_parts, 25)
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+#     return render(request, 'sets/parts_missing.html', {'sets': sets, 'inventories': page_obj, 'collections': collection, 'range': 25})
 
 
 class SetCreate(CreateView):
@@ -263,7 +285,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('index')
+            return redirect('/collections/')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()

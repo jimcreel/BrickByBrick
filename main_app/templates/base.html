@@ -23,22 +23,22 @@
 
 <!-- Drop Down Structure ----------------------------------------------------------------->
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="{% url 'sets_index' theme_name='Harry Potter' %}">Browse Harry Potter Sets</a></li>
+  <li><a href="{% url 'sets_index' theme_name='City' %}" id = "ddCss">Browse: City Sets</a></li>
   <li class="divider"></li>
-  <li><a href="{% url 'sets_index' theme_name='Star Wars' %}">Browse Star Wars Sets</a></li>
+  <li><a href="{% url 'sets_index' theme_name='Harry Potter' %}" id = "ddCss">Browse: Harry Potter Sets</a></li>
   <li class="divider"></li>
-  <li><a href="{% url 'sets_index' theme_name='City' %}">Browse City Sets</a></li>
+  <li><a href="{% url 'sets_index' theme_name='Star Wars' %}" id = "ddCss">Browse: Star Wars Sets</a></li>
   <li class="divider"></li>
-  <li><a href="{% url 'sets_index' theme_name='UCS' %}">Browse Ultimate Collector Series Sets</a></li>
+  <li><a href="{% url 'sets_index' theme_name='UCS' %}" id = "ddCss">Browse: Ultimate Collector Series Sets</a></li>
 </ul>
 <ul id="dropdown01" class="dropdown-content">
-  <li><a href="{% url 'sets_index' theme_name='Harry Potter' %}">Browse Harry Potter Sets</a></li>
+  <li><a href="{% url 'sets_index' theme_name='City' %}" id = "ddCss">Browse: City Sets</a></li>
   <li class="divider"></li>
-  <li><a href="{% url 'sets_index' theme_name='Star Wars' %}">Browse Star Wars Sets</a></li>
+  <li><a href="{% url 'sets_index' theme_name='Harry Potter' %}" id = "ddCss">Browse: Harry Potter Sets</a></li>
   <li class="divider"></li>
-  <li><a href="{% url 'sets_index' theme_name='City' %}">Browse City Sets</a></li>
+  <li><a href="{% url 'sets_index' theme_name='Star Wars' %}" id = "ddCss">Browse: Star Wars Sets</a></li>
   <li class="divider"></li>
-  <li><a href="{% url 'sets_index' theme_name='UCS' %}">Browse Ultimate Collector Series Sets</a></li>
+  <li><a href="{% url 'sets_index' theme_name='UCS' %}" id = "ddCss">Browse: Ultimate Collector Series Sets</a></li>
 </ul>
 <!-- Start of Navbar ----------------------------------------------------------------->
   <header class="navbar-fixed">
@@ -75,7 +75,7 @@
             </li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>   
             <li>
-              <a class="waves-effect waves-light btn" onclick="openNav()" ondblclick="closeNav()">Open Collections <i class="material-icons right">arrow_drop_down_circle</i></a>
+              <a class="btn" id = "collBtn" onclick="openNav()" ondblclick="closeNav()">Open Collections <i class="material-icons right">arrow_drop_down_circle</i></a>
             </li>
 
 <!-- Navbar if not logged in----------------------------------------------------------------->
@@ -159,12 +159,12 @@
     </div>
     <!-- <li>Parts List</li> -->
     <li>
-      <a href = "{% url 'collections_index' %}">Collection List</a>
+      <a class = "CollList" href = "{% url 'collections_index' %}">Collection List</a>
       {% for collection in collections %}
-        <div class="card side-nav">
+        <div class="card side-nav" id = "SNVCard">
           <a href= "{% url 'collections_detail' collection.id %}">
           <div class="card-content">
-            <span class="card-title">{{ collection.name }}</span>
+            <span id = "CdTtl" class="card-title">{{ collection.name }}</span>
 
             {% if collection.last_img %}
               <img src="{{ collection.last_img }}" alt="Lego Set Image" class="side-img">
@@ -177,7 +177,7 @@
         </div>
       {% endfor %}
     </li>
-    <btn class="btn"><a href="{% url 'collections_create' %}">Add a Collection</a></btn>
+    <btn class="btn" id = "AddColl"><a id = "AddCollA" href="{% url 'collections_create' %}">Add a Collection</a></btn>
   </div>
 </div>
 </ul>    
