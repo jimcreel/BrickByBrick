@@ -73,6 +73,10 @@ body {
     justify-content: space-around;
 }
 
+.part p {
+  margin: 0;
+}
+
 .twitter {
   position: absolute;
   top: 150px;
@@ -95,10 +99,7 @@ body {
   width: 50%;
 }
 
-@media (max-width: 1700px) {
-  .twitter {
-    display: none;
-  }
+
 
 
 #ddCss{
@@ -173,4 +174,10 @@ body {
 
 #SNVCard:hover {
   background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 1700px) {
+  .twitter {
+    display: none;
+  }
 }

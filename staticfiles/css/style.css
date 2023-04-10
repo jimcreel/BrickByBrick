@@ -82,3 +82,9 @@ body {
 .twitter:hover {
   opacity: 1;
 }
+
+@media (max-width: 1700px) {
+  .twitter {
+    display: none;
+  }
+}

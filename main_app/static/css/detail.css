@@ -16,4 +16,10 @@
 }
 
 
+.select-dropdown {
+    min-width: 200px;
+}
 
+form {
+    flex-direction: column;
+}
