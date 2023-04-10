@@ -9,6 +9,8 @@
     body {
         background-image: url("{% static 'images/pirate-collection.jpeg' %}");
         background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
         background-size: cover;
     }
 
@@ -32,7 +34,7 @@
 
 
 <h1>Sets in {{ collection.name }} Collection  </h1>
-<a href="{% url 'collection_parts' collection.id %}">View Parts In This Collection</a>
+<btn class = 'btn'><a href="{% url 'collection_parts' collection.id %}">View All Parts In This Collection</a></btn>
 <div class="card-grid">
 {% for set in sets %}
   <div class="card">
