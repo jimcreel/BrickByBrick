@@ -139,6 +139,7 @@ body {
 
 #AddColl {
   background-color: rgba(0, 0, 0, 0.822);
+  margin-left: 75px;
 }
 
 #AddColl:hover {
