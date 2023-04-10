@@ -5,6 +5,7 @@
     height: 40vh;
     flex-wrap: wrap;
     padding: 5px;
+    overflow: auto;
 }
 
 .part {
