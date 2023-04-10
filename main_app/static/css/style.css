@@ -3,6 +3,10 @@
 * {
   font-family: 'Glegoo', serif;
 }
+
+.confirm {
+  margin-left: 5px;
+}
 nav form .input-field input[type=search]:focus {
   height: auto;
 }
