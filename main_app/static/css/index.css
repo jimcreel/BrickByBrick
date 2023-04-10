@@ -72,6 +72,15 @@ h1 {
     width: 90%;
 }
 
+.formBtn {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    white-space: normal;
+    max-width: 150px;
+}
+
+
 @media (max-width: 1250px) {
     .card-grid {
         grid-template-columns: repeat(2, 1fr);
