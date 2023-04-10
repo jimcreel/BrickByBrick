@@ -8,7 +8,7 @@
 
 ---
 
-Click Here!
+[Click Here!](https://brickbybrick.herokuapp.com/)
 
 ### Project Description
 

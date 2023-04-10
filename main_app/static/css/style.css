@@ -57,7 +57,7 @@ body {
 
   .side-img {
     width: 90%;
-    max-height: auto;
+    max-height: 90%;
   }
 
   .cardImg {
@@ -81,4 +81,79 @@ body {
 
 .twitter:hover {
   opacity: 1;
+}
+
+
+#ddCss{
+  color:rgb(124, 123, 123);
+  font-weight: bold;
+  background-color: rgba(211,211,211,0.35);
+
+}
+
+#ddCss:hover {
+  color: rgb(117, 117, 117);
+  font-weight: bolder;
+  background-color: rgba(211,211,211,0.50);
+}
+
+#collBtn {
+  background-color: rgba(211,211,211,0.35);
+}
+
+#collBtn:hover {
+  background-color: rgba(184, 182, 182, 0.7);
+}
+
+#sidebar {
+  background-color: rgba(211,211,211,0.7);
+  z-index: 4;
+}
+
+#sidebar:hover {
+  background-color: rgba(211,211,211,0.9);
+}
+
+#CdTtl {
+  color: black;
+  font-size: 1.5rem;
+}
+
+#CdTtl:hover {
+  color: rgba(71, 181, 214, 0.849);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.CollList {
+  color: black;
+  font-size: 1.85rem;
+  font-weight: 400;
+}
+
+.CollList:hover {
+  color: rgba(71, 181, 214, 0.849);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+#AddColl {
+  background-color: rgba(0, 0, 0, 0.822);
+  margin-left: 75px;
+}
+
+#AddColl:hover {
+  font-weight: 600;
+}
+
+#AddCollA {
+  color: rgb(255, 255, 255);
+}
+
+#SNVCard{
+  background-color: rgba(255, 255, 255, .35);
+}
+
+#SNVCard:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
