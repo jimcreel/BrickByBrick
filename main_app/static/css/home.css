@@ -3,9 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 /*    font-family: 'Bangers', cursive;   */
 
-body {
-    background-image: url("{% static 'images/lego-rush.gif' %}");
-}
+
 
 
 /*
@@ -14,7 +12,12 @@ if you want the image of your background to stay fixed, use this:
 background-attachment: fixed;
 
  */
-
+.text {
+  background-color: rgba(158, 229, 250, 0.7);
+  width: 70vw;
+  margin: 0 auto;
+  border-radius: 5px;
+}
 #legoLogo {
   width: 65vw;
   height: 45vh;

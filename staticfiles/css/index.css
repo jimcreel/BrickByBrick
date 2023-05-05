@@ -42,6 +42,10 @@ h1 {
     max-width: 22rem;
     background-color: rgba(255, 255, 255, .35);
     max-height: 22rem;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: auto;
+
 }
 .btn-tray {
     display: flex;
@@ -69,6 +73,15 @@ h1 {
 .side-nav {
     width: 90%;
 }
+
+.formBtn {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    white-space: normal;
+    max-width: 150px;
+}
+
 
 @media (max-width: 1250px) {
     .card-grid {

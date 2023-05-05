@@ -98,7 +98,7 @@ Technologies Used for Brick by Brick:
 
 ---
 
-**Gary Zhou**
+**Gary Zhuo**
 
 * Roles:
   * Scrum Master
