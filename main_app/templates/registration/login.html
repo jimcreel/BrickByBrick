@@ -27,7 +27,7 @@
 <h1 id="loginHeader">Log In</h1>
 
 
-<form method="POST" action="{% url 'login' %}">
+<form class='login' method="POST" action="{% url 'login' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}" />
