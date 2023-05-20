@@ -17,7 +17,7 @@ p {
     padding: 15px;
 }
 
-form {
+.login {
     text-align: left;
     justify-content: center;
     display: flex;

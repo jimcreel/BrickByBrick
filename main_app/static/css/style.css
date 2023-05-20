@@ -11,6 +11,33 @@ nav form .input-field input[type=search]:focus {
   height: auto;
 }
 
+nav form {
+  margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block;
+    vertical-align:middle;
+    
+    
+}
+.right {
+  height: 80%;
+}
+
+#search {
+  width: 100px;
+}
+
+nav form label:after {
+  content: ":";
+}
+.input-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 90%
+}
+
 body {
     display: flex;
     min-height: 100vh;

@@ -8,6 +8,13 @@
     transition: 0.5s;
     padding-top: 110px;
     background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .card{
+    margin-left: 10px;
 }
     
 .sidebar li {
@@ -18,9 +25,9 @@
     cursor: pointer;
 }
     
-.body-text {
-    margin-right: 150px;
-    font-size: 18px;
+#AddColl {
+    position: relative;
+    margin: 0.5rem 0 1rem 0;
 }
 
 .sidebar .closebtn {
