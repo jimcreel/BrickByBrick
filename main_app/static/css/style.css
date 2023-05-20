@@ -19,6 +19,9 @@ nav form {
     
     
 }
+.right {
+  height: 80%;
+}
 
 #search {
   width: 100px;
@@ -32,6 +35,7 @@ nav form label:after {
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  height: 90%
 }
 
 body {
