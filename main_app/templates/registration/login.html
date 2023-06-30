@@ -28,7 +28,9 @@
 
 
 <form class='login' method="POST" action="{% url 'login' %}">
-    <p> Test User: brickbybrick - Test Password: testuser13</p>
+    <p> Test User: brickbybrick</p>
+    <p> Test Password: testuser13</p>
+    
     {% csrf_token %}
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}" />
