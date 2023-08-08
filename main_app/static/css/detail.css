@@ -5,14 +5,13 @@
     height: 40vh;
     flex-wrap: wrap;
     padding: 5px;
-    overflow: auto;
 }
 
-.part {
-    width: 150px;
-    height: 55px;
+.card {
+    display: flex;
+    flex-direction: column;
     margin: 10px;
-    font-size: 12px;
+    border-radius: 5px
 }
 
 

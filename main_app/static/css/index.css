@@ -26,7 +26,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    justify-content: center;
+    justify-content: space-around;
     width: 90%;
     max-width: 22rem;
     margin: 0 auto;
@@ -37,7 +37,7 @@ h1 {
     padding: 5px;
     margin-bottom: 20px;
     max-width: 22rem;
-    background-color: rgba(255, 255, 255, .35);
+    background-color: rgba(255, 255, 255, .85);
     max-height: 22rem;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
@@ -49,7 +49,7 @@ h1 {
     justify-content: center;
 }
 .card:hover {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.95);
     
 }
 
@@ -62,7 +62,7 @@ h1 {
 }
 
 .card-title {
-    font-size: 1 rem;
+    font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
     color: black;

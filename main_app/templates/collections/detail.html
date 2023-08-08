@@ -6,30 +6,19 @@
 
 {% load static %}
 <style>
-    body {
-        background-image: url("{% static 'images/pirate-collection.jpeg' %}");
+    
+    body{
+        background-image: linear-gradient(
+          rgba(255, 255, 255, 0.45), 
+          rgba(255, 255, 255, 0.45)
+        ), url("{% static 'images/pirate-collection.jpeg' %}");
         background-repeat: no-repeat;
+        background-repeat: no-repeat;
+        background-size: cover;
         background-attachment: fixed;
         background-position: center;
-        background-size: cover;
-    }
-
-    /* This is a seudo element, the content points to a empty string,
-    which creates the pseudo element.
-    width & height is at 100% bc we want to cover 100% of the page.
-    background-color is the color of the overlay. which also is the opacity.
-    The z-index is set to -1, so it will be behind the content.
-    SO the words wont be transparent.
-    */
-
-      body::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.5); /* adjust the alpha value as needed */
-        z-index: -1;
-    }
+  }
+  
 </style>
 
 
@@ -40,8 +29,9 @@
   <div class="card">
     
     <div class="card-content">
-      <span class="card-title">{{ set.name }}</span>
+      
       <a href= "{% url 'detail' set.set_num %}"><img class = "cardImg"src = "{{ set.img_url }}" alt = "{{ set.name }}"></a> 
+      <p> {{set.name}}
       <!-- <p>Minifigures: {{set.minifigs | length }}</p> -->
       <div class="card-action">
         <form action="{% url 'collections_remove' collection_id=collection.id set_num=set.set_num %}" method="POST">

@@ -41,10 +41,10 @@
     <div class="part-tray">
 
         {% for part_num, quantity, img_url in inventories %}
-        <div class="part">
-          <p>Part #:{{ part_num }}</p>  
+        <div class="card">
           <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
-           <p>Qty: {{ quantity }}</p>
+          <p>Part #:{{ part_num }}</p>  
+          <p>Qty: {{ quantity }}</p>
         </div>
         {% endfor %}
     </div>
