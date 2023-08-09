@@ -1,35 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 <style>
-    body {
-        background-image: url("{% static 'images/pirate-collection.jpeg' %}");
+    body{
+        background-image: linear-gradient(
+          rgba(255, 255, 255, 0.45), 
+          rgba(255, 255, 255, 0.45)
+        ), url("{% static 'images/pirate-collection.jpeg' %}");
+        background-repeat: no-repeat;
         background-repeat: no-repeat;
         background-size: cover;
-    }
-
-    /* This is a seudo element, the content points to a empty string,
-    which creates the pseudo element.
-    width & height is at 100% bc we want to cover 100% of the page.
-    background-color is the color of the overlay. which also is the opacity.
-    The z-index is set to -1, so it will be behind the content.
-    SO the words wont be transparent.
-    */
-
-      body::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.5); /* adjust the alpha value as needed */
-        z-index: -1;
-    }
+        background-attachment: fixed;
+        background-position: center;
+  }
 </style>
 
 <h1>Set Details</h1>
 
-<div class="card">
+<div class="set-card">
   <div class="card-content">
     <span class="card-title">Set Number {{ sets.set_num}} - {{ sets.name }}</span>
     <p>Number of Pieces: {{ sets.num_parts}}</p>
@@ -38,16 +27,24 @@
     <p>Minifigures: {{minifigs|length}}</p>
     
     <img class = 'cardImg' src = "{{ sets.img_url }}" alt = "{{ sets.name }}">
-    <div class="part-tray">
-
-        {% for part_num, quantity, img_url in inventories %}
-        <div class="card">
-          <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
-          <p>Part #:{{ part_num }}</p>  
-          <p>Qty: {{ quantity }}</p>
-        </div>
+  </div>
+</div>
+    <div class="part-grid">
+        {% for part_num, quantity, img_url, part_num__part_name in inventories %}
+        
+          
+            <div class="part-card card">
+              <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
+              <p>Part #:{{ part_num }}</p>  
+              <p>Part : {{part_num__part_name}}</p>
+              <p>Qty: {{ quantity }}</p>
+            </div>
+          
+        
         {% endfor %}
-    </div>
+      </div>
+      
+   
 
     {% if inventories.has_other_pages %}
         <nav class = 'page-nav'>
