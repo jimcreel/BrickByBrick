@@ -4,7 +4,6 @@
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox */
 
 .container {
-    max-width: 1200px;
     margin: auto;
     padding: 20px;
 }
@@ -15,44 +14,67 @@ h1 {
 
 .card-grid {
  display: grid;
- grid-template-columns: repeat(3, 1fr);
+ grid-template-columns: repeat(5, 1fr);
  grid-auto-rows: auto;
- grid-gap: 20px;
+ grid-gap: 5px;
 
 
 }
+
+.part-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 5px;
+   
+   
+   }
 
 .card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    justify-content: center;
     width: 90%;
     max-width: 22rem;
     margin: 0 auto;
 }
 
 .card {
-    width: calc(33.33% - 20px);
     box-sizing: border-box;
     padding: 5px;
     margin-bottom: 20px;
-    width: 22rem;
     max-width: 22rem;
-    background-color: rgba(255, 255, 255, .35);
+    background-color: rgba(255, 255, 255, .85);
     max-height: 22rem;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     z-index: auto;
 
 }
+.part-card{
+    box-sizing: border-box;
+    padding: 3px;
+    max-width: 10rem;
+    width: auto
+}
+
+.set-card { 
+    box-sizing: border-box;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, .85);
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    min-width: 300px;
+    max-width: 400px;
+}
+
 .btn-tray {
     display: flex;
     justify-content: center;
 }
 .card:hover {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.95);
     
 }
 
@@ -65,7 +87,7 @@ h1 {
 }
 
 .card-title {
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
     color: black;
@@ -82,6 +104,11 @@ h1 {
     max-width: 150px;
 }
 
+@media (max-width: 1500px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 
 @media (max-width: 1250px) {
     .card-grid {
@@ -92,5 +119,24 @@ h1 {
 @media (max-width: 1000px) {
     .card-grid {
         grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 1250px) {
+    .part-grid {
+        grid-template-columns: repeat(5, 1fr);
+
+    }
+}
+
+@media (max-width: 1000px) {
+    .part-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .part-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

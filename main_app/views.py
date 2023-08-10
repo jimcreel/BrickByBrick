@@ -42,8 +42,8 @@ def about(request):
 
     return render(request, 'about.html', context)
 
-def sets_index(request, theme_name):
-    
+def sets_index(request, theme_name='Star Wars'):
+        
     theme_list = Theme.objects.filter(name=theme_name).values_list('id', flat=True)
     set_list = Set.objects.filter(theme_id__in=theme_list).order_by('?', 'year').values_list('set_num', 'name', 'img_url', 'year')
     paginator = Paginator(set_list, 20)
@@ -64,7 +64,7 @@ def sets_detail(request, set_num):
     inv_list = Inventory_Part.objects.filter(inventory_id__in=inventories).select_related('part_num')
     mini_list = Inventory_MiniFig.objects.filter(inventory_id__in=inventories).select_related('fig_num')
     mini_flat_list = mini_list.values_list('fig_num', 'quantity', 'fig_num__name', 'fig_num__img_url')
-    inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url')
+    inventory_flat_list = inv_list.values_list('part_num', 'quantity', 'img_url', 'part_num__part_name')
     
     collection = Collection.objects.filter(user=request.user)
     #if the set is in a user's collection

@@ -143,13 +143,13 @@
 
 <!--Side bar----------------------------------------------------------------->
 <div id="main">
-<ul class="hide-on-med-and-down">
+<div class="hide-on-med-and-down">
   <div id="sidebar" class="sidebar">
     <div class="closebtn" onclick="closeNav()">
       <i class="material-icons">close</i>  
     </div>
     <!-- <li>Parts List</li> -->
-    <li>
+    <div>
       <a class = "CollList" href = "{% url 'collections_index' %}">Collection List</a>
       {% for collection in collections %}
         <div class="card side-nav" id = "SNVCard">
@@ -167,11 +167,11 @@
           </a>
         </div>
       {% endfor %}
-    </li>
+      </div>
     <btn class="btn" id = "AddColl"><a id = "AddCollA" href="{% url 'collections_create' %}">Add a Collection</a></btn>
   </div>
 </div>
-</ul>    
+</div>    
 
 </div>
 

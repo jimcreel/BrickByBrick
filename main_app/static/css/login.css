@@ -17,14 +17,14 @@ p {
     padding: 15px;
 }
 
-form {
+.login {
     text-align: left;
     justify-content: center;
     display: flex;
     flex-direction: column;
     max-width: 30vw;
     margin: 0 auto;
-    margin-bottom: 100px;
+    padding: 20px
 
 }
 
@@ -44,7 +44,7 @@ button {
     outline: none;
     border: .5px solid #aaa6a6;
     background: #aba0a0;
-    color: #ae00ff;
+    
     text-transform: uppercase;
     letter-spacing: 2px;
     opacity: .7;
@@ -57,7 +57,8 @@ button {
     display: block;
 }
 
-button:hover {
-    box-shadow: 0 0 10px #ae00ff, 0 0 25px #001eff, 0 0 50px #ae00ff;
+button:hover{
+    background: #867d7d
 }
+
 

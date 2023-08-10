@@ -6,15 +6,20 @@
 {% if theme_name == 'Harry Potter' %}
 <style>
   body{
-        
-        background-image: url("{% static 'images/new-harry.jpeg' %}");
+        background-image: linear-gradient(
+          rgba(255, 255, 255, 0.45), 
+          rgba(255, 255, 255, 0.45)
+        ),
+        url("{% static 'images/new-harry.jpeg' %}");
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
         background-position: center;
+        background-color: rgba(255, 255, 255, 0.5); /* adjust the alpha value as needed */
+      
+}
         
 
-  }
   
 </style>
 {% endif %}
@@ -22,7 +27,10 @@
 {% if theme_name == 'Star Wars' %}
 <style>
   body{
-        background-image: url("{% static 'images/new-starwars.jpeg' %}");
+        background-image: linear-gradient(
+          rgba(255, 255, 255, 0.45), 
+          rgba(255, 255, 255, 0.45)
+        ), url("{% static 'images/new-starwars.jpeg' %}");
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -34,7 +42,10 @@
 {% if theme_name == 'City' %}
 <style>
   body{
-        background-image: url("{% static 'images/new-legocity.jpeg' %}");
+        background-image: linear-gradient(
+          rgba(255, 255, 255, 0.45), 
+          rgba(255, 255, 255, 0.45)
+        ), url("{% static 'images/new-legocity.jpeg' %}");
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -46,23 +57,19 @@
 {% if theme_name == 'UCS' %}
 <style>
   body{
-        background-image: url("{% static 'images/new-batman.jpeg' %}");
+        background-image: linear-gradient(
+          rgba(255, 255, 255, 0.45), 
+          rgba(255, 255, 255, 0.45)
+        ), url("{% static 'images/new-batman.jpeg' %}");
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
         background-position: center;
   }
-  </style>
+  </style>s
 {% endif %}
 <style>
-body::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.5); /* adjust the alpha value as needed */
-  z-index: -1;
-}
+
 </style>
 
 <h1>Set List</h1>
@@ -71,8 +78,9 @@ body::before {
   <div class="card">
     <a href= "{% url 'detail' set.0 %}">
     <div class="card-content">
-      <span class="card-title">{{ set.1 }}</span>
       <img class = 'cardImg' src = "{{ set.2 }}" alt = "{{ set.1 }}"></a> 
+      <p >{{ set.1 }}</p>
+      
       <!-- <p>Minifigures: {{set.minifigs | length }}</p> -->
     </div>
   </a>
