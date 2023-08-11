@@ -59,8 +59,12 @@ h1 {
     font-size: 8px;
 }
 
+.card-header {
+    display: flex;
+    justify-content: center;
+}
 
-/* .set-card { 
+.set-card { 
     box-sizing: border-box;
     padding: 5px;
     background-color: rgba(255, 255, 255, .85);
@@ -68,7 +72,7 @@ h1 {
     border-radius: 4px;
     min-width: 300px;
     max-width: 400px;
-} */
+}
 
 .btn-tray {
     display: flex;

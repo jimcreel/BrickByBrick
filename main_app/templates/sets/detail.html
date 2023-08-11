@@ -18,15 +18,17 @@
 
 <h1>Set Details</h1>
 
-<div class="set-card">
-  <div class="card-content">
-    <span class="card-title">Set Number {{ sets.set_num}} - {{ sets.name }}</span>
-    <p>Number of Pieces: {{ sets.num_parts}}</p>
-    <p> {% if set_owned %} You own this set! {% else %} You have approximately {{ percentage }}% of the pieces for this set {% endif %}</p>
-    <p>Year: {{ sets.year }}</p>
-    <p>Minifigures: {{minifigs|length}}</p>
-    
-    <img class = 'cardImg' src = "{{ sets.img_url }}" alt = "{{ sets.name }}">
+<div class="card-header">
+  <div class="set-card">
+    <div class="card-content">
+      <span class="card-title">Set Number {{ sets.set_num}} - {{ sets.name }}</span>
+      <p>Number of Pieces: {{ sets.num_parts}}</p>
+      <p> {% if set_owned %} You own this set! {% else %} You have approximately {{ percentage }}% of the pieces for this set {% endif %}</p>
+      <p>Year: {{ sets.year }}</p>
+      <p>Minifigures: {{minifigs|length}}</p>
+      
+      <img class = 'cardImg' src = "{{ sets.img_url }}" alt = "{{ sets.name }}">
+    </div>
   </div>
 </div>
     <div class="part-grid">
