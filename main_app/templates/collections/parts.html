@@ -24,8 +24,10 @@
     <div class="card-grid">
 
         {% for part_num, quantity, img_url, part_num__part_name in inventories %}
-        <div class="card">
-            <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
+        <div class="card part-card">
+            <div class="partImgDiv">
+                <img class = 'partImg' src="{{ img_url }}" alt="{{ part_num }}">
+            </div>
             <p>Part #: {{ part_num }}</p>
             <p>Part: {{part_num__part_name}}</p>
             <p>Qty: {{ quantity }}</p>
