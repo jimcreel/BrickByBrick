@@ -78,10 +78,15 @@ nav form label:after {
   }
   
   .partImg {
+    margin: 0 auto;
     max-width: 50px;
     max-height: auto;
   }
 
+  .partImgDiv {
+    display: flex;
+    justify-content: center;
+  }
   
 
   .side-img {
