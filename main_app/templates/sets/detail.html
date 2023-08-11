@@ -74,20 +74,21 @@
       <!-- Render the inputs -->
       <input type="hidden" name="set" value="{{ sets.set_num }}">
       
-      <div class="input-field col s12">
-        <select id = "collection_select">
-            <option value="" disabled selected>Choose your Collection</option>
-          {% for collection in collections %}
-            <option value="{{ collection.id }}">{{ collection.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <br>
-      <input id = "submit"type="submit" class="hidden btn" value="Add Set To Collection" disabled>
+        <div class="input-field col s12">
+          <select id = "collection_select">
+              <option value="" disabled selected>Choose your Collection</option>
+            {% for collection in collections %}
+              <option value="{{ collection.id }}">{{ collection.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <br>
+        <input id = "submit"type="submit" class="hidden btn col-btn" value="Add Set To Collection" disabled>
+        
+      
     </form>
     </div>
-  </div>
-</div>
+  
 
 
 
