@@ -1,4 +1,7 @@
 .env/
 .myenv/
 .env
+venv/
 .venv/
+.gitignore
+venv/
