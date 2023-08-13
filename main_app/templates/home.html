@@ -7,13 +7,18 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <style>
-	/* added it here because when trying to add it in the css, it wouldnt work  
-	*/
-	body {
-		background-image: url("{% static 'images/prison-break.png' %}");
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
+	
+	body{
+        background-image: linear-gradient(
+          rgba(255, 255, 255, 0.45), 
+          rgba(255, 255, 255, 0.45)
+        ), url("{% static 'images/prison-break.png' %}");
+        background-repeat: no-repeat;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+  }
 </style>
 
 <body>
