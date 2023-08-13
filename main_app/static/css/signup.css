@@ -21,6 +21,7 @@ form {
     max-width: 30vw;
     margin: 0 auto;
     margin-bottom: 100px;
+    min-width: 275px;
 
 }
 
