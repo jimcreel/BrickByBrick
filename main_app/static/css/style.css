@@ -81,6 +81,8 @@ nav form label:after {
     margin: 0 auto;
     max-width: 50px;
     max-height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
   }
 
   .partImgDiv {
