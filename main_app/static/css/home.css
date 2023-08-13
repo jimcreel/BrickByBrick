@@ -6,22 +6,26 @@
 
 
 
-/*
 
-if you want the image of your background to stay fixed, use this:
-background-attachment: fixed;
-
- */
-.text {
-  background-color: rgba(158, 229, 250, 0.7);
+.textContainer {
+  
   width: 70vw;
   margin: 0 auto;
   border-radius: 5px;
   padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.text{
+  background-color: rgba(158, 229, 250, 0.7);
+  margin-top: 50px;
+  border-radius: 5px;
+  padding: 40px;
 }
 #legoLogo {
-  width: 65vw;
-  height: 45vh;
+  
   /* this is how we are centering it, moving it */
   margin: 120px auto -100;
   text-align: center;
@@ -29,6 +33,8 @@ background-attachment: fixed;
   animation-name: logoName;
   animation-duration: 1.8s;
   animation-timing-function: ease-out;
+  min-height: 200px;
+  min-width: 300px;
 }
 
 
@@ -187,11 +193,11 @@ img {
     margin-top: 20px;
   }
 
-  .box a {
+  /* .box a {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 34px;
     font-weight: bold;
-  }
+  } */
 }
