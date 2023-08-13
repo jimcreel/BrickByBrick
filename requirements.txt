@@ -9,8 +9,6 @@ asttokens==2.2.1
 attrs==22.2.0
 autopep8==2.0.2
 backcall==0.2.0
-beautifulsoup4==4.12.0
-bitdotio==2.1.0
 bleach==6.0.0
 certifi==2022.12.7
 cffi==1.15.1
@@ -97,7 +95,6 @@ terminado==0.17.1
 tinycss2==1.2.1
 tornado==6.2
 traitlets==5.8.0
-twilio==7.16.0
 typing_extensions==4.5.0
 uri-template==1.2.0
 urllib3==1.26.13
