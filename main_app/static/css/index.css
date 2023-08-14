@@ -21,10 +21,9 @@ h1 {
 }
 
 .part-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: auto;
-    grid-gap: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    
    
    
    }
