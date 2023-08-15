@@ -1,18 +1,24 @@
-.part-tray { 
+/* .part-tray { 
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
     height: 40vh;
     flex-wrap: wrap;
     padding: 5px;
-    overflow: auto;
 }
-
-.part {
-    width: 150px;
-    height: 55px;
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 5px;
+   
+   
+   }
+.card {
+    display: flex;
+    flex-direction: column;
     margin: 10px;
-    font-size: 12px;
+    border-radius: 5px
 }
 
 
@@ -22,4 +28,4 @@
 
 form {
     flex-direction: column;
-}
+} */

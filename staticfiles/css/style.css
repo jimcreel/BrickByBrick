@@ -19,6 +19,7 @@ nav form {
     
     
 }
+
 .right {
   height: 80%;
 }
@@ -38,12 +39,7 @@ nav form label:after {
   height: 90%
 }
 
-body {
-    display: flex;
-    min-height: 100vh;
-    max-height: 200vh;
-    flex-direction: column;
-  }
+
 
 #navLogoId {
   margin-top: -8px !important;
@@ -61,7 +57,7 @@ body {
   }
 
   nav {
-    background-color: rgba(211,211,211,0.35);
+    background-color: rgb(179, 179, 179);
   }
 
 
@@ -82,10 +78,17 @@ body {
   }
   
   .partImg {
-    max-width: 25px;
+    margin: 0 auto;
+    max-width: 50px;
     max-height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
   }
 
+  .partImgDiv {
+    display: flex;
+    justify-content: center;
+  }
   
 
   .side-img {
@@ -156,14 +159,6 @@ body {
   background-color: rgba(184, 182, 182, 0.7);
 }
 
-#sidebar {
-  background-color: rgba(211,211,211,0.7);
-  z-index: 4;
-}
-
-#sidebar:hover {
-  background-color: rgba(211,211,211,0.9);
-}
 
 #CdTtl {
   color: black;

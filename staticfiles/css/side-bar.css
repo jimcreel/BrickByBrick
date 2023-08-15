@@ -13,6 +13,16 @@
     align-items: center;
 }
 
+#sidebar {
+    background-color: rgb(179, 179, 179);
+    z-index: 4;
+    border: solid rgb(58, 58, 58) 1px;
+  }
+  
+  #sidebar:hover {
+    background-color: rgb(179, 179, 179);
+  }
+  
 .sidebar .card{
     margin-left: 10px;
 }

@@ -4,4 +4,7 @@
 venv/
 .venv/
 .gitignore
-venv/
+.env*
+gcpCredentials.json
+staticfiles/
+*.yaml
