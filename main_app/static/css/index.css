@@ -147,6 +147,11 @@ h1 {
 }
 
 @media (max-width: 500px) {
+    .input-field {
+        padding: 6px; /* Adjust the padding to your preference */
+        font-size: 14px; /* Adjust the font size to your preference */
+        max-width: 75px;
+    }
     .part-grid {
         grid-template-columns: repeat(2, 1fr);
     }

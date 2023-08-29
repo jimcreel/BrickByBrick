@@ -50,7 +50,7 @@
         <a href="#" data-target="mobile-links" class="sidenav-trigger">
           <i class="material-icons">menu</i>
         </a>
-        <div class = 'right'>
+        <div class = 'right hide-on-med-and-down'>
           <form method="POST" action="{% url 'search' %}" name="searchWord">
             {% csrf_token %}
             <div class="input-field">
